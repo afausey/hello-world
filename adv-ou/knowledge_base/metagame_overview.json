@@ -12,7 +12,8 @@
     "dominant_playstyle": "Balance - teams that pose threats while maintaining solid defensive backbone",
     "key_mechanic": "Spikes are the most important form of chip damage; no Stealth Rock exists",
     "weather": "Sand Stream (Tyranitar) is dominant; Rain Dance teams are viable but require manual setup",
-    "trapping": "Dugtrio and Magneton are extremely common and shape teambuilding"
+    "trapping": "Dugtrio and Magneton are extremely common and shape teambuilding",
+    "ko_ends_turn": "When you KO a Pokemon, the turn ends completely - denying the opponent their turn. Use this to pivot into a trapper or disrupt the enemy and get a good pivot in."
   },
   "clauses": {
     "sleep_clause": "Only one opponent Pokemon may be asleep at a time",
@@ -26,10 +27,11 @@
     "sleep_duration": "1-3 turns, not including the turn put to sleep",
     "sandstorm_spdef_boost": "Rock-types gain 1.5x Special Defense in sandstorm",
     "spikes_damage": {
-      "1_layer": "12.5% max HP",
-      "2_layers": "16.67% max HP",
-      "3_layers": "25% max HP"
+      "1_layer": "12.5% max HP (1/8)",
+      "2_layers": "16.67% max HP (1/6)",
+      "3_layers": "25% max HP (1/4)"
     },
+    "spikes_efficiency": "Getting ONE layer of Spikes is the most efficient use. From 1 to 2 layers, you only go from 12.5% to 16.67% - that's only ~4% more damage for an entire turn. Prioritize getting Spikes up quickly over stacking layers.",
     "no_team_preview": true,
     "no_fairy_type": true,
     "taunt_duration": "2 turns",
@@ -45,8 +47,12 @@
       "notes": "Core metagame Pokemon that appear on most competitive teams"
     },
     "B_tier": {
-      "pokemon": ["Flygon", "Heracross", "Claydol", "Milotic", "Moltres", "Medicham", "Raikou"],
+      "pokemon": ["Flygon", "Heracross", "Claydol", "Milotic", "Moltres", "Medicham", "Raikou", "Forretress", "Breloom", "Charizard", "Cloyster", "Gyarados"],
       "notes": "Strong Pokemon with specific roles or niches"
+    },
+    "C_tier": {
+      "pokemon": ["Kingdra", "Ludicolo", "Vaporeon", "Dusclops", "Weezing", "Regice", "Hariyama", "Machamp", "Jolteon"],
+      "notes": "Less common but have niches with proper support. Often need specific team support to shine."
     }
   },
   "archetypes": {
@@ -60,13 +66,31 @@
       "name": "Spikes Offense",
       "description": "Aggressive teams that use Spikes to enable OHKOs and 2HKOs from offensive threats",
       "key_pokemon": ["Skarmory", "Dugtrio", "Medicham", "Gengar", "Aerodactyl"],
-      "gameplan": "Set up Spikes early, use trappers to remove key threats, clean with fast attackers"
+      "gameplan": "Set up Spikes early, use trappers to remove key threats, clean with fast attackers. Spikes are critical for Dugtrio and Medicham to OHKO Tyranitar, Metagross, Swampert, and Celebi."
     },
     "spikeless_offense": {
       "name": "Spikeless Offense",
       "description": "Hyper-offensive teams that forgo Spikes for pure attacking power",
       "key_pokemon": ["Salamence", "Metagross", "Gengar", "Zapdos"],
       "gameplan": "Overwhelm opponent with powerful attacks and momentum"
+    },
+    "breloom_charizard_offense": {
+      "name": "Breloom/Charizard Spikeless Offense",
+      "description": "Popularized by the player 'Undisputed'. This team gained so much traction that both Breloom and Charizard moved from UUBL to OU.",
+      "key_pokemon": ["Breloom", "Charizard", "Celebi", "Jirachi", "Raikou"],
+      "gameplan": "Breloom puts threats to sleep with Spore, Charizard wallbreaks TSS teams with Fire Blast. CM users like Celebi, Jirachi, and Raikou are staples."
+    },
+    "superman": {
+      "name": "Superman (Anti-Spikes)",
+      "description": "Flying types and Levitate Pokemon all on one team to avoid Spikes damage entirely. Good matchup into Skarm/Bliss cores who rely heavily on Spikes chip to make progress.",
+      "key_pokemon": ["Zapdos", "Flygon", "Gengar", "Salamence", "Moltres", "Gyarados"],
+      "gameplan": "Avoid all Spikes damage by using only Pokemon immune to them. Forces opponent's Spikes strategy to be less effective."
+    },
+    "special_offense_dugtrio": {
+      "name": "Special Offense with Dugtrio",
+      "description": "Uses bulky Dugtrio to eliminate Blissey so special attackers like Suicune and Raikou can sweep. Zapdos/Dugtrio core is the backbone.",
+      "key_pokemon": ["Zapdos", "Dugtrio", "Suicune", "Raikou", "Magneton"],
+      "gameplan": "Trap and KO Blissey with Dugtrio, sweep with Crocune or CM Raikou. Can also run Rain offense variant."
     },
     "stall": {
       "name": "Spikes Stall",
@@ -85,15 +109,15 @@
       "name": "Milotic/Celebi Balance",
       "description": "Alternative defensive core to SkarmBliss, relying on recovery moves",
       "key_pokemon": ["Milotic", "Celebi", "Magneton", "Claydol"],
-      "gameplan": "Use recovery to stay healthy, often paired with HP Fire Magneton and Claydol for Rapid Spin"
+      "gameplan": "Use recovery to stay healthy, often paired with HP Fire Magneton and Claydol for Rapid Spin. Susceptible to chip from Spikes + Sand."
     }
   },
   "key_cores": {
     "skarmbliss": {
       "pokemon": ["Skarmory", "Blissey"],
       "type": "defensive",
-      "description": "The iconic defensive core - Skarmory handles physical attacks and sets Spikes, Blissey handles special attacks",
-      "weaknesses": ["Magneton trapping Skarmory", "Mixed attackers", "Taunt"]
+      "description": "The iconic defensive core - Skarmory handles physical attacks and sets Spikes, Blissey handles special attacks. Relies heavily on Spikes chip to make progress.",
+      "weaknesses": ["Magneton trapping Skarmory", "Mixed attackers", "Taunt", "Superman teams"]
     },
     "tyranitar_salamence": {
       "pokemon": ["Tyranitar", "Salamence"],
@@ -107,6 +131,19 @@
       "description": "Defensive pivots with good type synergy",
       "synergy": "Zapdos absorbs Grass attacks for Swampert; Swampert absorbs Electric for Zapdos"
     },
+    "zapdos_dugtrio": {
+      "pokemon": ["Zapdos", "Dugtrio"],
+      "type": "special_offense",
+      "description": "The backbone of special offense teams. Zapdos forces switches that Dugtrio can trap, particularly luring Blissey into Dugtrio's range.",
+      "synergy": "Use bulky Dugtrio to eliminate Blissey so special attackers (Suicune, Raikou) can sweep. Zapdos uses Baton Pass to bring in Dugtrio safely.",
+      "strategy": "Famously enables Crocune (CM/Rest/Sleep Talk Suicune) and Rain offense."
+    },
+    "rock_resists": {
+      "pokemon": ["Swampert", "Metagross", "Flygon"],
+      "type": "defensive",
+      "description": "All three Pokemon resist Rock Slide, which is crucial for handling Tyranitar and Aerodactyl.",
+      "synergy": "Provides multiple Rock resists so you're not reliant on one Pokemon to check Rock-types. Flygon's Levitate avoids Earthquake."
+    },
     "skarmdug": {
       "pokemon": ["Skarmory", "Dugtrio"],
       "type": "utility",
@@ -116,25 +153,73 @@
     "big_five": {
       "pokemon": ["Tyranitar", "Skarmory", "Swampert", "Blissey", "Gengar"],
       "type": "balanced",
-      "description": "Classic balanced team core covering all major threats"
+      "description": "Classic balanced team core covering all major threats. Tyranitar provides Sand Stream, Skarmory sets Spikes, Swampert is the bulky pivot, Blissey handles special attacks, Gengar spinblocks.",
+      "notes": "The 6th slot is flexible - often Celebi, Zapdos, or Dugtrio"
+    },
+    "magneton_crocune": {
+      "pokemon": ["Magneton", "Suicune"],
+      "type": "wincon",
+      "description": "Magneton traps and eliminates Skarmory, which is the main Pokemon that can Roar out Suicune. Once Skarmory is gone, Crocune (Rest/Sleep Talk Suicune) becomes nearly unstoppable as the last Pokemon.",
+      "strategy": "Use Magneton early/mid-game to trap Skarmory. Save Suicune for last - nothing can phaze it if it's your last mon."
     }
   },
   "trapping_guide": {
     "dugtrio": {
       "ability": "Arena Trap",
       "common_targets": ["Tyranitar", "Metagross", "Jirachi", "Magneton", "Blissey", "Starmie", "Raikou", "Celebi", "Heracross"],
-      "notes": "Most versatile trapper; keeps many frail ground-weak Pokemon out of the tier",
-      "common_set": "Choice Band with Earthquake, Rock Slide, Aerial Ace, Hidden Power Bug"
+      "notes": "Most versatile trapper; keeps many frail ground-weak Pokemon out of the tier. Key for special offense teams to eliminate Blissey.",
+      "common_set": "Choice Band with Earthquake, Rock Slide, Aerial Ace, Hidden Power Bug",
+      "bulky_variant": "Bulky Dugtrio for trapping Blissey on special offense teams"
     },
     "magneton": {
       "ability": "Magnet Pull",
       "common_targets": ["Skarmory", "Forretress", "Metagross", "Jirachi", "opposing Magneton"],
-      "notes": "Essential for teams weak to Steel-types; enables Dragon-types",
-      "common_sets": ["HP Fire Magneton for Skarmory", "Endure + Salac Berry for speed"]
+      "notes": "Essential for teams weak to Steel-types; enables Dragon-types and Crocune",
+      "common_sets": {
+        "hp_fire": "Standard set for trapping Skarmory. Note: HP Fire requires imperfect Speed IV (30), making Magneton slower than max Speed variants.",
+        "magnet_item": "Magnet Magneton holds the Magnet item for boosted Thunderbolt power. More effective at eliminating Skarmory because Skarmory typically runs SpD EVs. Also stronger vs Metagross, Jirachi, and Forretress.",
+        "endure_salac": "After Salac boost, outspeeds entire OU except Jolteon/Aerodactyl - including Dugtrio."
+      }
     },
     "counter_trapping": {
       "description": "Double switching Dugtrio or your own Magneton to trap opposing Magneton",
-      "importance": "Critical for Skarmory-based teams"
+      "importance": "Critical for Skarmory-based teams",
+      "yolo_skarm": "Some Skarmory run HP Ground and max Speed to outrun HP Fire Magneton (which has suboptimal Speed IV). Not a great set but it exists."
+    }
+  },
+  "spinblockers": {
+    "description": "Ghost-types that prevent Rapid Spin from removing Spikes. Critical for Spikes-based strategies.",
+    "pokemon": {
+      "gengar": {
+        "role": "Primary spinblocker in OU. Also offensive threat with Explosion.",
+        "notes": "Levitate makes it immune to Spikes and EQ. Can threaten back with attacks."
+      },
+      "dusclops": {
+        "role": "Dedicated defensive spinblocker. Immune to Hi Jump Kick.",
+        "notes": "More reliable blocker but less offensive presence. Can support Belly Drum teams with Memento."
+      }
+    },
+    "importance": "Without a spinblocker, opponents can freely use Starmie or Claydol to remove your Spikes."
+  },
+  "famous_sets_and_strategies": {
+    "crocune": {
+      "name": "Crocune",
+      "pokemon": "Suicune",
+      "creator": "Cromat",
+      "set": "Calm Mind / Surf / Rest / Sleep Talk",
+      "description": "Great on Magneton teams because once Skarmory is eliminated, nothing can Roar Suicune out if it's the last Pokemon. Ultimate late-game wincon."
+    },
+    "houdini": {
+      "name": "Houdini",
+      "pokemon": "Metagross",
+      "origin": "Named after a famous ladder player who always used a Metagross named Houdini",
+      "strategy": "Lead Metagross with intent to use Explosion early. KO ends turn completely - denies opponent their turn. Use this to pivot into a trapper or get a favorable switch."
+    },
+    "undisputed_offense": {
+      "name": "Undisputed's Breloom/Charizard Offense",
+      "origin": "Player 'Undisputed' popularized this team",
+      "impact": "Both Breloom and Charizard moved from UUBL to OU because of this team's success",
+      "key_pokemon": ["Breloom", "Charizard"]
     }
   }
 }
