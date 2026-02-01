@@ -1,0 +1,674 @@
+{
+  "pokemon": {
+    "tyranitar": {
+      "name": "Tyranitar",
+      "types": ["Rock", "Dark"],
+      "ability": "Sand Stream",
+      "base_stats": {
+        "hp": 100,
+        "atk": 134,
+        "def": 110,
+        "spa": 95,
+        "spd": 100,
+        "spe": 61
+      },
+      "viability": "S",
+      "role": "The best Pokemon in ADV OU - versatile wallbreaker, sweeper, or support",
+      "sets": {
+        "dragon_dance": {
+          "name": "Dragon Dance",
+          "item": "Lum Berry",
+          "nature": "Adamant",
+          "evs": "252 HP / 32 Atk / 48 Def / 176 Spe",
+          "moves": ["Dragon Dance", "Rock Slide", "Earthquake", "Hidden Power Bug"],
+          "description": "Incredibly dangerous cleaner and late-game sweeper. Bulk and Lum Berry allow safe setup. HP Bug hits Celebi and Claydol.",
+          "usage_tips": "Bring out in endgame to finish matches. Can often get two boosts with proper support."
+        },
+        "choice_band": {
+          "name": "Choice Band",
+          "item": "Choice Band",
+          "nature": "Adamant",
+          "evs": "252 Atk / 4 SpD / 252 Spe",
+          "moves": ["Rock Slide", "Earthquake", "Focus Punch", "Hidden Power Bug"],
+          "description": "Devastating wallbreaker. Focus Punch 2HKOs Flygon, Skarmory, and Swampert on predicted switches.",
+          "usage_tips": "Use aggressive double switches. Being Choice-locked is dangerous vs offense. Weak to Dugtrio without bulk investment."
+        },
+        "mixed_attacker": {
+          "name": "Mixed Attacker",
+          "item": "Leftovers",
+          "nature": "Brave / Quiet",
+          "evs": "Varies - typically HP/Atk/SpA investment",
+          "moves": ["Rock Slide", "Earthquake", "Fire Blast / Flamethrower", "Crunch / Pursuit"],
+          "description": "Harder to switch into than pure physical sets. Fire Blast threatens Skarmory and Forretress.",
+          "usage_tips": "Good for luring and weakening specific checks."
+        },
+        "substitute": {
+          "name": "Substitute",
+          "item": "Leftovers",
+          "nature": "Adamant / Jolly",
+          "evs": "Varies",
+          "moves": ["Substitute", "Focus Punch", "Rock Slide", "Earthquake / Crunch"],
+          "description": "SubPunch set for breaking through bulky Pokemon.",
+          "usage_tips": "Forces 50/50s and can snowball with correct predictions."
+        }
+      },
+      "checks_and_counters": {
+        "hard_counters": ["Swampert (for non-HP Grass sets)", "Flygon", "Claydol"],
+        "soft_checks": ["Skarmory", "Metagross", "Dugtrio (revenge kills)"],
+        "notes": "Few true counters exist; most checks can be overwhelmed with correct coverage or predictions"
+      },
+      "team_support": {
+        "offensive": "Wants support to wear down checks. Choice Band Metagross lures and removes Skarmory with Explosion.",
+        "defensive": "Sand Stream helps chip down opponents; pairs well with Spikes"
+      }
+    },
+    "skarmory": {
+      "name": "Skarmory",
+      "types": ["Steel", "Flying"],
+      "ability": "Keen Eye / Sturdy",
+      "base_stats": {
+        "hp": 65,
+        "atk": 80,
+        "def": 140,
+        "spa": 40,
+        "spd": 70,
+        "spe": 70
+      },
+      "viability": "S",
+      "role": "Best Spikes user in the tier; premier physical wall",
+      "sets": {
+        "spikes": {
+          "name": "Defensive Spiker",
+          "item": "Leftovers",
+          "nature": "Impish / Careful",
+          "evs": "252 HP / 4 Def / 252 SpD (or 252 HP / 232 Def / 24 Spe)",
+          "moves": ["Spikes", "Whirlwind / Roar", "Toxic / Drill Peck", "Protect / Rest"],
+          "description": "Sets up Spikes and phazes opponents for chip damage. 24 Spe outspeeds Adamant Tyranitar.",
+          "usage_tips": "Careful nature helps survive Magneton Thunderbolt to get 2 Spikes vs Mag teams. Whirlwind + Drill Peck is illegal - use Roar with Drill Peck.",
+          "move_legality_note": "Whirlwind and Drill Peck cannot be used together due to move tutor restrictions"
+        }
+      },
+      "checks_and_counters": {
+        "hard_counters": ["Magneton (traps and OHKOs)"],
+        "soft_checks": ["Zapdos", "Moltres", "Special attackers in general"],
+        "notes": "Anti-Spikes teams are necessarily anti-Skarmory"
+      },
+      "team_support": {
+        "partners": ["Dugtrio (traps Magneton)", "Blissey (handles special attacks)", "Own Magneton (traps opposing Magneton)"]
+      }
+    },
+    "blissey": {
+      "name": "Blissey",
+      "types": ["Normal"],
+      "ability": "Natural Cure / Serene Grace",
+      "base_stats": {
+        "hp": 255,
+        "atk": 10,
+        "def": 10,
+        "spa": 75,
+        "spd": 135,
+        "spe": 55
+      },
+      "viability": "S",
+      "role": "Best special wall in the tier; forces teams to run physical attackers",
+      "sets": {
+        "defensive": {
+          "name": "Defensive Support",
+          "item": "Leftovers",
+          "nature": "Bold / Modest",
+          "evs": "106 HP / 252 Def / 152 SpA (or 16 HP / 252 Def / 240 SpA Bold)",
+          "moves": ["Soft-Boiled", "Seismic Toss", "Ice Beam / Thunder Wave", "Aromatherapy / Toxic"],
+          "description": "Patches up Skarmory's mediocre special defense. Ice Beam OHKOs Salamence.",
+          "usage_tips": "Bold with Def investment handles physical threats better; SpA investment nails Dugtrio after Spikes."
+        },
+        "offensive": {
+          "name": "Offensive",
+          "item": "Leftovers",
+          "nature": "Bold",
+          "evs": "44 HP / 252 Def / 212 SpA",
+          "moves": ["Soft-Boiled", "Ice Beam", "Seismic Toss", "Thunder Wave / Fire Blast / Toxic"],
+          "description": "More offensive oriented, punishing Steel-types with Fire Blast.",
+          "usage_tips": "Fire Blast surprises Metagross and Skarmory switch-ins."
+        }
+      },
+      "checks_and_counters": {
+        "hard_counters": ["Focus Punch users", "Dugtrio"],
+        "soft_checks": ["Heracross", "Machamp", "Medicham"],
+        "notes": "If Blissey usage is too low, it will get exploited"
+      }
+    },
+    "dugtrio": {
+      "name": "Dugtrio",
+      "types": ["Ground"],
+      "ability": "Arena Trap",
+      "base_stats": {
+        "hp": 35,
+        "atk": 80,
+        "def": 50,
+        "spa": 50,
+        "spd": 70,
+        "spe": 120
+      },
+      "viability": "S",
+      "role": "Premier trapper; keeps frail ground-weaks out of the tier",
+      "sets": {
+        "choice_band": {
+          "name": "Choice Band",
+          "item": "Choice Band",
+          "nature": "Jolly / Adamant",
+          "evs": "252 Atk / 4 SpD / 252 Spe",
+          "moves": ["Earthquake", "Rock Slide", "Aerial Ace", "Hidden Power Bug"],
+          "description": "Traps and eliminates key threats. With Spikes, can OHKO Tyranitar, Metagross, etc.",
+          "targets": ["Tyranitar", "Metagross", "Jirachi", "Magneton", "Blissey (weakened)", "Starmie (after chip)"]
+        }
+      },
+      "notes": "Singlehandedly keeps frail ground-weaks out of the tier. Amazing synergy with Skarmory on stall teams."
+    },
+    "zapdos": {
+      "name": "Zapdos",
+      "types": ["Electric", "Flying"],
+      "ability": "Pressure",
+      "base_stats": {
+        "hp": 90,
+        "atk": 90,
+        "def": 85,
+        "spa": 125,
+        "spd": 90,
+        "spe": 100
+      },
+      "viability": "A",
+      "role": "Versatile special attacker and pivot; great lead to prevent early Spikes",
+      "sets": {
+        "offensive": {
+          "name": "Offensive",
+          "item": "Leftovers",
+          "nature": "Timid",
+          "evs": "4 HP / 252 SpA / 252 Spe",
+          "moves": ["Thunderbolt", "Hidden Power Ice / Hidden Power Grass", "Baton Pass / Substitute", "Thunder Wave / Roar"],
+          "description": "Timid outspeeds mixed/DD Salamence, Timid Moltres, defensive Gengar. HP Ice vs HP Grass are same set with different targets.",
+          "usage_tips": "Great lead - prevents early Spikes, threatens SubPass vs favorable matchups (Salamence, Skarmory, Metagross)."
+        }
+      },
+      "team_support": {
+        "partners": ["Swampert (type synergy)", "Dugtrio (Baton Pass to trap)"],
+        "notes": "Baton Pass maintains momentum by eliminating need to read switches"
+      }
+    },
+    "salamence": {
+      "name": "Salamence",
+      "types": ["Dragon", "Flying"],
+      "ability": "Intimidate",
+      "base_stats": {
+        "hp": 95,
+        "atk": 135,
+        "def": 80,
+        "spa": 110,
+        "spd": 80,
+        "spe": 100
+      },
+      "viability": "A",
+      "role": "Powerful wallbreaker and sweeper with Intimidate utility",
+      "sets": {
+        "choice_band": {
+          "name": "Choice Band",
+          "item": "Choice Band",
+          "nature": "Adamant / Jolly",
+          "evs": "4 HP / 252 Atk / 252 Spe",
+          "moves": ["Hidden Power Flying", "Earthquake", "Rock Slide", "Brick Break"],
+          "description": "Potent wallbreaker that can OHKO or 2HKO most of ADV OU.",
+          "usage_tips": "Intimidate provides defensive utility on switch-in."
+        },
+        "mixed": {
+          "name": "Mixed Attacker",
+          "item": "Leftovers",
+          "nature": "Rash / Mild",
+          "evs": "Atk/SpA/Spe investment",
+          "moves": ["Hidden Power Flying / Aerial Ace", "Earthquake", "Fire Blast / Flamethrower", "Dragon Claw / Brick Break"],
+          "description": "Most used set - threatens Swampert, Metagross, Celebi with coverage moves.",
+          "usage_tips": "Harder to switch into than pure physical."
+        },
+        "dragon_dance": {
+          "name": "Dragon Dance",
+          "item": "Leftovers / Lum Berry",
+          "nature": "Adamant / Jolly",
+          "evs": "Varies",
+          "moves": ["Dragon Dance", "Hidden Power Flying", "Earthquake", "Rock Slide / Fire Blast"],
+          "description": "Setup sweeper for late-game cleaning.",
+          "usage_tips": "Requires checks to be weakened first."
+        }
+      },
+      "checks_and_counters": {
+        "hard_counters": ["Skarmory (for physical sets)", "Blissey (Ice Beam OHKOs)"],
+        "soft_checks": ["Swampert", "Zapdos", "Suicune"],
+        "notes": "Mixed sets are hardest to switch into"
+      }
+    },
+    "metagross": {
+      "name": "Metagross",
+      "types": ["Steel", "Psychic"],
+      "ability": "Clear Body",
+      "base_stats": {
+        "hp": 80,
+        "atk": 135,
+        "def": 130,
+        "spa": 95,
+        "spd": 90,
+        "spe": 70
+      },
+      "viability": "A",
+      "role": "Versatile Steel-type; physical tank, wallbreaker, or sweeper",
+      "sets": {
+        "choice_band": {
+          "name": "Choice Band",
+          "item": "Choice Band",
+          "nature": "Adamant",
+          "evs": "252 HP / 252 Atk / 4 Spe (or max Atk/Spe)",
+          "moves": ["Meteor Mash", "Earthquake", "Rock Slide", "Explosion"],
+          "description": "Common lead. Explosion removes Skarmory and enables teammates.",
+          "usage_tips": "Explosion timing is critical - use it to remove key defensive threats."
+        },
+        "agility": {
+          "name": "Agility",
+          "item": "Leftovers",
+          "nature": "Adamant",
+          "evs": "Varies",
+          "moves": ["Agility", "Meteor Mash", "Earthquake", "Explosion / Rock Slide"],
+          "description": "Physical check that can sweep and close out games.",
+          "usage_tips": "Set up on Pokemon that can't threaten it."
+        },
+        "mixed": {
+          "name": "Mixed with Psychic",
+          "item": "Leftovers",
+          "nature": "Brave",
+          "evs": "HP/Atk/SpA",
+          "moves": ["Meteor Mash", "Earthquake", "Psychic", "Explosion"],
+          "description": "Psychic catches Gengar and Fighting-types.",
+          "usage_tips": "More flexible than pure physical."
+        }
+      },
+      "checks_and_counters": {
+        "hard_counters": ["Skarmory", "Swampert"],
+        "soft_checks": ["Celebi", "Dugtrio (traps)", "Magneton (traps Choice-locked)"],
+        "notes": "Explosion makes it hard to safely switch in"
+      }
+    },
+    "swampert": {
+      "name": "Swampert",
+      "types": ["Water", "Ground"],
+      "ability": "Torrent",
+      "base_stats": {
+        "hp": 100,
+        "atk": 110,
+        "def": 90,
+        "spa": 85,
+        "spd": 90,
+        "spe": 60
+      },
+      "viability": "A",
+      "role": "Bulky pivot with excellent typing; only weak to Grass",
+      "sets": {
+        "mixed_offensive": {
+          "name": "Mixed Offensive",
+          "item": "Leftovers",
+          "nature": "Quiet",
+          "evs": "240 HP / 236 SpA / 32 Spe",
+          "moves": ["Hydro Pump", "Ice Beam", "Earthquake", "Focus Punch / Protect"],
+          "description": "Breaks common defensive backbones. Hydro Pump 2-3HKOs almost anything that doesn't resist it.",
+          "usage_tips": "Ice Beam nails SpD Zapdos, Grass-types, Salamence. EQ pressures Blissey and Jirachi."
+        },
+        "epic_swampert": {
+          "name": "SubPunch (Epic Swampert)",
+          "item": "Leftovers",
+          "nature": "Adamant",
+          "evs": "252 HP / 236 Atk / 20 SpD",
+          "moves": ["Substitute", "Focus Punch", "Earthquake", "Rock Slide"],
+          "description": "Forces 50/50s and breaks through typical checks.",
+          "usage_tips": "Substitute on predicted switches."
+        }
+      },
+      "checks_and_counters": {
+        "hard_counters": ["Celebi", "Grass-types"],
+        "soft_checks": ["Milotic", "Suicune", "Zapdos"],
+        "notes": "Excellent type synergy with Zapdos"
+      }
+    },
+    "gengar": {
+      "name": "Gengar",
+      "types": ["Ghost", "Poison"],
+      "ability": "Levitate",
+      "base_stats": {
+        "hp": 60,
+        "atk": 65,
+        "def": 60,
+        "spa": 130,
+        "spd": 75,
+        "spe": 110
+      },
+      "viability": "A",
+      "role": "Offensive spinblocker; spreads status and generates momentum",
+      "sets": {
+        "offensive": {
+          "name": "Offensive",
+          "item": "Leftovers",
+          "nature": "Timid",
+          "evs": "4 HP / 252 SpA / 252 Spe",
+          "moves": ["Thunderbolt", "Ice Punch", "Hidden Power Grass", "Will-O-Wisp / Explosion / Taunt"],
+          "description": "HP Grass stops Swampert and Tyranitar from walling. Ice Punch OHKOs Salamence. Taunt prevents healing/setup.",
+          "usage_tips": "Explosion blows through Blissey for teammates. Will-O-Wisp helps vs physical offense."
+        },
+        "bulky_wisp": {
+          "name": "Bulky Will-O-Wisp",
+          "item": "Leftovers",
+          "nature": "Timid",
+          "evs": "HP investment",
+          "moves": ["Will-O-Wisp", "Thunderbolt", "Ice Punch", "Hidden Power Grass"],
+          "description": "Handles physical offense teams better.",
+          "usage_tips": "Burns cripple physical attackers."
+        }
+      },
+      "checks_and_counters": {
+        "hard_counters": ["Blissey", "Snorlax"],
+        "soft_checks": ["Tyranitar (for non-HP Grass)", "Pursuit users"],
+        "notes": "Key Pokemon for blocking Rapid Spin"
+      }
+    },
+    "starmie": {
+      "name": "Starmie",
+      "types": ["Water", "Psychic"],
+      "ability": "Natural Cure / Illuminate",
+      "base_stats": {
+        "hp": 60,
+        "atk": 75,
+        "def": 85,
+        "spa": 100,
+        "spd": 85,
+        "spe": 115
+      },
+      "viability": "A",
+      "role": "Fast Rapid Spinner with offensive presence",
+      "sets": {
+        "offensive_spinner": {
+          "name": "Offensive Rapid Spin",
+          "item": "Leftovers",
+          "nature": "Timid",
+          "evs": "4 HP / 252 SpA / 252 Spe",
+          "moves": ["Rapid Spin", "Hydro Pump", "Thunderbolt", "Ice Beam / Recover"],
+          "description": "Spins successfully almost 100% of the time with offensive pressure. Bolt-Beam coverage.",
+          "usage_tips": "Can run less Speed (176 EVs outspeeds Adamant Dugtrio, 136 for Salamence/Zapdos)."
+        },
+        "defensive": {
+          "name": "Defensive",
+          "item": "Leftovers",
+          "nature": "Bold",
+          "evs": "Heavy Def investment",
+          "moves": ["Rapid Spin", "Surf", "Recover", "Thunderbolt / Ice Beam"],
+          "description": "Better checks physical threats like Tyranitar, Metagross, Swampert, Aerodactyl.",
+          "usage_tips": "More reliable but less threatening."
+        }
+      },
+      "checks_and_counters": {
+        "hard_counters": ["Blissey", "Snorlax"],
+        "soft_checks": ["Dugtrio (revenge kills)", "Aerodactyl (outspeeds)"],
+        "notes": "Cannot play offense and defense simultaneously"
+      }
+    },
+    "magneton": {
+      "name": "Magneton",
+      "types": ["Electric", "Steel"],
+      "ability": "Magnet Pull",
+      "base_stats": {
+        "hp": 50,
+        "atk": 60,
+        "def": 95,
+        "spa": 120,
+        "spd": 70,
+        "spe": 70
+      },
+      "viability": "A",
+      "role": "Steel-type trapper; enables Dragon-types and Spikeless strategies",
+      "sets": {
+        "hp_fire": {
+          "name": "HP Fire Trapper",
+          "item": "Leftovers",
+          "nature": "Modest / Timid",
+          "evs": "HP/SpA investment",
+          "moves": ["Thunderbolt", "Hidden Power Fire", "Substitute / Thunder Wave", "Toxic"],
+          "description": "Traps and KOs Skarmory. HP Fire is essential for the trap.",
+          "targets": ["Skarmory", "Forretress", "Metagross (Choice-locked)", "Jirachi"]
+        },
+        "endure_salac": {
+          "name": "Endure + Salac",
+          "item": "Salac Berry",
+          "nature": "Timid",
+          "evs": "Speed focused",
+          "moves": ["Endure", "Thunderbolt", "Hidden Power Fire / Ice", "Explosion"],
+          "description": "After Salac boost, outspeeds entire OU except Jolteon/Aerodactyl - including Dugtrio.",
+          "usage_tips": "Becomes faster than Dugtrio, can't be trapped. Checks offensive Starmie in a pinch."
+        }
+      },
+      "notes": "Essential for teams weak to Steel-types; enables Dragon/Flying offense"
+    },
+    "celebi": {
+      "name": "Celebi",
+      "types": ["Grass", "Psychic"],
+      "ability": "Natural Cure",
+      "base_stats": {
+        "hp": 100,
+        "atk": 100,
+        "def": 100,
+        "spa": 100,
+        "spd": 100,
+        "spe": 100
+      },
+      "viability": "A",
+      "role": "Versatile support and setup sweeper; special wall on balance",
+      "sets": {
+        "calm_mind": {
+          "name": "Calm Mind",
+          "item": "Leftovers",
+          "nature": "Timid",
+          "evs": "252 HP / 80 Def / 176 Spe",
+          "moves": ["Calm Mind", "Hidden Power Grass / Giga Drain", "Psychic", "Recover"],
+          "description": "Counters Gengar, Suicune, Milotic, Swampert. HP Fire variant hits Skarmory/Metagross/Jirachi.",
+          "usage_tips": "Psychic hits Taunt Gengar, Moltres, Roar Zapdos hard after CM boost."
+        },
+        "baton_pass": {
+          "name": "Baton Pass",
+          "item": "Leftovers",
+          "nature": "Timid / Bold",
+          "evs": "Varies",
+          "moves": ["Swords Dance / Calm Mind", "Baton Pass", "Recover", "Hidden Power Grass"],
+          "description": "Grabs boosts and passes to sweepers like Agility Metagross.",
+          "usage_tips": "Used to lure things Dugtrio can trap."
+        },
+        "perish_song": {
+          "name": "Perish Song Stall",
+          "item": "Leftovers",
+          "nature": "Bold",
+          "evs": "Defensive",
+          "moves": ["Perish Song", "Recover", "Leech Seed", "Protect / HP Grass"],
+          "description": "Stall wincon - Perish Song prevails in endgame.",
+          "usage_tips": "Works on dedicated stall teams."
+        }
+      },
+      "checks_and_counters": {
+        "hard_counters": ["Snorlax", "Blissey", "Tyranitar"],
+        "soft_checks": ["Dugtrio (traps)", "Heracross", "Bug-types"],
+        "notes": "Natural Cure makes it very hard to status"
+      }
+    },
+    "jirachi": {
+      "name": "Jirachi",
+      "types": ["Steel", "Psychic"],
+      "ability": "Serene Grace",
+      "base_stats": {
+        "hp": 100,
+        "atk": 100,
+        "def": 100,
+        "spa": 100,
+        "spd": 100,
+        "spe": 100
+      },
+      "viability": "A",
+      "role": "Versatile Steel-type; special wall, Wish support, or Calm Mind sweeper",
+      "sets": {
+        "defensive_wish": {
+          "name": "Defensive Wish",
+          "item": "Leftovers",
+          "nature": "Careful / Calm",
+          "evs": "HP/SpD focused",
+          "moves": ["Wish", "Body Slam / Thunder Wave", "Psychic / Fire Punch", "Protect"],
+          "description": "Special wall that keeps teammates healthy with Wish. Body Slam has 60% para chance with Serene Grace.",
+          "usage_tips": "Effective against Aerodactyl, Curse Snorlax, mixed Salamence."
+        },
+        "calm_mind": {
+          "name": "Calm Mind",
+          "item": "Leftovers",
+          "nature": "Timid / Modest",
+          "evs": "SpA/Spe focused",
+          "moves": ["Calm Mind", "Psychic", "Fire Punch / Thunderbolt", "Substitute / Wish"],
+          "description": "Setup sweeper that can snowball if unchecked.",
+          "usage_tips": "Needs checks removed before attempting to sweep."
+        }
+      },
+      "checks_and_counters": {
+        "hard_counters": ["Dugtrio (traps)", "Ground-types"],
+        "soft_checks": ["Swampert", "Tyranitar", "Fire-types"],
+        "notes": "Serene Grace Body Slam is very annoying"
+      }
+    },
+    "aerodactyl": {
+      "name": "Aerodactyl",
+      "types": ["Rock", "Flying"],
+      "ability": "Pressure / Rock Head",
+      "base_stats": {
+        "hp": 80,
+        "atk": 105,
+        "def": 65,
+        "spa": 60,
+        "spd": 75,
+        "spe": 130
+      },
+      "viability": "A",
+      "role": "Fastest Choice Band user; best revenge killer in the tier",
+      "sets": {
+        "choice_band": {
+          "name": "Choice Band",
+          "item": "Choice Band",
+          "nature": "Jolly / Adamant",
+          "evs": "4 HP / 252 Atk / 252 Spe",
+          "moves": ["Rock Slide", "Earthquake", "Hidden Power Flying", "Double-Edge"],
+          "description": "Late-game cleaner. After Tyranitar weakens rock resists and bulky waters, Aerodactyl cleans with fast Rock Slide.",
+          "usage_tips": "Extremely threatening in late game. One of the most annoying Pokemon for CM spam teams."
+        }
+      },
+      "checks_and_counters": {
+        "hard_counters": ["Skarmory", "Metagross"],
+        "soft_checks": ["Swampert", "Suicune", "Milotic"],
+        "notes": "Play carefully against Aerodactyl - it can end games quickly"
+      }
+    },
+    "claydol": {
+      "name": "Claydol",
+      "types": ["Ground", "Psychic"],
+      "ability": "Levitate",
+      "base_stats": {
+        "hp": 60,
+        "atk": 70,
+        "def": 105,
+        "spa": 70,
+        "spd": 120,
+        "spe": 75
+      },
+      "viability": "B",
+      "role": "Best Rapid Spinner in the tier due to Levitate; immune to Spikes and Sand chip",
+      "sets": {
+        "rapid_spin": {
+          "name": "Rapid Spin Support",
+          "item": "Leftovers",
+          "nature": "Calm / Bold",
+          "evs": "252 HP / defensive investment",
+          "moves": ["Rapid Spin", "Earthquake", "Ice Beam / Psychic", "Refresh / Rest"],
+          "description": "Levitates over Spikes, doesn't take Sand chip as Ground-type. Refresh absorbs status.",
+          "usage_tips": "Best spinner for teams that need reliable hazard removal."
+        }
+      },
+      "checks_and_counters": {
+        "hard_counters": ["Gengar (blocks Spin)", "Water-types"],
+        "soft_checks": ["Tyranitar", "Celebi"],
+        "notes": "Struggles to pressure Gengar, making Spin difficult vs dedicated spinblockers"
+      }
+    },
+    "suicune": {
+      "name": "Suicune",
+      "types": ["Water"],
+      "ability": "Pressure",
+      "base_stats": {
+        "hp": 100,
+        "atk": 75,
+        "def": 115,
+        "spa": 90,
+        "spd": 115,
+        "spe": 85
+      },
+      "viability": "A",
+      "role": "Bulky Water that can set up with Calm Mind",
+      "sets": {
+        "calm_mind": {
+          "name": "Calm Mind",
+          "item": "Leftovers",
+          "nature": "Bold",
+          "evs": "252 HP / 252 Def / 4 Spe",
+          "moves": ["Calm Mind", "Surf", "Ice Beam / Roar", "Rest / Sleep Talk"],
+          "description": "Can become very hard to break after Calm Mind boosts.",
+          "usage_tips": "User mentioned repeatedly losing to CM Suicune by not preserving Zapdos."
+        }
+      },
+      "checks_and_counters": {
+        "hard_counters": ["Blissey (but can be worn down)", "Celebi", "Zapdos"],
+        "soft_checks": ["Starmie", "Electric-types"],
+        "notes": "Preserve your Suicune check - it can snowball games"
+      }
+    },
+    "snorlax": {
+      "name": "Snorlax",
+      "types": ["Normal"],
+      "ability": "Immunity / Thick Fat",
+      "base_stats": {
+        "hp": 160,
+        "atk": 110,
+        "def": 65,
+        "spa": 65,
+        "spd": 110,
+        "spe": 30
+      },
+      "viability": "A",
+      "role": "Special wall; beats Rain teams and special offense",
+      "sets": {
+        "curselax": {
+          "name": "Curse",
+          "item": "Leftovers",
+          "nature": "Careful",
+          "evs": "252 HP / 252 SpD / 4 Def",
+          "moves": ["Curse", "Body Slam / Return", "Earthquake / Shadow Ball", "Rest"],
+          "description": "Sets up Curse and becomes very hard to take down. Shadow Ball hits Gengar.",
+          "usage_tips": "Excellent vs Rain teams and special offense."
+        },
+        "rest_talk": {
+          "name": "Rest + Sleep Talk",
+          "item": "Leftovers",
+          "nature": "Careful",
+          "evs": "252 HP / 252 SpD",
+          "moves": ["Rest", "Sleep Talk", "Body Slam", "Earthquake"],
+          "description": "More consistent but less threatening.",
+          "usage_tips": "Hard to wear down."
+        }
+      },
+      "checks_and_counters": {
+        "hard_counters": ["Skarmory", "Dugtrio (for non-Curse)"],
+        "soft_checks": ["Fighting-types", "Gengar (for non-Shadow Ball)"],
+        "notes": "Key anti-Rain Pokemon"
+      }
+    }
+  }
+}
