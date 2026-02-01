@@ -427,6 +427,35 @@
             'Dark': '#705848', 'Steel': '#B8B8D0'
         };
 
+        // Helper: Get Pokemon key from name
+        function getPokemonKeyByName(name) {
+            const pokemon = pokemonData.pokemon || {};
+            for (const [key, mon] of Object.entries(pokemon)) {
+                if (mon.name.toLowerCase() === name.toLowerCase()) return key;
+            }
+            return null;
+        }
+
+        // Helper: Get type gradient for a Pokemon name
+        function getTypeGradient(name) {
+            const key = getPokemonKeyByName(name);
+            if (!key) return 'linear-gradient(90deg, #705898, #705898)'; // fallback purple
+            const mon = pokemonData.pokemon[key];
+            if (!mon || !mon.types) return 'linear-gradient(90deg, #705898, #705898)';
+
+            const type1 = typeColors[mon.types[0]] || '#705898';
+            const type2 = mon.types[1] ? typeColors[mon.types[1]] : type1;
+            return `linear-gradient(90deg, ${type1} 50%, ${type2} 50%)`;
+        }
+
+        // Helper: Create clickable Pokemon badge
+        function createPokemonBadge(name) {
+            const key = getPokemonKeyByName(name);
+            const gradient = getTypeGradient(name);
+            const clickAttr = key ? `onclick="showPokemonDetail('${key}')" style="cursor: pointer;"` : '';
+            return `<span class="move-badge pokemon-link" ${clickAttr} style="background: ${gradient}; border: none;">${name}</span>`;
+        }
+
         // Load JSON data
         async function loadData() {
             try {
@@ -455,7 +484,7 @@
             const container = document.getElementById('pokemon-list');
             const pokemon = pokemonData.pokemon || {};
 
-            const tiers = { S: [], A: [], B: [] };
+            const tiers = { S: [], A: [], B: [], C: [] };
 
             Object.entries(pokemon).forEach(([key, mon]) => {
                 if (filter && !mon.name.toLowerCase().includes(filter.toLowerCase())) return;
@@ -466,7 +495,7 @@
 
             let html = '';
 
-            ['S', 'A', 'B'].forEach(tier => {
+            ['S', 'A', 'B', 'C'].forEach(tier => {
                 if (tiers[tier].length === 0) return;
 
                 html += `
@@ -638,7 +667,7 @@
                         <p>${arch.description}</p>
                         <h3>Key Pokemon</h3>
                         <div class="moves-list">
-                            ${arch.key_pokemon.map(p => `<span class="move-badge">${p}</span>`).join('')}
+                            ${arch.key_pokemon.map(p => createPokemonBadge(p)).join('')}
                         </div>
                         <h3>Gameplan</h3>
                         <p>${arch.gameplan}</p>
@@ -660,7 +689,7 @@
             Object.entries(cores).forEach(([key, core]) => {
                 html += `
                     <div class="card">
-                        <h2>${core.pokemon.join(' + ')}</h2>
+                        <h2 style="margin-bottom: 0.5rem;">${core.pokemon.map(p => createPokemonBadge(p)).join(' <span style="color: var(--text-secondary);">+</span> ')}</h2>
                         <span class="type-badge" style="background: var(--accent)">${core.type}</span>
                         <p style="margin-top: 0.5rem;">${core.description}</p>
                         ${core.synergy ? `<p><strong>Synergy:</strong> ${core.synergy}</p>` : ''}
