@@ -58,45 +58,54 @@
   "archetypes": {
     "tss_balance": {
       "name": "TSS (Toxic, Sandstorm, Spikes) Balance",
-      "description": "The quintessential ADV style featuring bulky Tyranitar, Spikes from Skarmory, and gradual chip damage",
+      "description": "The quintessential ADV style featuring bulky Tyranitar, Spikes from Skarmory, and gradual chip damage. Balance really rules this metagame with the ability to pose a real threat whilst maintaining a solid defensive backbone.",
       "key_pokemon": ["Tyranitar", "Skarmory", "Blissey", "Gengar", "Swampert"],
-      "gameplan": "Set up sand with Tyranitar, Spikes with Skarmory, chip down opponents with Toxic and forced switches"
+      "gameplan": "Set up sand with Tyranitar, Spikes with Skarmory, chip down opponents with Toxic and forced switches",
+      "why_it_works": "Sand + Spikes + Toxic creates 12.5-25% chip per switch. Combined with phazing from Roar/Whirlwind, opponents get worn down rapidly. Tyranitar provides Sand Stream on switch-in; Skarmory sets up to 3 layers of Spikes (affecting 25% HP each switch); Toxic adds another 6.25% minimum."
     },
     "spikes_offense": {
       "name": "Spikes Offense",
-      "description": "Aggressive teams that use Spikes to enable OHKOs and 2HKOs from offensive threats",
+      "description": "Aggressive teams that use Spikes to enable OHKOs and 2HKOs from offensive threats. Spikes are very important for Dugtrio and Medicham to be able to one-shot mons like Tyranitar, Metagross, Swampert and Celebi.",
       "key_pokemon": ["Skarmory", "Dugtrio", "Medicham", "Gengar", "Aerodactyl"],
-      "gameplan": "Set up Spikes early, use trappers to remove key threats, clean with fast attackers. Spikes are critical for Dugtrio and Medicham to OHKO Tyranitar, Metagross, Swampert, and Celebi."
+      "gameplan": "Set up Spikes early, use trappers to remove key threats, clean with fast attackers. Spikes are critical for Dugtrio and Medicham to OHKO Tyranitar, Metagross, Swampert, and Celebi.",
+      "damage_thresholds": "With 3 layers of Spikes, non-immune Pokemon take 25% on switch-in. This lets CB Dugtrio OHKO Tyranitar after Spikes and allows Medicham's Pure Power boosted attacks to sweep."
     },
     "spikeless_offense": {
       "name": "Spikeless Offense",
-      "description": "Hyper-offensive teams that forgo Spikes for pure attacking power",
+      "description": "Hyper-offensive teams that forgo Spikes for pure attacking power. Though Spikes is ADV's most defining mechanic, some teams opt for raw power instead.",
       "key_pokemon": ["Salamence", "Metagross", "Gengar", "Zapdos"],
-      "gameplan": "Overwhelm opponent with powerful attacks and momentum"
+      "gameplan": "Overwhelm opponent with powerful attacks and momentum",
+      "when_to_use": "Good when you want to outpace TSS teams before they can set up chip damage. Also effective when your team naturally struggles to keep Spikes up due to spinner pressure."
     },
     "breloom_charizard_offense": {
       "name": "Breloom/Charizard Spikeless Offense",
-      "description": "Popularized by the player 'Undisputed'. This team gained so much traction that both Breloom and Charizard moved from UUBL to OU.",
+      "description": "Popularized by the player 'Undisputed'. This team gained so much traction that both Breloom and Charizard moved from UUBL to OU. One of the most influential team styles in ADV history.",
       "key_pokemon": ["Breloom", "Charizard", "Celebi", "Jirachi", "Raikou"],
-      "gameplan": "Breloom puts threats to sleep with Spore, Charizard wallbreaks TSS teams with Fire Blast. CM users like Celebi, Jirachi, and Raikou are staples."
+      "gameplan": "Breloom puts threats to sleep with Spore, Charizard wallbreaks TSS teams with Fire Blast. CM users like Celebi, Jirachi, and Raikou are staples.",
+      "historical_impact": "Proved that spikeless offense was viable and directly caused two Pokemon to rise from UUBL to OU through ladder success."
     },
     "superman": {
       "name": "Superman (Anti-Spikes)",
       "description": "Flying types and Levitate Pokemon all on one team to avoid Spikes damage entirely. Good matchup into Skarm/Bliss cores who rely heavily on Spikes chip to make progress.",
       "key_pokemon": ["Zapdos", "Flygon", "Gengar", "Salamence", "Moltres", "Gyarados"],
-      "gameplan": "Avoid all Spikes damage by using only Pokemon immune to them. Forces opponent's Spikes strategy to be less effective."
+      "gameplan": "Avoid all Spikes damage by using only Pokemon immune to them. Forces opponent's Spikes strategy to be less effective.",
+      "advantages": "Completely nullifies Spikes, your primary disadvantage against TSS. Can switch freely without chip damage accumulating.",
+      "disadvantages": "Often lacks dedicated answers to certain threats. Building a full team of fliers/levitators limits your options."
     },
     "special_offense_dugtrio": {
       "name": "Special Offense with Dugtrio",
-      "description": "Uses bulky Dugtrio to eliminate Blissey so special attackers like Suicune and Raikou can sweep. Zapdos/Dugtrio core is the backbone.",
+      "description": "Uses bulky Dugtrio to eliminate Blissey so special attackers like Suicune and Raikou can sweep. Zapdos/Dugtrio core is the backbone. One of the central offensive styles of ADV OU.",
       "key_pokemon": ["Zapdos", "Dugtrio", "Suicune", "Raikou", "Magneton"],
-      "gameplan": "Trap and KO Blissey with Dugtrio, sweep with Crocune or CM Raikou. Can also run Rain offense variant."
+      "gameplan": "Trap and KO Blissey with Dugtrio, sweep with Crocune or CM Raikou. Can also run Rain offense variant.",
+      "strategy_detail": "Zapdos forces switches that Dugtrio can trap. Use Baton Pass to bring in Dugtrio safely. Once Blissey is gone, special attackers become very difficult to wall. Crocune (CM/Rest/Sleep Talk Suicune) becomes nearly unstoppable as the last Pokemon.",
+      "jolteon_variant": "Jolteon can replace Zapdos for speed control and Baton Pass pivoting. Jolteon passes Substitutes to threats depending on what switches in."
     },
     "stall": {
       "name": "Spikes Stall",
-      "description": "Defensive teams relying on Spikes, status, and phazing to wear down opponents",
-      "key_pokemon": ["Skarmory", "Blissey", "Celebi", "Dugtrio", "Milotic"],
-      "gameplan": "Chip damage through Spikes/Roar/Whirlwind/Leech Seed, trap key threats with Dugtrio"
+      "description": "Defensive teams relying on Spikes, status, and phazing to wear down opponents. Rapid Spin Starmie Spikes Stall is seen as one of, if not the metagame's current strongest archetype.",
+      "key_pokemon": ["Skarmory", "Blissey", "Celebi", "Dugtrio", "Milotic", "Starmie"],
+      "gameplan": "Chip damage through Spikes/Roar/Whirlwind/Leech Seed, trap key threats with Dugtrio",
+      "stall_vs_cm": "Stall teams can struggle against CM/Rest Suicune and CM Blissey. Running your own CM Blissey or slipping Toxic into movesets helps. Bulk Up Machamp can also threaten traditional SkarmBliss."
     },
     "rain_dance": {
       "name": "Rain Dance",
@@ -242,20 +251,75 @@
       "name": "Crocune",
       "pokemon": "Suicune",
       "creator": "Cromat",
-      "set": "Calm Mind / Surf / Rest / Sleep Talk",
-      "description": "Great on Magneton teams because once Skarmory is eliminated, nothing can Roar Suicune out if it's the last Pokemon. Ultimate late-game wincon."
+      "set": {
+        "moves": ["Calm Mind", "Surf", "Rest", "Sleep Talk"],
+        "item": "Leftovers",
+        "ability": "Pressure",
+        "nature": "Bold",
+        "evs": "248 HP / 196 Def / 64 Spe"
+      },
+      "description": "One of the most feared sets in ADV OU history. Named after Cromat, a prolific competitive player during the Advance era who popularized Rest+Sleep Talk builds.",
+      "why_it_works": [
+        "Suicune's great physical bulk prevents even CB Salamence from 3HKO'ing it",
+        "Calm Mind boosts both SpA and SpD, patching its average Special Attack while making it nearly unbreakable specially",
+        "Before the physical/special split, ALL Grass and Electric moves were special - Suicune has no physical weaknesses",
+        "Pressure stalls out Thunderbolt PP from Zapdos and similar threats",
+        "Rest + Sleep Talk keeps it healthy while still boosting and attacking"
+      ],
+      "how_to_use": "Use early game to check physical threats. In the late game, if Suicune is your last Pokemon and Skarmory/Roar users are gone, nothing can force it out. Set up Calm Minds freely and sweep. The Magneton + Crocune core works because Magneton traps Skarmory, removing the main Pokemon that can phaze Suicune.",
+      "counters": ["Roar/Whirlwind users (Skarmory, Suicune)", "Celebi with Leech Seed/Perish Song", "Toxic stall if it can't Rest in time"],
+      "legacy": "So influential that mono-attacking Rest/Talk sets are often prefixed with 'Cro' to this day"
     },
     "houdini": {
       "name": "Houdini",
       "pokemon": "Metagross",
       "origin": "Named after a famous ladder player who always used a Metagross named Houdini",
-      "strategy": "Lead Metagross with intent to use Explosion early. KO ends turn completely - denies opponent their turn. Use this to pivot into a trapper or get a favorable switch."
+      "strategy": "Lead Metagross with intent to use Explosion early. KO ends turn completely - denies opponent their turn. Use this to pivot into a trapper or get a favorable switch.",
+      "why_ko_ends_turn_matters": "In Gen 3, when you KO an opposing Pokemon with Explosion, the turn ends immediately. Your opponent doesn't get to send out their next Pokemon until the following turn. This means you can switch to Dugtrio or another trapper for FREE without letting them react.",
+      "example_play": "Houdini Metagross uses Explosion on opposing Celebi. Celebi faints. Turn ends. You switch to Dugtrio. Opponent sends in Tyranitar. Dugtrio is already in and traps Tyranitar.",
+      "common_moves": ["Meteor Mash", "Earthquake", "Explosion", "Rock Slide/Hidden Power Fire"]
     },
     "undisputed_offense": {
       "name": "Undisputed's Breloom/Charizard Offense",
-      "origin": "Player 'Undisputed' popularized this team",
-      "impact": "Both Breloom and Charizard moved from UUBL to OU because of this team's success",
-      "key_pokemon": ["Breloom", "Charizard"]
+      "origin": "Player 'Undisputed' popularized this team style on the ADV OU ladder",
+      "impact": "Both Breloom and Charizard moved from UUBL to OU because of this team's success. One of the most historically significant teams.",
+      "key_pokemon": ["Breloom", "Charizard"],
+      "strategy": "Breloom's Spore puts a key threat to sleep (often Skarmory or Blissey). Charizard's Fire Blast destroys the Steel-types that wall other offensive Pokemon. CM users like Celebi, Jirachi, and Raikou close out games.",
+      "why_it_worked": "TSS teams relied on Skarmory to wall physical threats - Charizard's Fire Blast OHKOs it. Blissey walled special attackers - Breloom's Focus Punch 2HKOs it after Spore."
+    },
+    "skarmbliss": {
+      "name": "SkarmBliss",
+      "pokemon": ["Skarmory", "Blissey"],
+      "description": "The most iconic defensive core in Pokemon history, originated in ADV. Skarmory covers Blissey's poor physical bulk while Blissey patches Skarmory's mediocre special defense.",
+      "skarmory_role": "Spiker and phazer. Finds it amazingly easy to lay Spikes and take advantage of them with Whirlwind, particularly against Choice Band users like Metagross and Snorlax. Toxic stalls opponents in conjunction with Protect.",
+      "blissey_role": "Special sponge. Seismic Toss checks Raikou, offensive Jirachi, Suicune without Sub, Zapdos, Jolteon. Aromatherapy heals team's status.",
+      "weaknesses": ["CM/Rest Suicune (stalls out Blissey)", "CM Blissey (both sides)", "Bulk Up Machamp", "Magneton (traps Skarmory)"],
+      "variations": {
+        "defensive": "Traditional full stall with maximum longevity",
+        "offensive": "Uses offensive threats alongside the core, plays more proactively but has less longevity"
+      }
+    },
+    "dragmag": {
+      "name": "DragMag",
+      "description": "Dragon-type sweepers paired with Magneton to trap Steel-types",
+      "key_pokemon": ["Salamence", "Flygon", "Magneton", "Dugtrio"],
+      "strategy": "Magneton traps Skarmory and Metagross which wall Dragon-types. Once Steels are gone, Dragon Dance Salamence or mixed Flygon can sweep. Dugtrio handles Blissey for special variants.",
+      "why_it_works": "Steel-types are the primary Dragon resists in Gen 3. Remove them and Dragon-types have almost free reign."
+    },
+    "baton_pass_chains": {
+      "name": "Baton Pass Teams",
+      "description": "Teams built around passing stat boosts to a sweeper",
+      "key_pokemon": ["Celebi", "Zapdos", "Vaporeon", "Jolteon", "Smeargle"],
+      "common_boosts": ["Agility", "Calm Mind", "Substitute", "Swords Dance"],
+      "counters": ["Roar/Whirlwind", "Perish Song", "Haze", "Taunt"],
+      "notes": "Baton Pass can also be used simply to lure Pokemon for Dugtrio to trap - doesn't always need to pass boosts"
+    },
+    "agility_metagross": {
+      "name": "Agility Metagross",
+      "pokemon": "Metagross",
+      "description": "Rising in popularity recently. Agility patches Metagross's middling Speed, allowing it to sweep late-game.",
+      "set": ["Agility", "Meteor Mash", "Earthquake", "Rock Slide/Explosion"],
+      "usage": "Set up on forced switches. After one Agility, outspeeds most of the metagame except Jolteon and Aerodactyl."
     }
   },
   "teambuilding_principles": {
