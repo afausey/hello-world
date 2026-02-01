@@ -1,0 +1,140 @@
+{
+  "format": "ADV OU",
+  "generation": 3,
+  "last_updated": "2026-02-01",
+  "sources": [
+    "https://www.smogon.com/forums/threads/adv-ou-viability-ranking-and-metagame-discussion.3503019/",
+    "https://www.smogon.com/forums/threads/adv-ou-teambuilding-strategy-archetypes-and-cores-a-data-driven-approach.3654874/",
+    "https://www.smogon.com/forums/threads/adv-ou-sample-teams.3687813/"
+  ],
+  "metagame_characteristics": {
+    "pace": "Slower than modern metagames due to lack of Life Orb and other power items",
+    "dominant_playstyle": "Balance - teams that pose threats while maintaining solid defensive backbone",
+    "key_mechanic": "Spikes are the most important form of chip damage; no Stealth Rock exists",
+    "weather": "Sand Stream (Tyranitar) is dominant; Rain Dance teams are viable but require manual setup",
+    "trapping": "Dugtrio and Magneton are extremely common and shape teambuilding"
+  },
+  "clauses": {
+    "sleep_clause": "Only one opponent Pokemon may be asleep at a time",
+    "species_clause": "No two Pokemon on a team may share a Pokedex number",
+    "ohko_clause": "Fissure, Guillotine, Horn Drill, Sheer Cold are banned",
+    "evasion_clause": "Double Team and Minimize are banned"
+  },
+  "unique_gen3_mechanics": {
+    "explosion_self_destruct": "Halves target's Defense during damage calculation (effectively doubles damage)",
+    "critical_hits": "Ignore all stat changes (positive and negative), deal 2x damage",
+    "sleep_duration": "1-3 turns, not including the turn put to sleep",
+    "sandstorm_spdef_boost": "Rock-types gain 1.5x Special Defense in sandstorm",
+    "spikes_damage": {
+      "1_layer": "12.5% max HP",
+      "2_layers": "16.67% max HP",
+      "3_layers": "25% max HP"
+    },
+    "no_team_preview": true,
+    "no_fairy_type": true,
+    "taunt_duration": "2 turns",
+    "encore_duration": "2-5 turns"
+  },
+  "viability_rankings": {
+    "S_tier": {
+      "pokemon": ["Tyranitar", "Skarmory", "Blissey", "Dugtrio"],
+      "notes": "Tyranitar is considered the best Pokemon in ADV OU. Skarmory is the best Spikes user. Blissey is the best special wall. Dugtrio enables many strategies through trapping."
+    },
+    "A_tier": {
+      "pokemon": ["Zapdos", "Salamence", "Metagross", "Swampert", "Gengar", "Celebi", "Jirachi", "Starmie", "Magneton", "Aerodactyl", "Suicune", "Snorlax"],
+      "notes": "Core metagame Pokemon that appear on most competitive teams"
+    },
+    "B_tier": {
+      "pokemon": ["Flygon", "Heracross", "Claydol", "Milotic", "Moltres", "Medicham", "Raikou"],
+      "notes": "Strong Pokemon with specific roles or niches"
+    }
+  },
+  "archetypes": {
+    "tss_balance": {
+      "name": "TSS (Toxic, Sandstorm, Spikes) Balance",
+      "description": "The quintessential ADV style featuring bulky Tyranitar, Spikes from Skarmory, and gradual chip damage",
+      "key_pokemon": ["Tyranitar", "Skarmory", "Blissey", "Gengar", "Swampert"],
+      "gameplan": "Set up sand with Tyranitar, Spikes with Skarmory, chip down opponents with Toxic and forced switches"
+    },
+    "spikes_offense": {
+      "name": "Spikes Offense",
+      "description": "Aggressive teams that use Spikes to enable OHKOs and 2HKOs from offensive threats",
+      "key_pokemon": ["Skarmory", "Dugtrio", "Medicham", "Gengar", "Aerodactyl"],
+      "gameplan": "Set up Spikes early, use trappers to remove key threats, clean with fast attackers"
+    },
+    "spikeless_offense": {
+      "name": "Spikeless Offense",
+      "description": "Hyper-offensive teams that forgo Spikes for pure attacking power",
+      "key_pokemon": ["Salamence", "Metagross", "Gengar", "Zapdos"],
+      "gameplan": "Overwhelm opponent with powerful attacks and momentum"
+    },
+    "stall": {
+      "name": "Spikes Stall",
+      "description": "Defensive teams relying on Spikes, status, and phazing to wear down opponents",
+      "key_pokemon": ["Skarmory", "Blissey", "Celebi", "Dugtrio", "Milotic"],
+      "gameplan": "Chip damage through Spikes/Roar/Whirlwind/Leech Seed, trap key threats with Dugtrio"
+    },
+    "rain_dance": {
+      "name": "Rain Dance",
+      "description": "Weather-based offense using Swift Swim sweepers",
+      "key_pokemon": ["Kingdra", "Ludicolo", "Zapdos", "Swampert"],
+      "gameplan": "Set Rain Dance manually (no Damp Rock), sweep with boosted Water moves and Swift Swim",
+      "notes": "Requires multiple Rain setters; strong vs standard offense, weak vs stall and Snorlax"
+    },
+    "milotic_celebi_balance": {
+      "name": "Milotic/Celebi Balance",
+      "description": "Alternative defensive core to SkarmBliss, relying on recovery moves",
+      "key_pokemon": ["Milotic", "Celebi", "Magneton", "Claydol"],
+      "gameplan": "Use recovery to stay healthy, often paired with HP Fire Magneton and Claydol for Rapid Spin"
+    }
+  },
+  "key_cores": {
+    "skarmbliss": {
+      "pokemon": ["Skarmory", "Blissey"],
+      "type": "defensive",
+      "description": "The iconic defensive core - Skarmory handles physical attacks and sets Spikes, Blissey handles special attacks",
+      "weaknesses": ["Magneton trapping Skarmory", "Mixed attackers", "Taunt"]
+    },
+    "tyranitar_salamence": {
+      "pokemon": ["Tyranitar", "Salamence"],
+      "type": "offensive",
+      "description": "Dragon Dance sweepers that can clean games; Tyranitar's Sand Stream aids both",
+      "synergy": "Both threaten different checks; Salamence's Intimidate helps Tyranitar set up"
+    },
+    "zapdos_swampert": {
+      "pokemon": ["Zapdos", "Swampert"],
+      "type": "pivot",
+      "description": "Defensive pivots with good type synergy",
+      "synergy": "Zapdos absorbs Grass attacks for Swampert; Swampert absorbs Electric for Zapdos"
+    },
+    "skarmdug": {
+      "pokemon": ["Skarmory", "Dugtrio"],
+      "type": "utility",
+      "description": "Skarmory sets Spikes, Dugtrio traps threats including Magneton",
+      "synergy": "Dugtrio protects Skarmory from Magneton; Spikes enable Dugtrio's KOs"
+    },
+    "big_five": {
+      "pokemon": ["Tyranitar", "Skarmory", "Swampert", "Blissey", "Gengar"],
+      "type": "balanced",
+      "description": "Classic balanced team core covering all major threats"
+    }
+  },
+  "trapping_guide": {
+    "dugtrio": {
+      "ability": "Arena Trap",
+      "common_targets": ["Tyranitar", "Metagross", "Jirachi", "Magneton", "Blissey", "Starmie", "Raikou", "Celebi", "Heracross"],
+      "notes": "Most versatile trapper; keeps many frail ground-weak Pokemon out of the tier",
+      "common_set": "Choice Band with Earthquake, Rock Slide, Aerial Ace, Hidden Power Bug"
+    },
+    "magneton": {
+      "ability": "Magnet Pull",
+      "common_targets": ["Skarmory", "Forretress", "Metagross", "Jirachi", "opposing Magneton"],
+      "notes": "Essential for teams weak to Steel-types; enables Dragon-types",
+      "common_sets": ["HP Fire Magneton for Skarmory", "Endure + Salac Berry for speed"]
+    },
+    "counter_trapping": {
+      "description": "Double switching Dugtrio or your own Magneton to trap opposing Magneton",
+      "importance": "Critical for Skarmory-based teams"
+    }
+  }
+}

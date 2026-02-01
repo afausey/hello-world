@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADV OU Knowledge Base</title>
+    <style>
+        :root {
+            --bg-primary: #1a1a2e;
+            --bg-secondary: #16213e;
+            --bg-card: #0f3460;
+            --text-primary: #eee;
+            --text-secondary: #aaa;
+            --accent: #e94560;
+            --accent-secondary: #533483;
+            --type-normal: #A8A878;
+            --type-fire: #F08030;
+            --type-water: #6890F0;
+            --type-electric: #F8D030;
+            --type-grass: #78C850;
+            --type-ice: #98D8D8;
+            --type-fighting: #C03028;
+            --type-poison: #A040A0;
+            --type-ground: #E0C068;
+            --type-flying: #A890F0;
+            --type-psychic: #F85888;
+            --type-bug: #A8B820;
+            --type-rock: #B8A038;
+            --type-ghost: #705898;
+            --type-dragon: #7038F8;
+            --type-dark: #705848;
+            --type-steel: #B8B8D0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.5;
+        }
+
+        header {
+            background: var(--bg-secondary);
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 2px solid var(--accent);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header h1 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        nav {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav button {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--accent);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        nav button:hover, nav button.active {
+            background: var(--accent);
+        }
+
+        main {
+            padding: 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--accent);
+            border-radius: 4px;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .search-box::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--accent);
+        }
+
+        .card h2 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .card h3 {
+            color: var(--text-primary);
+            margin: 0.75rem 0 0.25rem;
+            font-size: 1rem;
+        }
+
+        .card p, .card li {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .card ul {
+            padding-left: 1.25rem;
+            margin: 0.5rem 0;
+        }
+
+        .pokemon-card {
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .pokemon-card:hover {
+            transform: translateX(4px);
+        }
+
+        .pokemon-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .type-badge {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #000;
+        }
+
+        .viability-badge {
+            background: var(--accent);
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+
+        .set-card {
+            background: var(--bg-secondary);
+            padding: 0.75rem;
+            border-radius: 4px;
+            margin: 0.5rem 0;
+        }
+
+        .set-card h4 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .moves-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.25rem;
+            margin: 0.5rem 0;
+        }
+
+        .move-badge {
+            background: var(--accent-secondary);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 0.25rem;
+            margin: 0.5rem 0;
+            text-align: center;
+            font-size: 0.75rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+        }
+
+        .stat-value {
+            font-weight: bold;
+        }
+
+        .tier-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .tier-header {
+            background: var(--accent);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .pokemon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 0.5rem;
+        }
+
+        .pokemon-mini {
+            background: var(--bg-card);
+            padding: 0.75rem;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .pokemon-mini:hover {
+            background: var(--accent-secondary);
+        }
+
+        .detail-view {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 200;
+            overflow-y: auto;
+            padding: 1rem;
+        }
+
+        .detail-view.active {
+            display: block;
+        }
+
+        .detail-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .close-btn {
+            position: sticky;
+            top: 0;
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .calc-section {
+            background: var(--bg-card);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .calc-select {
+            width: 100%;
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 1px solid var(--accent);
+            border-radius: 4px;
+        }
+
+        .calc-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            width: 100%;
+            margin-top: 0.5rem;
+        }
+
+        .calc-result {
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        @media (max-width: 600px) {
+            .stats-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .pokemon-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>ADV OU Knowledge Base</h1>
+        <nav>
+            <button class="active" data-section="pokemon">Pokemon</button>
+            <button data-section="metagame">Metagame</button>
+            <button data-section="archetypes">Archetypes</button>
+            <button data-section="cores">Cores</button>
+            <button data-section="calculator">Calculator</button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Pokemon Section -->
+        <section id="pokemon" class="section active">
+            <input type="text" class="search-box" id="pokemon-search" placeholder="Search Pokemon...">
+            <div id="pokemon-list"></div>
+        </section>
+
+        <!-- Metagame Section -->
+        <section id="metagame" class="section">
+            <div id="metagame-content"></div>
+        </section>
+
+        <!-- Archetypes Section -->
+        <section id="archetypes" class="section">
+            <div id="archetypes-content"></div>
+        </section>
+
+        <!-- Cores Section -->
+        <section id="cores" class="section">
+            <div id="cores-content"></div>
+        </section>
+
+        <!-- Calculator Section -->
+        <section id="calculator" class="section">
+            <div class="calc-section">
+                <h2>Damage Calculator</h2>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">Select attacker, defender, and move to calculate damage.</p>
+
+                <label>Attacker:</label>
+                <select class="calc-select" id="calc-attacker"></select>
+
+                <label>Attacker Set:</label>
+                <select class="calc-select" id="calc-attacker-set"></select>
+
+                <label>Move:</label>
+                <select class="calc-select" id="calc-move"></select>
+
+                <label>Defender:</label>
+                <select class="calc-select" id="calc-defender"></select>
+
+                <label>Defender Set:</label>
+                <select class="calc-select" id="calc-defender-set"></select>
+
+                <button class="calc-btn" id="calc-btn">Calculate Damage</button>
+
+                <div class="calc-result" id="calc-result" style="display: none;"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Detail View Modal -->
+    <div class="detail-view" id="detail-view">
+        <div class="detail-content" id="detail-content"></div>
+    </div>
+
+    <script>
+        // Global data storage
+        let pokemonData = {};
+        let metagameData = {};
+
+        // Type colors
+        const typeColors = {
+            'Normal': '#A8A878', 'Fire': '#F08030', 'Water': '#6890F0',
+            'Electric': '#F8D030', 'Grass': '#78C850', 'Ice': '#98D8D8',
+            'Fighting': '#C03028', 'Poison': '#A040A0', 'Ground': '#E0C068',
+            'Flying': '#A890F0', 'Psychic': '#F85888', 'Bug': '#A8B820',
+            'Rock': '#B8A038', 'Ghost': '#705898', 'Dragon': '#7038F8',
+            'Dark': '#705848', 'Steel': '#B8B8D0'
+        };
+
+        // Load JSON data
+        async function loadData() {
+            try {
+                const [pokemonRes, metagameRes] = await Promise.all([
+                    fetch('knowledge_base/pokemon_sets.json'),
+                    fetch('knowledge_base/metagame_overview.json')
+                ]);
+
+                pokemonData = await pokemonRes.json();
+                metagameData = await metagameRes.json();
+
+                renderPokemonList();
+                renderMetagame();
+                renderArchetypes();
+                renderCores();
+                populateCalculator();
+            } catch (error) {
+                console.error('Error loading data:', error);
+                document.getElementById('pokemon-list').innerHTML =
+                    '<div class="card"><p>Error loading data. Make sure JSON files are accessible.</p></div>';
+            }
+        }
+
+        // Render Pokemon list by viability tier
+        function renderPokemonList(filter = '') {
+            const container = document.getElementById('pokemon-list');
+            const pokemon = pokemonData.pokemon || {};
+
+            const tiers = { S: [], A: [], B: [] };
+
+            Object.entries(pokemon).forEach(([key, mon]) => {
+                if (filter && !mon.name.toLowerCase().includes(filter.toLowerCase())) return;
+                if (tiers[mon.viability]) {
+                    tiers[mon.viability].push({ key, ...mon });
+                }
+            });
+
+            let html = '';
+
+            ['S', 'A', 'B'].forEach(tier => {
+                if (tiers[tier].length === 0) return;
+
+                html += `
+                    <div class="tier-section">
+                        <div class="tier-header">${tier} Tier</div>
+                        <div class="pokemon-grid">
+                            ${tiers[tier].map(mon => `
+                                <div class="pokemon-mini" onclick="showPokemonDetail('${mon.key}')">
+                                    <strong>${mon.name}</strong>
+                                    <div>
+                                        ${mon.types.map(t => `<span class="type-badge" style="background: ${typeColors[t]}">${t}</span>`).join(' ')}
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html || '<div class="card"><p>No Pokemon found.</p></div>';
+        }
+
+        // Show Pokemon detail modal
+        function showPokemonDetail(key) {
+            const mon = pokemonData.pokemon[key];
+            if (!mon) return;
+
+            const stats = mon.base_stats;
+
+            let html = `
+                <button class="close-btn" onclick="closeDetail()">Close</button>
+                <div class="pokemon-header">
+                    <h2>${mon.name}</h2>
+                    <span class="viability-badge">${mon.viability} Tier</span>
+                </div>
+                <div>
+                    ${mon.types.map(t => `<span class="type-badge" style="background: ${typeColors[t]}">${t}</span>`).join(' ')}
+                </div>
+                <p style="margin: 0.5rem 0; color: var(--text-secondary);">${mon.role}</p>
+
+                <h3>Base Stats</h3>
+                <div class="stats-grid">
+                    <div><div class="stat-label">HP</div><div class="stat-value">${stats.hp}</div></div>
+                    <div><div class="stat-label">Atk</div><div class="stat-value">${stats.atk}</div></div>
+                    <div><div class="stat-label">Def</div><div class="stat-value">${stats.def}</div></div>
+                    <div><div class="stat-label">SpA</div><div class="stat-value">${stats.spa}</div></div>
+                    <div><div class="stat-label">SpD</div><div class="stat-value">${stats.spd}</div></div>
+                    <div><div class="stat-label">Spe</div><div class="stat-value">${stats.spe}</div></div>
+                </div>
+
+                <h3>Sets</h3>
+            `;
+
+            if (mon.sets) {
+                Object.entries(mon.sets).forEach(([setKey, set]) => {
+                    html += `
+                        <div class="set-card">
+                            <h4>${set.name}</h4>
+                            <p><strong>Item:</strong> ${set.item} | <strong>Nature:</strong> ${set.nature}</p>
+                            <p><strong>EVs:</strong> ${set.evs}</p>
+                            <div class="moves-list">
+                                ${set.moves.map(m => `<span class="move-badge">${m}</span>`).join('')}
+                            </div>
+                            <p>${set.description}</p>
+                            ${set.usage_tips ? `<p><strong>Tips:</strong> ${set.usage_tips}</p>` : ''}
+                        </div>
+                    `;
+                });
+            }
+
+            if (mon.checks_and_counters) {
+                html += `
+                    <h3>Checks & Counters</h3>
+                    <div class="set-card">
+                        <p><strong>Hard Counters:</strong> ${mon.checks_and_counters.hard_counters?.join(', ') || 'None'}</p>
+                        <p><strong>Soft Checks:</strong> ${mon.checks_and_counters.soft_checks?.join(', ') || 'None'}</p>
+                        ${mon.checks_and_counters.notes ? `<p><em>${mon.checks_and_counters.notes}</em></p>` : ''}
+                    </div>
+                `;
+            }
+
+            document.getElementById('detail-content').innerHTML = html;
+            document.getElementById('detail-view').classList.add('active');
+        }
+
+        function closeDetail() {
+            document.getElementById('detail-view').classList.remove('active');
+        }
+
+        // Render metagame overview
+        function renderMetagame() {
+            const container = document.getElementById('metagame-content');
+            const meta = metagameData;
+
+            let html = `
+                <div class="card">
+                    <h2>Metagame Characteristics</h2>
+                    <ul>
+                        <li><strong>Pace:</strong> ${meta.metagame_characteristics?.pace}</li>
+                        <li><strong>Dominant Style:</strong> ${meta.metagame_characteristics?.dominant_playstyle}</li>
+                        <li><strong>Key Mechanic:</strong> ${meta.metagame_characteristics?.key_mechanic}</li>
+                        <li><strong>Weather:</strong> ${meta.metagame_characteristics?.weather}</li>
+                        <li><strong>Trapping:</strong> ${meta.metagame_characteristics?.trapping}</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h2>Clauses</h2>
+                    <ul>
+                        ${Object.entries(meta.clauses || {}).map(([k, v]) =>
+                            `<li><strong>${k.replace(/_/g, ' ')}:</strong> ${v}</li>`
+                        ).join('')}
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h2>Unique Gen 3 Mechanics</h2>
+                    <ul>
+                        <li><strong>Explosion/Self-Destruct:</strong> ${meta.unique_gen3_mechanics?.explosion_self_destruct}</li>
+                        <li><strong>Critical Hits:</strong> ${meta.unique_gen3_mechanics?.critical_hits}</li>
+                        <li><strong>Sleep Duration:</strong> ${meta.unique_gen3_mechanics?.sleep_duration}</li>
+                        <li><strong>Sandstorm SpD Boost:</strong> ${meta.unique_gen3_mechanics?.sandstorm_spdef_boost}</li>
+                        <li><strong>Spikes Damage:</strong> 1 layer = 12.5%, 2 layers = 16.67%, 3 layers = 25%</li>
+                        <li><strong>Taunt Duration:</strong> ${meta.unique_gen3_mechanics?.taunt_duration}</li>
+                        <li><strong>Encore Duration:</strong> ${meta.unique_gen3_mechanics?.encore_duration}</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h2>Trapping Guide</h2>
+                    <h3>Dugtrio (Arena Trap)</h3>
+                    <p><strong>Targets:</strong> ${meta.trapping_guide?.dugtrio?.common_targets?.join(', ')}</p>
+                    <p>${meta.trapping_guide?.dugtrio?.notes}</p>
+
+                    <h3>Magneton (Magnet Pull)</h3>
+                    <p><strong>Targets:</strong> ${meta.trapping_guide?.magneton?.common_targets?.join(', ')}</p>
+                    <p>${meta.trapping_guide?.magneton?.notes}</p>
+                </div>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        // Render archetypes
+        function renderArchetypes() {
+            const container = document.getElementById('archetypes-content');
+            const archetypes = metagameData.archetypes || {};
+
+            let html = '';
+
+            Object.entries(archetypes).forEach(([key, arch]) => {
+                html += `
+                    <div class="card">
+                        <h2>${arch.name}</h2>
+                        <p>${arch.description}</p>
+                        <h3>Key Pokemon</h3>
+                        <div class="moves-list">
+                            ${arch.key_pokemon.map(p => `<span class="move-badge">${p}</span>`).join('')}
+                        </div>
+                        <h3>Gameplan</h3>
+                        <p>${arch.gameplan}</p>
+                        ${arch.notes ? `<p><em>${arch.notes}</em></p>` : ''}
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // Render cores
+        function renderCores() {
+            const container = document.getElementById('cores-content');
+            const cores = metagameData.key_cores || {};
+
+            let html = '<div class="info-grid">';
+
+            Object.entries(cores).forEach(([key, core]) => {
+                html += `
+                    <div class="card">
+                        <h2>${core.pokemon.join(' + ')}</h2>
+                        <span class="type-badge" style="background: var(--accent)">${core.type}</span>
+                        <p style="margin-top: 0.5rem;">${core.description}</p>
+                        ${core.synergy ? `<p><strong>Synergy:</strong> ${core.synergy}</p>` : ''}
+                        ${core.weaknesses ? `<p><strong>Weaknesses:</strong> ${core.weaknesses.join(', ')}</p>` : ''}
+                    </div>
+                `;
+            });
+
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        // Populate calculator dropdowns
+        function populateCalculator() {
+            const attackerSelect = document.getElementById('calc-attacker');
+            const defenderSelect = document.getElementById('calc-defender');
+
+            const pokemon = pokemonData.pokemon || {};
+            const options = Object.entries(pokemon)
+                .sort((a, b) => a[1].name.localeCompare(b[1].name))
+                .map(([key, mon]) => `<option value="${key}">${mon.name}</option>`)
+                .join('');
+
+            attackerSelect.innerHTML = '<option value="">Select Attacker</option>' + options;
+            defenderSelect.innerHTML = '<option value="">Select Defender</option>' + options;
+
+            attackerSelect.addEventListener('change', updateAttackerSets);
+            defenderSelect.addEventListener('change', updateDefenderSets);
+            document.getElementById('calc-attacker-set').addEventListener('change', updateMoves);
+        }
+
+        function updateAttackerSets() {
+            const key = document.getElementById('calc-attacker').value;
+            const setSelect = document.getElementById('calc-attacker-set');
+            const mon = pokemonData.pokemon[key];
+
+            if (!mon || !mon.sets) {
+                setSelect.innerHTML = '<option value="">No sets available</option>';
+                return;
+            }
+
+            setSelect.innerHTML = Object.entries(mon.sets)
+                .map(([k, s]) => `<option value="${k}">${s.name}</option>`)
+                .join('');
+
+            updateMoves();
+        }
+
+        function updateDefenderSets() {
+            const key = document.getElementById('calc-defender').value;
+            const setSelect = document.getElementById('calc-defender-set');
+            const mon = pokemonData.pokemon[key];
+
+            if (!mon || !mon.sets) {
+                setSelect.innerHTML = '<option value="">No sets available</option>';
+                return;
+            }
+
+            setSelect.innerHTML = Object.entries(mon.sets)
+                .map(([k, s]) => `<option value="${k}">${s.name}</option>`)
+                .join('');
+        }
+
+        function updateMoves() {
+            const pokemonKey = document.getElementById('calc-attacker').value;
+            const setKey = document.getElementById('calc-attacker-set').value;
+            const moveSelect = document.getElementById('calc-move');
+
+            const mon = pokemonData.pokemon[pokemonKey];
+            if (!mon || !mon.sets || !mon.sets[setKey]) {
+                moveSelect.innerHTML = '<option value="">Select a set first</option>';
+                return;
+            }
+
+            const moves = mon.sets[setKey].moves;
+            moveSelect.innerHTML = moves
+                .map(m => `<option value="${m}">${m}</option>`)
+                .join('');
+        }
+
+        // Calculate damage - calls API if server is running, otherwise shows preview
+        document.getElementById('calc-btn').addEventListener('click', async function() {
+            const attacker = document.getElementById('calc-attacker').value;
+            const attackerSet = document.getElementById('calc-attacker-set').value;
+            const move = document.getElementById('calc-move').value;
+            const defender = document.getElementById('calc-defender').value;
+            const defenderSet = document.getElementById('calc-defender-set').value;
+
+            if (!attacker || !defender || !move) {
+                alert('Please select attacker, defender, and move.');
+                return;
+            }
+
+            const result = document.getElementById('calc-result');
+            result.style.display = 'block';
+            result.textContent = 'Calculating...';
+
+            // Try to call the API
+            try {
+                const params = new URLSearchParams({
+                    attacker: attacker,
+                    attacker_set: attackerSet,
+                    defender: defender,
+                    defender_set: defenderSet,
+                    move: move,
+                    weather: 'sand'  // Default to sand (Tyranitar's Sand Stream)
+                });
+
+                const response = await fetch(`/api/calc?${params}`);
+                const data = await response.json();
+
+                if (data.success) {
+                    const r = data.result;
+                    result.textContent = `
+${data.attacker.name} (${data.attacker.set || 'default'}) @ ${data.attacker.item || 'no item'}
+  ${move}
+vs
+${data.defender.name} (${data.defender.set || 'default'})
+
+Damage: ${r.min_damage} - ${r.max_damage} (${r.min_percent}% - ${r.max_percent}%)
+${r.ko_chance}
+
+Critical Hit: ${r.crit_min} - ${r.crit_max} (${r.crit_min_percent}% - ${r.crit_max_percent}%)
+
+Attacker Stats: ${data.attacker.stats.atk} Atk / ${data.attacker.stats.spa} SpA / ${data.attacker.stats.spe} Spe
+Defender HP: ${data.defender.hp}
+Weather: ${data.weather}
+                    `;
+                } else {
+                    result.textContent = `Error: ${data.error}`;
+                }
+            } catch (e) {
+                // API not available - show preview with local data
+                const atkMon = pokemonData.pokemon[attacker];
+                const defMon = pokemonData.pokemon[defender];
+                const atkSetData = atkMon.sets[attackerSet];
+                const defSetData = defMon.sets[defenderSet];
+
+                result.textContent = `
+Calculation Preview (Server not running):
+-----------------------------------------
+${atkMon.name} (${atkSetData?.name || 'default'})
+  ${move}
+vs
+${defMon.name} (${defSetData?.name || 'default'})
+
+Attacker Stats: ${atkMon.base_stats.atk} Atk / ${atkMon.base_stats.spa} SpA
+Defender Stats: ${defMon.base_stats.hp} HP / ${defMon.base_stats.def} Def / ${defMon.base_stats.spd} SpD
+
+To run full calculations, start the server:
+  cd adv-ou && python3 server.py
+
+Or use CLI:
+  python3 tools/damage_calc.py ${attacker} "${move}" ${defender}
+                `;
+            }
+        });
+
+        // Navigation
+        document.querySelectorAll('nav button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+
+                this.classList.add('active');
+                document.getElementById(this.dataset.section).classList.add('active');
+            });
+        });
+
+        // Search
+        document.getElementById('pokemon-search').addEventListener('input', function() {
+            renderPokemonList(this.value);
+        });
+
+        // Close modal on escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeDetail();
+        });
+
+        // Load data on page load
+        loadData();
+    </script>
+</body>
+</html>
