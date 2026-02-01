@@ -588,7 +588,7 @@
                         <li><strong>Explosion/Self-Destruct:</strong> ${meta.unique_gen3_mechanics?.explosion_self_destruct}</li>
                         <li><strong>Critical Hits:</strong> ${meta.unique_gen3_mechanics?.critical_hits}</li>
                         <li><strong>Sleep Duration:</strong> ${meta.unique_gen3_mechanics?.sleep_duration}</li>
-                        <li><strong>Sandstorm SpD Boost:</strong> ${meta.unique_gen3_mechanics?.sandstorm_spdef_boost}</li>
+                        <li><strong>Sandstorm:</strong> ${meta.unique_gen3_mechanics?.sandstorm_effect}</li>
                         <li><strong>Spikes Damage:</strong> 1 layer = 12.5%, 2 layers = 16.67%, 3 layers = 25%</li>
                         <li><strong>Taunt Duration:</strong> ${meta.unique_gen3_mechanics?.taunt_duration}</li>
                         <li><strong>Encore Duration:</strong> ${meta.unique_gen3_mechanics?.encore_duration}</li>
@@ -600,10 +600,24 @@
                     <h3>Dugtrio (Arena Trap)</h3>
                     <p><strong>Targets:</strong> ${meta.trapping_guide?.dugtrio?.common_targets?.join(', ')}</p>
                     <p>${meta.trapping_guide?.dugtrio?.notes}</p>
+                    ${meta.trapping_guide?.dugtrio?.common_set ? `<p><strong>Common Set:</strong> ${meta.trapping_guide.dugtrio.common_set}</p>` : ''}
+                    ${meta.trapping_guide?.dugtrio?.bulky_variant ? `<p><strong>Bulky Variant:</strong> ${meta.trapping_guide.dugtrio.bulky_variant}</p>` : ''}
 
                     <h3>Magneton (Magnet Pull)</h3>
                     <p><strong>Targets:</strong> ${meta.trapping_guide?.magneton?.common_targets?.join(', ')}</p>
                     <p>${meta.trapping_guide?.magneton?.notes}</p>
+                    ${meta.trapping_guide?.magneton?.common_sets ? `
+                        <p><strong>HP Fire Set:</strong> ${meta.trapping_guide.magneton.common_sets.hp_fire || ''}</p>
+                        <p><strong>Magnet Item:</strong> ${meta.trapping_guide.magneton.common_sets.magnet_item || ''}</p>
+                        <p><strong>Endure Salac:</strong> ${meta.trapping_guide.magneton.common_sets.endure_salac || ''}</p>
+                    ` : ''}
+
+                    ${meta.trapping_guide?.counter_trapping ? `
+                        <h3>Counter-Trapping</h3>
+                        <p>${meta.trapping_guide.counter_trapping.description}</p>
+                        <p><strong>Importance:</strong> ${meta.trapping_guide.counter_trapping.importance}</p>
+                        ${meta.trapping_guide.counter_trapping.yolo_skarm ? `<p><strong>Yolo Skarm:</strong> ${meta.trapping_guide.counter_trapping.yolo_skarm}</p>` : ''}
+                    ` : ''}
                 </div>
             `;
 
@@ -650,6 +664,8 @@
                         <span class="type-badge" style="background: var(--accent)">${core.type}</span>
                         <p style="margin-top: 0.5rem;">${core.description}</p>
                         ${core.synergy ? `<p><strong>Synergy:</strong> ${core.synergy}</p>` : ''}
+                        ${core.strategy ? `<p><strong>Strategy:</strong> ${core.strategy}</p>` : ''}
+                        ${core.notes ? `<p><strong>Notes:</strong> ${core.notes}</p>` : ''}
                         ${core.weaknesses ? `<p><strong>Weaknesses:</strong> ${core.weaknesses.join(', ')}</p>` : ''}
                     </div>
                 `;
