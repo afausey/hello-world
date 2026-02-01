@@ -427,6 +427,78 @@
             'Dark': '#705848', 'Steel': '#B8B8D0'
         };
 
+        // Move type database (common ADV OU moves)
+        const moveTypes = {
+            // Normal
+            'Body Slam': 'Normal', 'Double-Edge': 'Normal', 'Explosion': 'Normal', 'Facade': 'Normal',
+            'Fake Out': 'Normal', 'Frustration': 'Normal', 'Hyper Beam': 'Normal', 'Protect': 'Normal',
+            'Rapid Spin': 'Normal', 'Return': 'Normal', 'Self-Destruct': 'Normal', 'Selfdestruct': 'Normal',
+            'Wish': 'Normal', 'Substitute': 'Normal', 'Baton Pass': 'Normal', 'Roar': 'Normal',
+            'Whirlwind': 'Normal', 'Belly Drum': 'Normal', 'Soft-Boiled': 'Normal', 'Softboiled': 'Normal',
+            'Heal Bell': 'Normal', 'Aromatherapy': 'Normal', 'Sleep Talk': 'Normal', 'Swords Dance': 'Normal',
+            // Fire
+            'Fire Blast': 'Fire', 'Flamethrower': 'Fire', 'Overheat': 'Fire', 'Will-O-Wisp': 'Fire',
+            'Hidden Power Fire': 'Fire', 'HP Fire': 'Fire', 'Sunny Day': 'Fire', 'Fire Punch': 'Fire',
+            // Water
+            'Surf': 'Water', 'Hydro Pump': 'Water', 'Ice Beam': 'Ice', 'Rain Dance': 'Water',
+            'Waterfall': 'Water', 'Hidden Power Water': 'Water',
+            // Electric
+            'Thunderbolt': 'Electric', 'Thunder': 'Electric', 'Thunder Wave': 'Electric',
+            'Hidden Power Electric': 'Electric', 'Volt Tackle': 'Electric',
+            // Grass
+            'Giga Drain': 'Grass', 'Leech Seed': 'Grass', 'Hidden Power Grass': 'Grass', 'HP Grass': 'Grass',
+            'Spore': 'Grass', 'Sleep Powder': 'Grass', 'Stun Spore': 'Grass', 'Synthesis': 'Grass',
+            // Ice
+            'Ice Beam': 'Ice', 'Blizzard': 'Ice', 'Ice Punch': 'Ice', 'Hidden Power Ice': 'Ice', 'HP Ice': 'Ice',
+            // Fighting
+            'Focus Punch': 'Fighting', 'Brick Break': 'Fighting', 'Cross Chop': 'Fighting',
+            'Hi Jump Kick': 'Fighting', 'Superpower': 'Fighting', 'Mach Punch': 'Fighting',
+            'Sky Uppercut': 'Fighting', 'Bulk Up': 'Fighting', 'Counter': 'Fighting',
+            // Poison
+            'Sludge Bomb': 'Poison', 'Toxic': 'Poison', 'Poison Jab': 'Poison',
+            // Ground
+            'Earthquake': 'Ground', 'Hidden Power Ground': 'Ground', 'HP Ground': 'Ground',
+            'Spikes': 'Ground', 'Sand-Attack': 'Ground',
+            // Flying
+            'Aerial Ace': 'Flying', 'Drill Peck': 'Flying', 'Hidden Power Flying': 'Flying', 'HP Flying': 'Flying',
+            'Sky Attack': 'Flying',
+            // Psychic
+            'Psychic': 'Psychic', 'Calm Mind': 'Psychic', 'Hypnosis': 'Psychic', 'Rest': 'Psychic',
+            'Reflect': 'Psychic', 'Light Screen': 'Psychic', 'Trick': 'Psychic', 'Agility': 'Psychic',
+            'Recover': 'Normal', 'Cosmic Power': 'Psychic',
+            // Bug
+            'Megahorn': 'Bug', 'Signal Beam': 'Bug', 'Hidden Power Bug': 'Bug', 'HP Bug': 'Bug',
+            'Silver Wind': 'Bug', 'U-turn': 'Bug',
+            // Rock
+            'Rock Slide': 'Rock', 'Stone Edge': 'Rock', 'Hidden Power Rock': 'Rock', 'HP Rock': 'Rock',
+            'Stealth Rock': 'Rock', 'Rock Tomb': 'Rock', 'Sandstorm': 'Rock',
+            // Ghost
+            'Shadow Ball': 'Ghost', 'Shadow Punch': 'Ghost', 'Destiny Bond': 'Ghost', 'Memento': 'Dark',
+            'Pain Split': 'Normal', 'Perish Song': 'Normal',
+            // Dragon
+            'Dragon Claw': 'Dragon', 'Dragon Dance': 'Dragon', 'Dragonbreath': 'Dragon',
+            'Outrage': 'Dragon', 'Hidden Power Dragon': 'Dragon',
+            // Dark
+            'Crunch': 'Dark', 'Pursuit': 'Dark', 'Taunt': 'Dark', 'Knock Off': 'Dark', 'Thief': 'Dark',
+            'Mean Look': 'Normal', 'Torment': 'Dark',
+            // Steel
+            'Meteor Mash': 'Steel', 'Iron Tail': 'Steel', 'Metal Claw': 'Steel', 'Hidden Power Steel': 'Steel',
+            // Status/Other commonly seen
+            'Seismic Toss': 'Fighting', 'Night Shade': 'Ghost', 'Haze': 'Ice', 'Encore': 'Normal',
+            'Disable': 'Normal', 'Endure': 'Normal', 'Flail': 'Normal', 'Reversal': 'Fighting',
+            'Mirror Coat': 'Psychic', 'Refresh': 'Normal', 'Thunder Punch': 'Electric', 'Ice Punch': 'Ice',
+            'Fire Punch': 'Fire', 'Dynamic Punch': 'Fighting', 'Thunderpunch': 'Electric', 'Firepunch': 'Fire',
+            'Icepunch': 'Ice'
+        };
+
+        // Helper: Get move badge with type color
+        function createMoveBadge(moveName) {
+            const type = moveTypes[moveName] || 'Normal';
+            const bgColor = typeColors[type] || '#A8A878';
+            const textColor = getTextColor(bgColor);
+            return `<span class="move-badge" style="background: ${bgColor}; color: ${textColor}; border: none;">${moveName}</span>`;
+        }
+
         // Helper: Get Pokemon key from name
         function getPokemonKeyByName(name) {
             const pokemon = pokemonData.pokemon || {};
@@ -572,7 +644,7 @@
                             <p><strong>Item:</strong> ${set.item} | <strong>Nature:</strong> ${set.nature}</p>
                             <p><strong>EVs:</strong> ${set.evs}</p>
                             <div class="moves-list">
-                                ${set.moves.map(m => `<span class="move-badge">${m}</span>`).join('')}
+                                ${set.moves.map(m => createMoveBadge(m)).join('')}
                             </div>
                             <p>${set.description}</p>
                             ${set.usage_tips ? `<p><strong>Tips:</strong> ${set.usage_tips}</p>` : ''}
