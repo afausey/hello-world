@@ -25,7 +25,7 @@
     "explosion_self_destruct": "Halves target's Defense during damage calculation (effectively doubles damage)",
     "critical_hits": "Ignore all stat changes (positive and negative), deal 2x damage",
     "sleep_duration": "1-3 turns, not including the turn put to sleep",
-    "sandstorm_spdef_boost": "Rock-types gain 1.5x Special Defense in sandstorm",
+    "sandstorm_effect": "Deals 1/16 HP damage per turn to non-Rock/Ground/Steel types. Note: The 1.5x SpD boost for Rock-types is a Gen 4+ mechanic and does NOT exist in Gen 3.",
     "spikes_damage": {
       "1_layer": "12.5% max HP (1/8)",
       "2_layers": "16.67% max HP (1/6)",
@@ -138,12 +138,6 @@
       "synergy": "Use bulky Dugtrio to eliminate Blissey so special attackers (Suicune, Raikou) can sweep. Zapdos uses Baton Pass to bring in Dugtrio safely.",
       "strategy": "Famously enables Crocune (CM/Rest/Sleep Talk Suicune) and Rain offense."
     },
-    "rock_resists": {
-      "pokemon": ["Swampert", "Metagross", "Flygon"],
-      "type": "defensive",
-      "description": "All three Pokemon resist Rock Slide, which is crucial for handling Tyranitar and Aerodactyl.",
-      "synergy": "Provides multiple Rock resists so you're not reliant on one Pokemon to check Rock-types. Flygon's Levitate avoids Earthquake."
-    },
     "skarmdug": {
       "pokemon": ["Skarmory", "Dugtrio"],
       "type": "utility",
@@ -189,17 +183,59 @@
   },
   "spinblockers": {
     "description": "Ghost-types that prevent Rapid Spin from removing Spikes. Critical for Spikes-based strategies.",
+    "why_essential": "Spikes are the primary form of chip damage in ADV OU. If your opponent can freely spin, you lose the main way Spikes offense and stall teams make progress. Every Spikes team needs a spinblocker.",
     "pokemon": {
       "gengar": {
-        "role": "Primary spinblocker in OU. Also offensive threat with Explosion.",
-        "notes": "Levitate makes it immune to Spikes and EQ. Can threaten back with attacks."
+        "role": "Primary spinblocker in OU. Offensive threat that can pressure spinners.",
+        "advantages": [
+          "Levitate makes it immune to Spikes and Earthquake",
+          "STAB Shadow Ball threatens Starmie and Claydol",
+          "Thunderbolt OHKOs Starmie",
+          "Explosion for trading with threats",
+          "Can run offensive sets that threaten while spinblocking"
+        ],
+        "disadvantages": [
+          "Pursuit weak - Tyranitar can trap and KO",
+          "Frailer than Dusclops",
+          "Dugtrio can trap non-Levitate variants (all Gengar have Levitate)"
+        ],
+        "common_sets": ["SubDisable", "Offensive 3 Attacks + WoW", "Explosion"]
       },
       "dusclops": {
-        "role": "Dedicated defensive spinblocker. Immune to Hi Jump Kick.",
-        "notes": "More reliable blocker but less offensive presence. Can support Belly Drum teams with Memento."
+        "role": "Dedicated defensive spinblocker. Reliable but passive.",
+        "advantages": [
+          "Much bulkier than Gengar - can take hits and stay in",
+          "Immune to Hi Jump Kick (from Medicham/Heracross)",
+          "Ghost typing makes it immune to Dugtrio's Arena Trap",
+          "Can support with Will-O-Wisp for physical attackers",
+          "Pain Split for recovery",
+          "Memento can support sweepers like Belly Drum Charizard"
+        ],
+        "disadvantages": [
+          "Very passive - no offensive pressure",
+          "Pursuit weak (Tyranitar)",
+          "Taunt shuts it down",
+          "Takes Spikes damage unlike Gengar"
+        ],
+        "common_sets": ["RestTalk", "Will-O-Wisp utility", "Memento support"]
       }
     },
-    "importance": "Without a spinblocker, opponents can freely use Starmie or Claydol to remove your Spikes."
+    "common_spinners": {
+      "starmie": {
+        "threat_level": "High",
+        "notes": "Most common spinner. Fast, hits hard, has recovery. Gengar OHKOs with Thunderbolt."
+      },
+      "claydol": {
+        "threat_level": "Medium",
+        "notes": "Bulkier than Starmie, immune to Thunderbolt. Weak to Shadow Ball. Often used on Balance teams."
+      },
+      "forretress": {
+        "threat_level": "Low",
+        "notes": "Can spin but is very passive. Rare in OU. Magneton traps it."
+      }
+    },
+    "spinblock_priority": "In most games, keeping your spinblocker healthy is a priority. Trade it only if you can secure a key KO or if Spikes are already doing their job.",
+    "importance": "Without a spinblocker, opponents can freely use Starmie or Claydol to remove your Spikes - invalidating your entire chip damage strategy."
   },
   "famous_sets_and_strategies": {
     "crocune": {
@@ -220,6 +256,54 @@
       "origin": "Player 'Undisputed' popularized this team",
       "impact": "Both Breloom and Charizard moved from UUBL to OU because of this team's success",
       "key_pokemon": ["Breloom", "Charizard"]
+    }
+  },
+  "teambuilding_principles": {
+    "rock_resists": {
+      "importance": "Having multiple Rock resists is critical in ADV OU due to the prevalence of Tyranitar and Aerodactyl.",
+      "key_pokemon": ["Swampert", "Metagross", "Flygon", "Claydol", "Forretress"],
+      "explanation": "Rock Slide is extremely common - Tyranitar runs it on almost every set, and CB Aerodactyl's Rock Slide hits incredibly hard. If your only Rock resist gets trapped by Dugtrio or KO'd, you can lose to a simple Tyranitar sweep. Having 2-3 Rock resists ensures you always have a switchin.",
+      "synergy_note": "Swampert, Metagross, and Flygon all resist Rock and complement each other - Flygon's Levitate avoids Earthquake that threatens the other two."
+    },
+    "spinblocker_necessity": {
+      "importance": "If you use Spikes, you NEED a spinblocker. Without one, Starmie and Claydol freely remove your hazards.",
+      "key_pokemon": ["Gengar", "Dusclops"],
+      "explanation": "Spikes are the backbone of ADV OU chip damage. Losing your Spikes means losing your primary way of wearing down switch-ins. Gengar is preferred for offensive teams (can threaten spinners), while Dusclops is better for stall (more reliable blocking, can support with Will-O-Wisp).",
+      "common_spinners": ["Starmie", "Claydol", "Forretress"],
+      "gengar_advantage": "Gengar can OHKO Starmie with Thunderbolt and threatens Claydol with Shadow Ball. It also spinblocks while maintaining offensive pressure.",
+      "dusclops_advantage": "Dusclops is bulkier and can't be trapped by Dugtrio due to its Ghost typing. It can support the team with Will-O-Wisp and Pain Split."
+    },
+    "ground_immunity": {
+      "importance": "Having at least one Ground immunity helps handle Earthquake spam from Tyranitar, Swampert, and Dugtrio.",
+      "key_pokemon": ["Skarmory", "Zapdos", "Gengar", "Flygon", "Salamence", "Aerodactyl", "Moltres", "Gyarados"],
+      "explanation": "Earthquake is the most common move in the tier. A Levitate user or Flying-type lets you switch into predicted Earthquakes safely and gain momentum."
+    },
+    "status_absorbers": {
+      "importance": "Every team needs ways to handle Toxic and sleep.",
+      "toxic_absorbers": ["Blissey (Natural Cure)", "Celebi (Natural Cure)", "Starmie (Natural Cure)", "Steel-types (immune)"],
+      "sleep_absorbers": ["Sleep Talk users", "Early-game sacrifice"],
+      "explanation": "Toxic wears down your team quickly combined with Spikes and Sand. Rest/Sleep Talk Pokemon can absorb Toxic while remaining functional. For sleep, either lead with something expendable or use a Sleep Talk set."
+    },
+    "dugtrio_proofing": {
+      "importance": "Dugtrio traps and KOs many key Pokemon. Building with Arena Trap in mind is essential.",
+      "vulnerable_pokemon": ["Tyranitar", "Metagross", "Jirachi", "Blissey", "Magneton", "Starmie", "Raikou"],
+      "solutions": ["Shed Shell (rare)", "Flying-types", "Levitate users", "Multiple targets so losing one isn't fatal"],
+      "explanation": "You can't always save a Pokemon from Dugtrio - but you can build so that losing one target doesn't lose the game. Having two Tyranitars' worth of value (e.g., Tyranitar + Aerodactyl for Rock-type offense) means Dugtrio can't cripple your gameplan by trapping one."
+    },
+    "magneton_proofing": {
+      "importance": "If you rely on Skarmory for Spikes, you must have a plan for Magneton.",
+      "solutions": ["Dugtrio to trap Magneton", "Ground-types that threaten Magneton", "Multiple Steel-types", "Shed Shell Skarmory (rare)"],
+      "explanation": "Magneton's Magnet Pull traps Skarmory and KOs it with Thunderbolt. Counter-trapping with your own Dugtrio is the most common solution. Some teams double up on Steels or run Forretress as a backup Spikes user."
+    },
+    "electric_immunity": {
+      "importance": "Zapdos is omnipresent. Having a Ground-type or Electric immunity makes handling it much easier.",
+      "key_pokemon": ["Swampert", "Flygon", "Claydol", "Dugtrio", "Snorlax (SpD tank)"],
+      "explanation": "Zapdos's Thunderbolt 2HKOs most of the tier. Ground-types are immune and can threaten back, while specially defensive Snorlax and Blissey can tank hits."
+    },
+    "water_resist": {
+      "importance": "Starmie, Suicune, Swampert, and Milotic are common. Having answers to Water-types is crucial.",
+      "key_pokemon": ["Celebi", "Starmie", "Blissey", "Suicune", "Milotic", "Zapdos"],
+      "explanation": "Water-types have excellent neutral coverage. Grass-types like Celebi resist Water and threaten back, while bulky Water-types can check each other."
     }
   }
 }
