@@ -1,0 +1,400 @@
+{
+  "source": "Smogon ADV OU Sample Teams Official Thread",
+  "source_url": "https://www.smogon.com/forums/threads/adv-ou-sample-teams-and-team-dumps.3687813/",
+  "last_updated": "2025-12-13",
+  "description": "Official curated sample teams representing ADV OU's major archetypes, organized by playstyle",
+
+  "sample_teams": {
+    "spikes_balance": {
+      "archetype": "Balanced Toxic, Sandstorm, and Spikes (TSS)",
+      "description": "The quintessential ADV playstyle combining Spikes, Sand Stream Tyranitar, and Toxic to slowly wear down opponents while maintaining defensive stability",
+      "difficulty": "Beginner-friendly",
+      "teams": [
+        {
+          "name": "Big 5 + Starmie (Beerlover)",
+          "author": "UD",
+          "year": "2016-2018",
+          "pokepaste": "https://pokepast.es/f6229d2c867e21d6",
+          "team": ["Skarmory", "Blissey", "Tyranitar", "Swampert", "Gengar", "Starmie"],
+          "description": "The quintessential TSS style. Features bulky physical Tyranitar (BKCTar) breaking cores with Spikes support. Gengar spinblocks offensively with Will-O-Wisp and Explosion. Swampert provides defensive backbone in sand. Offensive Starmie variant (Beerlover) provides speed control and Spikes management.",
+          "key_features": ["BKCTar", "Offensive Gengar", "Offensive Starmie", "Defensive Swampert"],
+          "2024_trends": "Thunderbolt + Ice Punch Gengar, defensive Starmie"
+        },
+        {
+          "name": "Forretress Gengar Dug",
+          "author": "M Dragon",
+          "year": "2015-2020",
+          "pokepaste": "https://pokepast.es/a04c29cf769e9a11",
+          "team": ["Tyranitar", "Forretress", "Dugtrio", "Gengar", "Swampert", "Blissey"],
+          "description": "Standard balance with Dugtrio. Arena Trap revenge-kills Celebi, Jirachi, and Tyranitar. Forretress provides Spikes + Rapid Spin role compression. Pursuit Tyranitar eliminates ghosts and Rapid Spin users. Gengar spinblocks while checking Flygon, Salamence, and Suicune.",
+          "key_features": ["Dugtrio trapping", "Forretress Spikes+Spin", "Pursuit Tyranitar", "Offensive Gengar"]
+        },
+        {
+          "name": "Gengar + Jirachi Superman TSS",
+          "author": "ADV Community",
+          "year": "Classic",
+          "pokepaste": "https://pokepast.es/82e97fe2bfbb6f69",
+          "team": ["Tyranitar", "Skarmory", "Flygon", "Zapdos", "Gengar", "Jirachi"],
+          "description": "One of the oldest ADV styles. Based on trading Spikes while hovering most team members above them (Flygon, Zapdos, Gengar). Jirachi provides Wish support and physical checking. Tyranitar with Pursuit stops Gengar and fire birds. Rest Zapdos checks special attackers with Roar anti-setup.",
+          "key_features": ["Spikes immunity on key members", "Wish Jirachi", "Pursuit Tyranitar", "Destiny Bond Gengar"]
+        },
+        {
+          "name": "Moltres Superman TSS",
+          "author": "Golden Sun",
+          "year": "2018",
+          "pokepaste": "https://pokepast.es/9f27f5d3e34021a7",
+          "team": ["Tyranitar", "Skarmory", "Moltres", "Jirachi", "Gengar", "Flygon"],
+          "description": "Offensive Superman variant. Moltres over Zapdos makes it stronger vs offense but lacks secondary special wall, placing more pressure on Jirachi. Jirachi Fire Punch + Gengar's coverage wears down Skarmory. Destiny Bond removes Rapid Spin users and last-mon threats.",
+          "key_features": ["Moltres offensive pressure", "Fire Punch Jirachi", "Destiny Bond Gengar"],
+          "recommended_changes": "Toxic Jirachi, DBond Gengar, Flamethrower Moltres"
+        },
+        {
+          "name": "SkarmMag + Aerodactyl TSS",
+          "author": "ABR, updated by Astamatitos",
+          "year": "2015",
+          "pokepaste": "https://pokepast.es/b89e1e37caa40e6a",
+          "team": ["Skarmory", "Swampert", "Magneton", "Blissey", "Celebi", "Aerodactyl"],
+          "description": "Combines Spikes with Magneton trapping Skarmory. Double down on defensive sets that don't touch Skarmory well. Curse Rest Swampert breaks defensive teams. Aero provides speed control and fast cleaning. Be aware mixed attackers and Gengar can be difficult.",
+          "key_features": ["Magneton traps Skarmory", "Curse Rest Swampert", "Defensive Celebi", "Aerodactyl speed control"]
+        },
+        {
+          "name": "MixMence Claydol TSS",
+          "author": "ADV Community",
+          "year": "Classic",
+          "pokepaste": "https://pokepast.es/e11829f0561ef5a9",
+          "team": ["Tyranitar", "Salamence", "Skarmory", "Blissey", "Claydol", "Metagross"],
+          "description": "Classic mixed Salamence Spikes team. Tyranitar and Metagross break for Salamence. Blissey absorbs special attacks while retaliating. Claydol handles opposing Spikes in this Skarmory beatdown style. Salamence Intimidate + Metagross + Claydol checks opposing Tyranitar.",
+          "key_features": ["Mixed Salamence", "Skarmory beatdown", "Claydol Rapid Spin", "Intimidate support"]
+        },
+        {
+          "name": "Zapdos MixMence Forre TSS",
+          "author": "ADV Community",
+          "year": "Classic",
+          "pokepaste": "https://pokepast.es/9909f2e98e981ccc",
+          "team": ["Zapdos", "Tyranitar", "Forretress", "Blissey", "Swampert", "Salamence"],
+          "description": "Forretress provides Spikes+Spin role compression and limits opposing Skarmory Spikes. Pursuit Tyranitar fights spinblockers and punishes fliers. Swampert is defensive backbone. Aromatherapy Blissey provides speed control and status healing. Rest Zapdos dishes powerful hits with Roar anti-setup. Mixed Salamence with Wish helps pivots.",
+          "key_features": ["Forretress Spikes+Spin", "Aromatherapy Blissey", "Rest Zapdos", "Wish MixMence"]
+        }
+      ]
+    },
+
+    "spikes_offense": {
+      "archetype": "Offensive TSS / Spikes Offense",
+      "description": "Fast-paced offensive teams using Spikes to pressure opponents and break through defenses quickly",
+      "difficulty": "Intermediate",
+      "teams": [
+        {
+          "name": "Special Wall-less TSS (El Clásico)",
+          "author": "Hclat",
+          "year": "2023-2024",
+          "pokepaste": "https://pokepast.es/9283210847f806ee",
+          "team": ["Tyranitar", "Skarmory", "Swampert", "Gengar", "Zapdos", "Aerodactyl"],
+          "description": "Similar to AeroBi, doubles down on Rock-types to overwhelm defenses with Spikes. Gengar and defensive Refresh Swampert allow slower play vs balance. No Electric resist means careful pivoting is required to deal with Electric attacks.",
+          "key_features": ["No special wall", "Double Rock-types", "Refresh Swampert", "Gengar spinblock"]
+        },
+        {
+          "name": "Jolteon Starmie Spikes Stack",
+          "author": "Kerts",
+          "year": "2016-2024",
+          "pokepaste": "https://pokepast.es/dbf81d8ecae51c39",
+          "team": ["Skarmory", "Jolteon", "Tyranitar", "Gengar", "Metagross", "Starmie"],
+          "description": "Fast early game Zapdos answer generating momentum. Gengar spinblocks offensively. Starmie punishes Ground-types and provides offensive pressure. Tyranitar and Metagross punish Blissey/Snorlax and break defenses. Claydol can cause trouble - keep Skarmory healthy for spin denial.",
+          "key_features": ["Jolteon momentum", "Offensive Gengar", "Offensive Starmie", "Agility Metagross"],
+          "2024_trends": "Thunder Wave Tyranitar for DDMence, Agility Metagross"
+        },
+        {
+          "name": "Zapdos + AeroBi Spikes Offense",
+          "author": "Shitrock enjoyer",
+          "year": "2023",
+          "pokepaste": "https://pokepast.es/d4e74946b54f1a4b",
+          "team": ["Zapdos", "Skarmory", "Celebi", "Swampert", "Aerodactyl", "Tyranitar"],
+          "description": "AeroBi overwhelms defenses with shared offensive profiles. DD Tyranitar lures physical walls, opening holes for Aerodactyl. Prioritize Spikes early. Celebi and Zapdos check Waters while dishing powerful moves under sand and Spikes. Swampert is defensive check with invested Hydro Pump.",
+          "key_features": ["AeroBi concept", "Dragon Dance Tyranitar", "Defensive Celebi and Zapdos"]
+        },
+        {
+          "name": "DDTar + Starmie Spikes Offense",
+          "author": "Shitrock enjoyer",
+          "year": "2023",
+          "pokepaste": "https://pokepast.es/9eb3abdc52876a63",
+          "team": ["Tyranitar", "Skarmory", "Celebi", "Starmie", "Salamence", "Metagross"],
+          "description": "More offensive take on Spikes + MixMence. Generate early momentum with Spikes and offensive Celebi pressuring switches. Tyranitar breaks physically defensive pieces for Agility Metagross endgame. Offensive Starmie provides speed control and Spikes management. Focus on positive trades for endgame win condition.",
+          "key_features": ["Offensive Celebi", "Agility Metagross win condition", "Offensive Starmie"]
+        },
+        {
+          "name": "Regice Spikes Offense",
+          "author": "Jirachee",
+          "year": "2022",
+          "pokepaste": "https://pokepast.es/ce35b7368c3d692e",
+          "team": ["Skarmory", "Regice", "Gengar", "Suicune", "Claydol", "Metagross"],
+          "description": "Regice is best lead Skarmory partner. Generates offensive momentum vs lead Zapdos. Thunder Waving Tyranitar/Metagross or threatening Skarmory with super effective moves is crucial. Exploding into special checks helps Suicune and Gengar. Gengar oppresses with coverage and Explosion. Sleep Talk Suicune is midgame breaker. Agility Metagross provides physical checking and late-game cleaning. Claydol provides Rapid Spin and explodes on slow setup mons.",
+          "key_features": ["Regice lead", "Sleep Talk Suicune", "Agility Metagross", "Explosion spam"]
+        },
+        {
+          "name": "Charizard Spikes Offense",
+          "author": "Shitrock enjoyer",
+          "year": "2023 (Fruhdazi in Jimothy Cool Invitational I)",
+          "pokepaste": "https://pokepast.es/90b94599967c6b77",
+          "team": ["Zapdos", "Skarmory", "Jirachi", "Flygon", "Charizard", "Tyranitar"],
+          "description": "Unexplored but effective. Charizard with Spikes uses chip damage to achieve KO ranges it normally wouldn't. DD Tyranitar works as main breaker, baiting and trading with Waters. Fire Blast Flygon lures and kills Skarmory before too many Spikes. Calm Mind Jirachi breaks defensive structures. Zapdos checks threats with Thunder Wave. Charizard helps vs Jirachi/Celebi weakness.",
+          "key_features": ["Charizard + Spikes synergy", "Fire Blast Flygon", "Calm Mind Jirachi"]
+        }
+      ]
+    },
+
+    "stall": {
+      "archetype": "Stall",
+      "description": "Extremely defensive teams focused on wearing down opponents through passive damage and outlasting them",
+      "difficulty": "Advanced",
+      "teams": [
+        {
+          "name": "Tyranitar + MiloDol TSS",
+          "author": "Zokuru",
+          "year": "2015-2024",
+          "pokepaste": "https://pokepast.es/6d56d06b9fca508e",
+          "team": ["Tyranitar", "Milotic", "Blissey", "Skarmory", "Claydol", "Dugtrio"],
+          "description": "Blissey and Milotic feel impossible to eliminate together but are passive. Skarmory Spikes + Tyranitar sand provide passive damage. Tyranitar's physical power pressures walls and wallbreakers. Wear down CM Jirachi, Heracross, DD Salamence through Sand, Spikes, Toxic, or eliminate with Dugtrio. Claydol removes opposing Spikes.",
+          "key_features": ["Milotic + Blissey core", "Sand + Spikes + Toxic", "Dugtrio trapping"],
+          "2024_trends": "Other Pokemon that pressure Curselax > Tyranitar, like Suicune, Metagross"
+        },
+        {
+          "name": "Zapdos + CuneDol",
+          "author": "ADV Community",
+          "year": "Classic",
+          "pokepaste": "https://pokepast.es/f7ba5702fe856292",
+          "team": ["Zapdos", "Suicune", "Blissey", "Skarmory", "Claydol", "Dugtrio"],
+          "description": "Timeless stall team. Rest Zapdos + Thunder Wave Blissey handle most special attackers outside CM Blissey/Celebi/Jirachi. Suicune's longevity manages Tyranitar, Metagross, Swampert and serves as win condition with Calm Mind + Roar. Extremely dependent on Spikes and removing hazards with Claydol. Skarmory must spike multiple times vs spinners. Aerodactyl is threatening late game.",
+          "key_features": ["Rest Zapdos", "Calm Mind Suicune win condition", "Thunder Wave Blissey"]
+        },
+        {
+          "name": "Triple Natural Cure",
+          "author": "ABR",
+          "year": "2015",
+          "pokepaste": "https://pokepast.es/0fa105ae42dc85ec",
+          "team": ["Salamence", "Celebi", "Blissey", "Skarmory", "Starmie", "Metagross"],
+          "description": "Defensive take on MixMence Spikes. Defensive Starmie provides Spikes control and paralysis spreading for Salamence breaking. Defensive Celebi scares setup threats like Snorlax/Suicune while sponging Waters. Metagross is physically defensive answer with Salamence Intimidate support but can break vs slower teams. Wish Blissey helps longevity.",
+          "key_features": ["Three Natural Cure users", "Defensive Starmie", "Wish Blissey"]
+        },
+        {
+          "name": "Suicune + MiloDol (Vir5in)",
+          "author": "Kerts",
+          "year": "2013+",
+          "pokepaste": "https://pokepast.es/8cdc78b2d46f0515",
+          "team": ["Blissey", "Suicune", "Milotic", "Skarmory", "Claydol", "Dugtrio"],
+          "description": "One of the most popular defensive Dugtrio structures (Virgin 5). Specializes in winning Spikes game with Skarmory as reliable spiker and Claydol as spinner. Solid defensive backbone minimizes health loss on Skarmory. Blissey and Milotic sponge special/physical attacks. Suicune complements defense while phazing and breaking endgame. Dugtrio eliminates offensive cores and wallbreakers. Spikes chip is important to make Dugtrio OHKO targets.",
+          "key_features": ["Virgin 5 structure", "Milotic + Blissey core", "Dugtrio + Spikes chip"]
+        },
+        {
+          "name": "Curse RestLax ForreDol",
+          "author": "ABR",
+          "year": "2015",
+          "pokepaste": "https://pokepast.es/0972146213a667c9",
+          "team": ["Suicune", "Dugtrio", "Blissey", "Claydol", "Snorlax", "Forretress"],
+          "description": "One of the most divisive teams in ADV history. Rest Suicune + Blissey + Rest Snorlax keep most of metagame in check. Forretress + Spikes make it extremely difficult to break past multiple extremely bulky Pokemon. Common wallbreakers (CM Jirachi, DD Tar, Raikou) trapped by Dugtrio. Claydol removes threats via Explosion and clears Spikes. Thunder Wave Blissey + Sunny Day Claydol (removes sand for Leftovers) make progress extremely difficult.",
+          "key_features": ["Curse Rest Snorlax", "Rest Suicune", "Thunder Wave Blissey", "Sunny Day Claydol"]
+        }
+      ]
+    },
+
+    "hyper_offense": {
+      "archetype": "Hyper Offense",
+      "description": "Extremely aggressive teams with suicide leads and multiple setup sweepers",
+      "difficulty": "Advanced",
+      "teams": [
+        {
+          "name": "Smeargle Offense",
+          "author": "ADV Community",
+          "year": "Classic",
+          "pokepaste": "https://pokepast.es/460b8c99ee366f6c",
+          "team": ["Smeargle", "Tyranitar", "Swampert", "Metagross", "Gengar", "Aerodactyl"],
+          "description": "Fast paced offensive teams relying on suicide lead with sleep support. Smeargle can Spikes or Spore on most common leads. DD Tyranitar breaks physical defenses for late game Liechi Aerodactyl. Endeavor Swampert checks physical attacks while threatening with Roar + Endeavor + Spikes. Mixed Metagross is early Skarmory beater and wallbreaker. Gengar spinblocks and explodes to turn momentum. Sinking momentum and free spinning are scariest for Smeargle teams.",
+          "key_features": ["Smeargle suicide lead", "Liechi Aerodactyl", "Endeavor Swampert", "Explosion spam"]
+        }
+      ]
+    },
+
+    "trappers_spikeless_offense": {
+      "archetype": "Trappers Spike-less Offense",
+      "description": "Offensive teams using Magneton/Dugtrio trapping without relying on Spikes",
+      "difficulty": "Intermediate",
+      "teams": [
+        {
+          "name": "Blue Offense",
+          "author": "Noitu",
+          "year": "2015",
+          "pokepaste": "https://pokepast.es/63eda9d8d491d6a4",
+          "team": ["Suicune", "Snorlax", "Magneton", "Salamence", "Metagross", "Heracross"],
+          "description": "Iconic Magneton offense with signature blue color palette. Lead Suicune threatens Tyranitar and forces favorable sequences. Flexible as bulky Water and setup breaker/sweeper. Snorlax is main special check, forcing switches and threatening Explosion. Banded Metagross is powerful breaker and one-time physical check. Mixed Salamence is anti-offense. Heracross with Magneton weather clearing works as Sub-Salac + Swords Dance + Swarm cleaner.",
+          "key_features": ["Lead Suicune", "Banded Metagross", "Sub-Salac Heracross", "Magneton weather clear"]
+        },
+        {
+          "name": "Medicham Cune Offense",
+          "author": "Mana",
+          "year": "2015",
+          "pokepaste": "https://pokepast.es/f5a4f4f0f5dc49ce",
+          "team": ["Medicham", "Salamence", "Suicune", "Snorlax", "Magneton", "Metagross"],
+          "description": "Medicham is one of the most threatening leads, scaring Tyranitar and creating advantageous positions. Takes advantage of early chip damage. Salamence and Suicune enjoy dealing with chipped Flying-types. Magneton traps chipped Metagross. Lum Berry Medicham counters Gengar. Snorlax is main special check and progress-maker. Calm Suicune (ManaCune) wins vs CM Blissey and helps vs Zapdos. Agility Metagross checks physically and closes games.",
+          "key_features": ["Medicham lead", "Lum Berry Medicham", "Calm Suicune (ManaCune)", "Agility Metagross"]
+        },
+        {
+          "name": "Aero SD Pass",
+          "author": "z0mOG",
+          "year": "2019",
+          "pokepaste": "https://pokepast.es/53f215cb45b7d729",
+          "team": ["Tyranitar", "Celebi", "Magneton", "Swampert", "Metagross", "Aerodactyl"],
+          "description": "Classic archetype. Swords Dance Baton Pass Celebi supports strong sweepers, turning fast cleaners into breakers. Celebi needs lots of support. Pursuit Tyranitar deals with Gengar and Fire-types. Magneton eliminates Skarmory. Leech Seed helps Celebi vs other Roar Pokemon and gives longevity. Recover for short term. Swampert is main physical check. Metagross and Liechi Aerodactyl are breakers and sweepers.",
+          "key_features": ["SD Baton Pass Celebi", "Magneton traps Skarmory", "Liechi Aerodactyl"]
+        },
+        {
+          "name": "ZapDug",
+          "author": "ADV Community",
+          "year": "Classic",
+          "pokepaste": "https://pokepast.es/eccfe630ec08de27",
+          "team": ["Zapdos", "Dugtrio", "Suicune", "Claydol", "Metagross", "Celebi"],
+          "description": "ZapDug abuses structures using Blissey as main Zapdos check early. Beat up bulky Dugtrio traps Blissey, living Ice Beam without Spikes chip. Baton Pass Zapdos enables this interaction. Mixed Metagross and Claydol are Skarmory bait + Spikes clearing combo and defensive backbone. Suicune breaks defensive cores and opens holes in offensive ones. CM + 3 attacks Celebi is late game cleaner.",
+          "key_features": ["Baton Pass Zapdos", "Beat Up Dugtrio", "Mixed Metagross"]
+        },
+        {
+          "name": "Jynx Special Offense",
+          "author": "Hclat",
+          "year": "Classic",
+          "pokepaste": "https://pokepast.es/023a2d47648b85e6",
+          "team": ["Jynx", "Suicune", "Dugtrio", "Claydol", "Gengar", "Jirachi"],
+          "description": "Like ZapDug, relies on Dugtrio trapping Blissey to open space for special threats. Jynx instantly threatens with Lovely Kiss and Calm Mind. Glass-cannon playstyle. Suicune used early to overwhelm defenses, opening setup for Substitute Jirachi. Jirachi is strong cleaner heavily abusing passive sets. Claydol is defensive check removing Spikes. Gengar is Normal-type switch-in generating offensive momentum.",
+          "key_features": ["Jynx Lovely Kiss + CM", "Substitute Jirachi", "Dugtrio traps Blissey"]
+        },
+        {
+          "name": "Quad Band",
+          "author": "M Dragon",
+          "year": "Classic",
+          "pokepaste": "https://pokepast.es/61590463ee85d456",
+          "team": ["Zapdos", "Tyranitar", "Swampert", "Aerodactyl", "Dugtrio", "Metagross"],
+          "description": "Features 4 Choice Band users. Showcased overwhelming defenses concept. Banded Tyranitar and banded Metagross are early hard hitters, crippling walls into Dug range for Aero to clean endgame. Zapdos is main special defense check with Toxic and Rest. Swampert provides defensive sturdiness vs physical threats.",
+          "key_features": ["Four Choice Band users", "Banded Tyranitar + Metagross", "Dugtrio cleanup", "Rest Toxic Zapdos"]
+        }
+      ]
+    },
+
+    "trappers_spikeless_balance": {
+      "archetype": "Trappers Spike-less Balance",
+      "description": "Balanced teams using Magneton to trap Steel-types without Spikes",
+      "difficulty": "Intermediate",
+      "teams": [
+        {
+          "name": "CB Mence MagDol",
+          "author": "BKC",
+          "year": "Classic",
+          "pokepaste": "https://pokepast.es/7036a0a1dcb59a19",
+          "team": ["Salamence", "Metagross", "Suicune", "Claydol", "Blissey", "Magneton"],
+          "description": "Specializes in reliably trapping Skarmory and spinning Spikes afterwards. With Spikes gone, grounded Pokemon exercise better defense and longevity. Magneton cripples other Steel-types like Metagross and Jirachi after Skarmory is gone. Sunny Day clears Sand for Suicune, Blissey, Salamence once Tyranitar faints. Banded Salamence is main progress maker. Metagross and Suicune provide breaking and physical resistance. Wish Blissey heals teammates.",
+          "key_features": ["Magneton traps Skarmory", "Sunny Day Magneton", "Choice Band Salamence", "Wish Blissey"]
+        }
+      ]
+    },
+
+    "trapless_spikeless_offense": {
+      "archetype": "Trap-less Spike-less Offense",
+      "description": "Pure offensive teams relying on breaking power without trapping or Spikes",
+      "difficulty": "Intermediate-Advanced",
+      "teams": [
+        {
+          "name": "Charizard Houdini CMPass",
+          "author": "SEA",
+          "year": "2024",
+          "pokepaste": "https://pokepast.es/a3ca232f030ef625",
+          "team": ["Zapdos", "Metagross", "Celebi", "Tyranitar", "Swampert", "Charizard"],
+          "description": "Calm Mind Baton Pass breaks through special checks. Metagross lures Skarmory with Banded Explosion (Houdini - makes Skarmory 'disappear'). Celebi takes advantage of free turns to Calm Mind and pass. Zapdos keeps baton pass chain while boosted. DD Hidden Power Grass Tyranitar deals with Swampert and breaks defenses. Substitute Swampert is defensive piece and Blissey breaker. Charizard threatens opposing Calm Minders and dishes powerful Fire moves when boosted.",
+          "key_features": ["Calm Mind Baton Pass chain", "Houdini Metagross", "DD HP Grass Tyranitar", "Charizard"]
+        },
+        {
+          "name": "CBMeta CroCune Skarm Beatdown",
+          "author": "ADV Community",
+          "year": "Classic",
+          "pokepaste": "https://pokepast.es/e541f7be8713393c",
+          "team": ["Metagross", "Snorlax", "Suicune", "Claydol", "Tyranitar", "Salamence"],
+          "description": "Classic spikesless archetype using many Pokemon that lure and heavily chip Skarmory. Typically has spin support to clear acquired Spikes. Banded Metagross is consistent Skarmory beater and early breaker while being defensive with Salamence Intimidate. Snorlax punishes special attackers similarly. Pursuit Tyranitar eliminates Gengar and checks fliers. Suicune is important breaker. Salamence takes advantage of simplified positions for endgame cleaning.",
+          "key_features": ["Skarmory beatdown", "Choice Band Metagross", "Calm Mind Suicune"]
+        },
+        {
+          "name": "MixZap Houdini DDTar MixOff",
+          "author": "ADV Community",
+          "year": "Classic",
+          "pokepaste": "https://pokepast.es/710d8d529538ff90",
+          "team": ["Zapdos", "Metagross", "Tyranitar", "Swampert", "Jirachi", "Salamence"],
+          "description": "Similar to Charizard CM Pass but different breakers. Mixed Zapdos is interesting Celebi punisher while forcing damage and checking Starmie. Swampert is defensive force with offensive capabilities. Tyranitar provides offensive breaking with defensive capabilities. Jirachi is powerful breaker with enough bulk to Calm Mind vs multiple special attackers. Salamence impacts late game with Dragon Dance.",
+          "key_features": ["Houdini Metagross", "Mixed Zapdos", "Calm Mind Jirachi", "DD Salamence"]
+        },
+        {
+          "name": "WishJira Skarm Beatdown",
+          "author": "Astamatitos",
+          "year": "Classic",
+          "pokepaste": "https://pokepast.es/e0d97b0ed592889d",
+          "team": ["Salamence", "Snorlax", "Suicune", "Claydol", "Jirachi", "Tyranitar"],
+          "description": "More defensive Skarmory beatdown. Wish Jirachi helps longevity while threatening Skarmory long-term. Mixed Salamence is fast threat to offense. Snorlax and Jirachi lure Skarmory to chip it early, limiting Spikes stacking. Claydol cleans residual Spikes and threatens Explosion. Pursuit Tyranitar alleviates ghost weakness and checks Flying-types. Suicune breaks walls midgame and cleans endgames.",
+          "key_features": ["Wish Jirachi", "Skarmory beatdown", "Calm Mind Suicune"]
+        },
+        {
+          "name": "Raikou Celebi Slop",
+          "author": "Shitrock enjoyer (Fruhdazi creation)",
+          "year": "Recent",
+          "pokepaste": "https://pokepast.es/8e768980fc8f3b5f",
+          "team": ["Tyranitar", "Registeel", "Swampert", "Celebi", "Raikou", "Salamence"],
+          "description": "Most recent Hyper Offense addition (commonly known as 'Slop'). Setup-sweeper-driven structure focusing on opening winning paths by forcing trades. DD Tyranitar and Endeavor Swampert are fundamental - Tyranitar should DD turn one vs everything except Metagross, then attack turn two. Goal is weakening checks/counters for partners. Registeel is team sponge, spreading paralysis/toxic and exploding for momentum. CM Celebi, CM Raikou, or DD Salamence serves as cleaner depending on game state. Main objective: overwhelm defensive core.",
+          "key_features": ["Setup-sweeper driven", "DD Tyranitar turn 1", "Endeavor Swampert", "Registeel sponge", "Multiple win conditions"]
+        }
+      ]
+    },
+
+    "trapless_spikeless_balance": {
+      "archetype": "Trap-less Spike-less Balance",
+      "description": "Balanced teams without trapping or Spikes, relying on defensive cores and breaking power",
+      "difficulty": "Beginner-Intermediate",
+      "teams": [
+        {
+          "name": "Yama BandMence",
+          "author": "ADV Community",
+          "year": "Classic",
+          "pokepaste": "https://pokepast.es/9d5f845869e899ee",
+          "team": ["Salamence", "Hariyama", "Claydol", "Suicune", "Jirachi", "Blissey"],
+          "description": "Hariyama is unique fighter with Knock Off access. Removing items forces progress easily even without Spikes, punishing Blissey and Skarmory. Choice Band Salamence complements Yama, providing better offense matchup with Intimidate and coverage. Takes advantage of Knock Off to break itemless defensive threats. Suicune and Jirachi offer defensive profile with Wish support. Both can break walls long term. Aromatherapy Blissey covers lack of status immunities. Claydol cleans Spikes and forces damage.",
+          "key_features": ["Hariyama Knock Off", "Choice Band Salamence", "Wish Jirachi", "Aromatherapy Blissey"]
+        }
+      ]
+    }
+  },
+
+  "team_dumps": {
+    "description": "Community-donated team collections - not curated but treasure troves of information",
+    "recommended_for_learning": [
+      {
+        "author": "thelinearcurve",
+        "year": "2019",
+        "url": "https://pastebin.com/raw/jyFh4AF3",
+        "description": "Highly recommended for learning the metagame - comprehensive team collection"
+      },
+      {
+        "author": "thelinearcurve",
+        "year": "2020 (user-friendly)",
+        "url": "https://pastebin.com/raw/QbwUxw0P",
+        "description": "More viable and beginner-friendly subset"
+      }
+    ]
+  },
+
+  "usage_notes": {
+    "for_claude_code": [
+      "Import these teams into the knowledge base as clickable examples",
+      "Link Pokemon names in team descriptions to their full data",
+      "Show archetype descriptions when user browses teams",
+      "Allow filtering by archetype, difficulty, or Pokemon",
+      "Provide pokepaste links for easy import to Pokemon Showdown"
+    ],
+    "key_archetypes_summary": {
+      "TSS_Balance": "Most common - Tyranitar, Sandstorm, Spikes balance",
+      "Spikes_Offense": "Aggressive Spikes abuse with offensive pressure",
+      "Stall": "Ultra-defensive wear-down strategies",
+      "Hyper_Offense": "Suicide leads and multiple setup sweepers",
+      "Trappers": "Magneton/Dugtrio removing key defensive checks",
+      "Spikeless": "Breaking power without relying on Spikes"
+    }
+  }
+}
