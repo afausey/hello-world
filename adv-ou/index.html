@@ -334,6 +334,30 @@
             gap: 1rem;
         }
 
+        .team-link {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .team-link:hover {
+            color: var(--text-primary);
+            text-decoration: underline;
+        }
+
+        .speed-value {
+            font-family: monospace;
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        .archetype-header {
+            background: linear-gradient(90deg, var(--accent-secondary), var(--bg-card));
+            padding: 0.75rem 1rem;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+        }
+
         @media (max-width: 600px) {
             .stats-grid {
                 grid-template-columns: repeat(3, 1fr);
@@ -341,6 +365,10 @@
 
             .pokemon-grid {
                 grid-template-columns: repeat(2, 1fr);
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -353,6 +381,8 @@
             <button data-section="metagame">Metagame</button>
             <button data-section="archetypes">Archetypes</button>
             <button data-section="cores">Cores</button>
+            <button data-section="teams">Sample Teams</button>
+            <button data-section="speed">Speed Tiers</button>
             <button data-section="calculator">Calculator</button>
         </nav>
     </header>
@@ -377,6 +407,17 @@
         <!-- Cores Section -->
         <section id="cores" class="section">
             <div id="cores-content"></div>
+        </section>
+
+        <!-- Sample Teams Section -->
+        <section id="teams" class="section">
+            <input type="text" class="search-box" id="teams-search" placeholder="Search teams by name, Pokemon, or archetype...">
+            <div id="teams-content"></div>
+        </section>
+
+        <!-- Speed Tiers Section -->
+        <section id="speed" class="section">
+            <div id="speed-content"></div>
         </section>
 
         <!-- Calculator Section -->
@@ -416,6 +457,8 @@
         // Global data storage
         let pokemonData = {};
         let metagameData = {};
+        let sampleTeamsData = {};
+        let speedTiersData = {};
 
         // Type colors
         const typeColors = {
@@ -546,18 +589,24 @@
         // Load JSON data
         async function loadData() {
             try {
-                const [pokemonRes, metagameRes] = await Promise.all([
+                const [pokemonRes, metagameRes, teamsRes, speedRes] = await Promise.all([
                     fetch('knowledge_base/pokemon_sets.json'),
-                    fetch('knowledge_base/metagame_overview.json')
+                    fetch('knowledge_base/metagame_overview.json'),
+                    fetch('../adv-ou-sample-teams.json'),
+                    fetch('../adv-ou-speed-tiers.json')
                 ]);
 
                 pokemonData = await pokemonRes.json();
                 metagameData = await metagameRes.json();
+                sampleTeamsData = await teamsRes.json();
+                speedTiersData = await speedRes.json();
 
                 renderPokemonList();
                 renderMetagame();
                 renderArchetypes();
                 renderCores();
+                renderSampleTeams();
+                renderSpeedTiers();
                 populateCalculator();
             } catch (error) {
                 console.error('Error loading data:', error);
@@ -791,6 +840,282 @@
             container.innerHTML = html;
         }
 
+        // Render sample teams
+        function renderSampleTeams(filter = '') {
+            const container = document.getElementById('teams-content');
+            const teams = sampleTeamsData.sample_teams || {};
+            const filterLower = filter.toLowerCase();
+
+            let html = `
+                <div class="card">
+                    <h2>ADV OU Sample Teams</h2>
+                    <p style="color: var(--text-secondary);">${sampleTeamsData.description || 'Official curated sample teams organized by playstyle'}</p>
+                    <p style="margin-top: 0.5rem;"><a href="${sampleTeamsData.source_url}" target="_blank" style="color: var(--accent);">Source: ${sampleTeamsData.source}</a></p>
+                </div>
+            `;
+
+            Object.entries(teams).forEach(([archKey, archetype]) => {
+                // Filter teams based on search
+                const filteredTeams = archetype.teams.filter(team => {
+                    if (!filter) return true;
+                    const searchStr = [
+                        team.name,
+                        team.author,
+                        team.description,
+                        ...team.team,
+                        ...(team.key_features || [])
+                    ].join(' ').toLowerCase();
+                    return searchStr.includes(filterLower);
+                });
+
+                if (filteredTeams.length === 0) return;
+
+                html += `
+                    <div class="card" style="border-left-color: var(--accent-secondary);">
+                        <h2>${archetype.archetype}</h2>
+                        <p style="color: var(--text-secondary);">${archetype.description}</p>
+                        <span class="type-badge" style="background: ${getDifficultyColor(archetype.difficulty)}; margin-top: 0.5rem;">${archetype.difficulty}</span>
+                `;
+
+                filteredTeams.forEach(team => {
+                    html += `
+                        <div class="set-card" style="margin-top: 1rem;">
+                            <h4>${team.name}</h4>
+                            <p style="color: var(--text-secondary); font-size: 0.85rem;">by ${team.author} (${team.year})</p>
+                            <div class="moves-list" style="margin: 0.75rem 0;">
+                                ${team.team.map(p => createPokemonBadge(p)).join('')}
+                            </div>
+                            <p>${team.description}</p>
+                            ${team.key_features ? `
+                                <p style="margin-top: 0.5rem;"><strong>Key Features:</strong></p>
+                                <div class="moves-list">
+                                    ${team.key_features.map(f => `<span class="move-badge" style="background: var(--bg-card);">${f}</span>`).join('')}
+                                </div>
+                            ` : ''}
+                            ${team['2024_trends'] ? `<p style="margin-top: 0.5rem; font-style: italic; color: var(--text-secondary);"><strong>2024 Trends:</strong> ${team['2024_trends']}</p>` : ''}
+                            <a href="${team.pokepaste}" target="_blank" class="calc-btn" style="display: inline-block; width: auto; margin-top: 0.75rem; text-decoration: none; text-align: center;">Import from Pokepaste</a>
+                        </div>
+                    `;
+                });
+
+                html += '</div>';
+            });
+
+            // Add team dumps section
+            if (sampleTeamsData.team_dumps && (!filter || 'team dumps'.includes(filterLower))) {
+                html += `
+                    <div class="card">
+                        <h2>Team Dumps</h2>
+                        <p style="color: var(--text-secondary);">${sampleTeamsData.team_dumps.description}</p>
+                        <div style="margin-top: 1rem;">
+                            ${sampleTeamsData.team_dumps.recommended_for_learning.map(dump => `
+                                <div class="set-card">
+                                    <h4>${dump.author} (${dump.year})</h4>
+                                    <p>${dump.description}</p>
+                                    <a href="${dump.url}" target="_blank" style="color: var(--accent);">View Collection</a>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = html || '<div class="card"><p>No teams found matching your search.</p></div>';
+        }
+
+        // Helper: Get difficulty color
+        function getDifficultyColor(difficulty) {
+            if (!difficulty) return 'var(--accent)';
+            const d = difficulty.toLowerCase();
+            if (d.includes('beginner')) return '#78C850';
+            if (d.includes('intermediate')) return '#F8D030';
+            if (d.includes('advanced')) return '#F08030';
+            return 'var(--accent)';
+        }
+
+        // Render speed tiers
+        function renderSpeedTiers() {
+            const container = document.getElementById('speed-content');
+            const data = speedTiersData;
+
+            let html = `
+                <div class="card">
+                    <h2>ADV OU Speed Tiers</h2>
+                    <p style="color: var(--text-secondary);">${data.speed_tiers_overview?.description || 'Critical speed benchmarks in ADV OU'}</p>
+                </div>
+
+                <div class="card">
+                    <h2>Speed Calculation Formulas</h2>
+                    <div class="set-card">
+                        <p><strong>Swift Swim / Agility (+2):</strong> ${data.speed_tiers_overview?.formulas?.swift_swim_agility}</p>
+                        <p><strong>Dragon Dance / Salac (+1):</strong> ${data.speed_tiers_overview?.formulas?.dragon_dance_salac}</p>
+                    </div>
+                    <div class="set-card">
+                        <p><strong>Example (Swift Swim):</strong> ${data.speed_tiers_overview?.formulas?.example_swift_swim}</p>
+                        <p><strong>Example (Dragon Dance):</strong> ${data.speed_tiers_overview?.formulas?.example_dragon_dance}</p>
+                    </div>
+                </div>
+            `;
+
+            // Practical Speed Tiers
+            const tiers = data.practical_speed_tiers || {};
+            html += `<div class="card"><h2>Practical Speed Tiers</h2>`;
+
+            Object.entries(tiers).forEach(([tierKey, tier]) => {
+                html += `
+                    <div class="set-card">
+                        <h4 style="color: ${getTierColor(tierKey)};">${tier.range} - ${tier.description}</h4>
+                        <div style="display: grid; gap: 0.5rem; margin-top: 0.5rem;">
+                            ${tier.pokemon.map(p => `
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.25rem 0; border-bottom: 1px solid var(--bg-primary);">
+                                    <span>${createPokemonBadge(p.name)} <span style="color: var(--text-secondary); font-size: 0.85rem;">${p.set || p.condition || ''}</span></span>
+                                    <span style="font-weight: bold; color: var(--accent);">${p.speed}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+            html += '</div>';
+
+            // Key Benchmarks
+            const benchmarks = data.key_benchmarks || {};
+            html += `<div class="card"><h2>Key Speed Benchmarks</h2><div class="info-grid">`;
+
+            Object.entries(benchmarks)
+                .sort((a, b) => parseInt(b[0]) - parseInt(a[0]))
+                .forEach(([speed, info]) => {
+                    html += `
+                        <div class="set-card">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <h4>${info.description}</h4>
+                                <span class="viability-badge">${speed}</span>
+                            </div>
+                            <div class="moves-list" style="margin: 0.5rem 0;">
+                                ${info.pokemon.map(p => createPokemonBadge(p)).join('')}
+                            </div>
+                            <p style="font-size: 0.85rem;"><strong>Nature:</strong> ${info.nature} | <strong>EVs:</strong> ${info.evs}</p>
+                            <p style="color: var(--text-secondary);">${info.significance}</p>
+                            ${info.note ? `<p style="font-style: italic; color: var(--accent); font-size: 0.85rem;">${info.note}</p>` : ''}
+                        </div>
+                    `;
+                });
+            html += '</div></div>';
+
+            // Boosted Speeds
+            const boosted = data.boosted_speeds || {};
+            html += `<div class="card"><h2>Boosted Speed Threats</h2>`;
+
+            if (boosted.dragon_dance_plus_one) {
+                html += `
+                    <div class="set-card">
+                        <h4>Dragon Dance / Salac Berry (+1 Speed)</h4>
+                        <p style="color: var(--text-secondary);">${boosted.dragon_dance_plus_one.description}</p>
+                        <p><strong>Formula:</strong> ${boosted.dragon_dance_plus_one.formula}</p>
+                        <div style="margin-top: 0.5rem;">
+                            ${Object.entries(boosted.dragon_dance_plus_one.common_threats || {}).map(([speed, info]) => `
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid var(--bg-primary);">
+                                    <span>${createPokemonBadge(info.pokemon)} <span style="color: var(--text-secondary);">(${info.unboosted} unboosted)</span></span>
+                                    <span style="font-weight: bold; color: var(--accent);">+1: ${speed}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (boosted.agility_plus_two) {
+                html += `
+                    <div class="set-card">
+                        <h4>Agility (+2 Speed)</h4>
+                        <p style="color: var(--text-secondary);">${boosted.agility_plus_two.description}</p>
+                        <p><strong>Formula:</strong> ${boosted.agility_plus_two.formula}</p>
+                        <div style="margin-top: 0.5rem;">
+                            ${Object.entries(boosted.agility_plus_two.common_threats || {}).map(([speed, info]) => `
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid var(--bg-primary);">
+                                    <span>${Array.isArray(info.pokemon) ? info.pokemon.map(p => createPokemonBadge(p)).join(' ') : createPokemonBadge(info.pokemon)} <span style="color: var(--text-secondary);">(${info.unboosted || ''} unboosted)</span></span>
+                                    <span style="font-weight: bold; color: var(--accent);">+2: ${speed}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (boosted.swift_swim_rain) {
+                html += `
+                    <div class="set-card">
+                        <h4>Swift Swim (Rain)</h4>
+                        <p style="color: var(--text-secondary);">${boosted.swift_swim_rain.description}</p>
+                        <p><strong>Mechanics:</strong> ${boosted.swift_swim_rain.mechanics}</p>
+                        <div style="margin-top: 0.5rem;">
+                            ${Object.entries(boosted.swift_swim_rain.common_users || {}).map(([key, info]) => `
+                                <div style="padding: 0.5rem 0; border-bottom: 1px solid var(--bg-primary);">
+                                    ${createPokemonBadge(info.pokemon)}
+                                    <span style="color: var(--text-secondary);">${info.significance}</span>
+                                    ${info.boosted ? `<span style="font-weight: bold; color: var(--accent);"> Rain: ${info.boosted}</span>` : ''}
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            html += '</div>';
+
+            // Speed Creep Guide
+            const creep = data.speed_creep_guide || {};
+            html += `
+                <div class="card">
+                    <h2>Speed Creep Guide</h2>
+                    <p style="color: var(--text-secondary);">${creep.description || ''}</p>
+                    ${Object.entries(creep.targets || {}).map(([key, target]) => `
+                        <div class="set-card">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <h4>${key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</h4>
+                                <span class="viability-badge">${target.target_speed}</span>
+                            </div>
+                            <p>${target.reasoning}</p>
+                            ${target.common_users ? `<p><strong>Common Users:</strong> ${target.common_users.join(', ')}</p>` : ''}
+                            <p style="color: ${target.importance?.includes('Critical') ? 'var(--accent)' : 'var(--text-secondary)'}; font-style: italic;">${target.importance}</p>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+
+            // Meta Notes
+            const meta = data.meta_notes || {};
+            html += `
+                <div class="card">
+                    <h2>Important Considerations</h2>
+                    <ul>
+                        ${(meta.important_considerations || []).map(note => `<li style="margin-bottom: 0.5rem;">${note}</li>`).join('')}
+                    </ul>
+                    ${meta.trapping_considerations ? `
+                        <h3 style="margin-top: 1rem;">Trapping & Speed</h3>
+                        <ul>
+                            ${Object.entries(meta.trapping_considerations).map(([mon, note]) => `<li><strong>${mon.charAt(0).toUpperCase() + mon.slice(1)}:</strong> ${note}</li>`).join('')}
+                        </ul>
+                    ` : ''}
+                </div>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        // Helper: Get tier color for speed tiers
+        function getTierColor(tierKey) {
+            const colors = {
+                'tier_0_extreme': '#F85888',
+                'tier_1_blazing': '#F08030',
+                'tier_2_fast': '#F8D030',
+                'tier_3_moderate': '#78C850',
+                'tier_4_bulky': '#6890F0',
+                'tier_5_slow': '#A890F0'
+            };
+            return colors[tierKey] || 'var(--accent)';
+        }
+
         // Populate calculator dropdowns
         function populateCalculator() {
             const attackerSelect = document.getElementById('calc-attacker');
@@ -951,6 +1276,10 @@ Or use CLI:
         // Search
         document.getElementById('pokemon-search').addEventListener('input', function() {
             renderPokemonList(this.value);
+        });
+
+        document.getElementById('teams-search').addEventListener('input', function() {
+            renderSampleTeams(this.value);
         });
 
         // Close modal on escape
