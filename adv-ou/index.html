@@ -531,8 +531,8 @@
             let html = `
                 <div class="card">
                     <h2>ADV OU Sample Teams</h2>
-                    <p style="color: var(--text-secondary);">${sampleTeamsData.description || 'Official curated sample teams organized by playstyle'}</p>
-                    <p style="margin-top: 0.5rem;"><a href="${sampleTeamsData.source_url}" target="_blank" style="color: var(--accent);">Source: ${sampleTeamsData.source}</a></p>
+                    <p class="text-secondary">${sampleTeamsData.description || 'Official curated sample teams organized by playstyle'}</p>
+                    <p class="mt-3"><a href="${sampleTeamsData.source_url}" target="_blank">Source: ${sampleTeamsData.source}</a></p>
                 </div>
             `;
 
@@ -553,29 +553,29 @@
                 if (filteredTeams.length === 0) return;
 
                 html += `
-                    <div class="card" style="border-left-color: var(--accent-secondary);">
+                    <div class="card">
                         <h2>${archetype.archetype}</h2>
-                        <p style="color: var(--text-secondary);">${archetype.description}</p>
-                        <span class="type-badge" style="background: ${getDifficultyColor(archetype.difficulty)}; margin-top: 0.5rem;">${archetype.difficulty}</span>
+                        <p class="text-secondary mb-3">${archetype.description}</p>
+                        <span class="archetype-badge ${getDifficultyClass(archetype.difficulty)}">${archetype.difficulty}</span>
                 `;
 
                 filteredTeams.forEach(team => {
                     html += `
-                        <div class="set-card" style="margin-top: 1rem;">
+                        <div class="set-card mt-4">
                             <h4>${team.name}</h4>
-                            <p style="color: var(--text-secondary); font-size: 0.85rem;">by ${team.author} (${team.year})</p>
-                            <div class="moves-list" style="margin: 0.75rem 0;">
+                            <p class="text-secondary text-sm">by ${team.author} (${team.year})</p>
+                            <div class="moves-list mt-3 mb-3">
                                 ${team.team.map(p => createPokemonBadge(p)).join('')}
                             </div>
                             <p>${team.description}</p>
                             ${team.key_features ? `
-                                <p style="margin-top: 0.5rem;"><strong>Key Features:</strong></p>
+                                <p class="mt-3 font-semibold">Key Features:</p>
                                 <div class="moves-list">
-                                    ${team.key_features.map(f => `<span class="move-badge" style="background: var(--bg-card);">${f}</span>`).join('')}
+                                    ${team.key_features.map(f => `<span class="move-badge">${f}</span>`).join('')}
                                 </div>
                             ` : ''}
-                            ${team['2024_trends'] ? `<p style="margin-top: 0.5rem; font-style: italic; color: var(--text-secondary);"><strong>2024 Trends:</strong> ${team['2024_trends']}</p>` : ''}
-                            <a href="${team.pokepaste}" target="_blank" class="calc-btn" style="display: inline-block; width: auto; margin-top: 0.75rem; text-decoration: none; text-align: center;">Import from Pokepaste</a>
+                            ${team['2024_trends'] ? `<p class="mt-3 text-secondary" style="font-style: italic;"><strong>2024 Trends:</strong> ${team['2024_trends']}</p>` : ''}
+                            <a href="${team.pokepaste}" target="_blank" class="btn btn-primary mt-4" style="display: inline-block;">Import from Pokepaste</a>
                         </div>
                     `;
                 });
@@ -588,13 +588,13 @@
                 html += `
                     <div class="card">
                         <h2>Team Dumps</h2>
-                        <p style="color: var(--text-secondary);">${sampleTeamsData.team_dumps.description}</p>
-                        <div style="margin-top: 1rem;">
+                        <p class="text-secondary">${sampleTeamsData.team_dumps.description}</p>
+                        <div class="mt-4">
                             ${sampleTeamsData.team_dumps.recommended_for_learning.map(dump => `
                                 <div class="set-card">
                                     <h4>${dump.author} (${dump.year})</h4>
                                     <p>${dump.description}</p>
-                                    <a href="${dump.url}" target="_blank" style="color: var(--accent);">View Collection</a>
+                                    <a href="${dump.url}" target="_blank">View Collection</a>
                                 </div>
                             `).join('')}
                         </div>
@@ -605,14 +605,14 @@
             container.innerHTML = html || '<div class="card"><p>No teams found matching your search.</p></div>';
         }
 
-        // Helper: Get difficulty color
-        function getDifficultyColor(difficulty) {
-            if (!difficulty) return 'var(--accent)';
+        // Helper: Get difficulty badge class
+        function getDifficultyClass(difficulty) {
+            if (!difficulty) return 'balanced';
             const d = difficulty.toLowerCase();
-            if (d.includes('beginner')) return '#78C850';
-            if (d.includes('intermediate')) return '#F8D030';
-            if (d.includes('advanced')) return '#F08030';
-            return 'var(--accent)';
+            if (d.includes('beginner')) return 'beginner';
+            if (d.includes('intermediate')) return 'intermediate';
+            if (d.includes('advanced')) return 'advanced';
+            return 'balanced';
         }
 
         // Render speed tiers
@@ -623,7 +623,7 @@
             let html = `
                 <div class="card">
                     <h2>ADV OU Speed Tiers</h2>
-                    <p style="color: var(--text-secondary);">${data.speed_tiers_overview?.description || 'Critical speed benchmarks in ADV OU'}</p>
+                    <p class="text-secondary">${data.speed_tiers_overview?.description || 'Critical speed benchmarks in ADV OU'}</p>
                 </div>
 
                 <div class="card">
@@ -647,11 +647,12 @@
                 html += `
                     <div class="set-card">
                         <h4 style="color: ${getTierColor(tierKey)};">${tier.range} - ${tier.description}</h4>
-                        <div style="display: grid; gap: 0.5rem; margin-top: 0.5rem;">
+                        <div class="speed-tier-list mt-3">
                             ${tier.pokemon.map(p => `
-                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.25rem 0; border-bottom: 1px solid var(--bg-primary);">
-                                    <span>${createPokemonBadge(p.name)} <span style="color: var(--text-secondary); font-size: 0.85rem;">${p.set || p.condition || ''}</span></span>
-                                    <span style="font-weight: bold; color: var(--accent);">${p.speed}</span>
+                                <div class="speed-tier-item">
+                                    <span class="speed-tier-pokemon">${createPokemonBadge(p.name)}</span>
+                                    <span class="speed-tier-details">${p.set || p.condition || ''}</span>
+                                    <span class="speed-tier-number">${p.speed}</span>
                                 </div>
                             `).join('')}
                         </div>
@@ -669,16 +670,16 @@
                 .forEach(([speed, info]) => {
                     html += `
                         <div class="set-card">
-                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div class="flex justify-between items-center mb-3">
                                 <h4>${info.description}</h4>
-                                <span class="viability-badge">${speed}</span>
+                                <span class="speed-number">${speed}</span>
                             </div>
-                            <div class="moves-list" style="margin: 0.5rem 0;">
+                            <div class="moves-list mb-3">
                                 ${info.pokemon.map(p => createPokemonBadge(p)).join('')}
                             </div>
-                            <p style="font-size: 0.85rem;"><strong>Nature:</strong> ${info.nature} | <strong>EVs:</strong> ${info.evs}</p>
-                            <p style="color: var(--text-secondary);">${info.significance}</p>
-                            ${info.note ? `<p style="font-style: italic; color: var(--accent); font-size: 0.85rem;">${info.note}</p>` : ''}
+                            <p class="text-sm"><strong>Nature:</strong> ${info.nature} | <strong>EVs:</strong> ${info.evs}</p>
+                            <p class="text-secondary">${info.significance}</p>
+                            ${info.note ? `<p class="text-sm text-sapphire mt-2" style="font-style: italic;">${info.note}</p>` : ''}
                         </div>
                     `;
                 });
@@ -692,13 +693,13 @@
                 html += `
                     <div class="set-card">
                         <h4>Dragon Dance / Salac Berry (+1 Speed)</h4>
-                        <p style="color: var(--text-secondary);">${boosted.dragon_dance_plus_one.description}</p>
+                        <p class="text-secondary">${boosted.dragon_dance_plus_one.description}</p>
                         <p><strong>Formula:</strong> ${boosted.dragon_dance_plus_one.formula}</p>
-                        <div style="margin-top: 0.5rem;">
+                        <div class="speed-tier-list mt-3">
                             ${Object.entries(boosted.dragon_dance_plus_one.common_threats || {}).map(([speed, info]) => `
-                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid var(--bg-primary);">
-                                    <span>${createPokemonBadge(info.pokemon)} <span style="color: var(--text-secondary);">(${info.unboosted} unboosted)</span></span>
-                                    <span style="font-weight: bold; color: var(--accent);">+1: ${speed}</span>
+                                <div class="speed-tier-item">
+                                    <span>${createPokemonBadge(info.pokemon)} <span class="text-secondary text-sm">(${info.unboosted} unboosted)</span></span>
+                                    <span class="speed-number ml-auto">+1: ${speed}</span>
                                 </div>
                             `).join('')}
                         </div>
@@ -710,13 +711,13 @@
                 html += `
                     <div class="set-card">
                         <h4>Agility (+2 Speed)</h4>
-                        <p style="color: var(--text-secondary);">${boosted.agility_plus_two.description}</p>
+                        <p class="text-secondary">${boosted.agility_plus_two.description}</p>
                         <p><strong>Formula:</strong> ${boosted.agility_plus_two.formula}</p>
-                        <div style="margin-top: 0.5rem;">
+                        <div class="speed-tier-list mt-3">
                             ${Object.entries(boosted.agility_plus_two.common_threats || {}).map(([speed, info]) => `
-                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid var(--bg-primary);">
-                                    <span>${Array.isArray(info.pokemon) ? info.pokemon.map(p => createPokemonBadge(p)).join(' ') : createPokemonBadge(info.pokemon)} <span style="color: var(--text-secondary);">(${info.unboosted || ''} unboosted)</span></span>
-                                    <span style="font-weight: bold; color: var(--accent);">+2: ${speed}</span>
+                                <div class="speed-tier-item">
+                                    <span>${Array.isArray(info.pokemon) ? info.pokemon.map(p => createPokemonBadge(p)).join(' ') : createPokemonBadge(info.pokemon)} <span class="text-secondary text-sm">(${info.unboosted || ''} unboosted)</span></span>
+                                    <span class="speed-number ml-auto">+2: ${speed}</span>
                                 </div>
                             `).join('')}
                         </div>
@@ -728,14 +729,14 @@
                 html += `
                     <div class="set-card">
                         <h4>Swift Swim (Rain)</h4>
-                        <p style="color: var(--text-secondary);">${boosted.swift_swim_rain.description}</p>
+                        <p class="text-secondary">${boosted.swift_swim_rain.description}</p>
                         <p><strong>Mechanics:</strong> ${boosted.swift_swim_rain.mechanics}</p>
-                        <div style="margin-top: 0.5rem;">
+                        <div class="speed-tier-list mt-3">
                             ${Object.entries(boosted.swift_swim_rain.common_users || {}).map(([key, info]) => `
-                                <div style="padding: 0.5rem 0; border-bottom: 1px solid var(--bg-primary);">
+                                <div class="speed-tier-item">
                                     ${createPokemonBadge(info.pokemon)}
-                                    <span style="color: var(--text-secondary);">${info.significance}</span>
-                                    ${info.boosted ? `<span style="font-weight: bold; color: var(--accent);"> Rain: ${info.boosted}</span>` : ''}
+                                    <span class="text-secondary flex-1">${info.significance}</span>
+                                    ${info.boosted ? `<span class="speed-number">Rain: ${info.boosted}</span>` : ''}
                                 </div>
                             `).join('')}
                         </div>
@@ -750,16 +751,16 @@
             html += `
                 <div class="card">
                     <h2>Speed Creep Guide</h2>
-                    <p style="color: var(--text-secondary);">${creep.description || ''}</p>
+                    <p class="text-secondary mb-4">${creep.description || ''}</p>
                     ${Object.entries(creep.targets || {}).map(([key, target]) => `
                         <div class="set-card">
-                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div class="flex justify-between items-center mb-3">
                                 <h4>${key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</h4>
-                                <span class="viability-badge">${target.target_speed}</span>
+                                <span class="speed-number">${target.target_speed}</span>
                             </div>
                             <p>${target.reasoning}</p>
-                            ${target.common_users ? `<p><strong>Common Users:</strong> ${target.common_users.join(', ')}</p>` : ''}
-                            <p style="color: ${target.importance?.includes('Critical') ? 'var(--accent)' : 'var(--text-secondary)'}; font-style: italic;">${target.importance}</p>
+                            ${target.common_users ? `<p class="mt-2"><strong>Common Users:</strong> ${target.common_users.join(', ')}</p>` : ''}
+                            <p class="mt-2 ${target.importance?.includes('Critical') ? 'text-ruby' : 'text-secondary'}" style="font-style: italic;">${target.importance}</p>
                         </div>
                     `).join('')}
                 </div>
@@ -771,12 +772,12 @@
                 <div class="card">
                     <h2>Important Considerations</h2>
                     <ul>
-                        ${(meta.important_considerations || []).map(note => `<li style="margin-bottom: 0.5rem;">${note}</li>`).join('')}
+                        ${(meta.important_considerations || []).map(note => `<li class="mb-2">${note}</li>`).join('')}
                     </ul>
                     ${meta.trapping_considerations ? `
-                        <h3 style="margin-top: 1rem;">Trapping & Speed</h3>
-                        <ul>
-                            ${Object.entries(meta.trapping_considerations).map(([mon, note]) => `<li><strong>${mon.charAt(0).toUpperCase() + mon.slice(1)}:</strong> ${note}</li>`).join('')}
+                        <h3 class="mt-6">Trapping & Speed</h3>
+                        <ul class="mt-3">
+                            ${Object.entries(meta.trapping_considerations).map(([mon, note]) => `<li class="mb-2"><strong>${mon.charAt(0).toUpperCase() + mon.slice(1)}:</strong> ${note}</li>`).join('')}
                         </ul>
                     ` : ''}
                 </div>
@@ -788,14 +789,14 @@
         // Helper: Get tier color for speed tiers
         function getTierColor(tierKey) {
             const colors = {
-                'tier_0_extreme': '#F85888',
-                'tier_1_blazing': '#F08030',
-                'tier_2_fast': '#F8D030',
-                'tier_3_moderate': '#78C850',
-                'tier_4_bulky': '#6890F0',
-                'tier_5_slow': '#A890F0'
+                'tier_0_extreme': 'var(--type-psychic)',
+                'tier_1_blazing': 'var(--type-fire)',
+                'tier_2_fast': 'var(--color-electric)',
+                'tier_3_moderate': 'var(--color-emerald)',
+                'tier_4_bulky': 'var(--color-sapphire)',
+                'tier_5_slow': 'var(--type-flying)'
             };
-            return colors[tierKey] || 'var(--accent)';
+            return colors[tierKey] || 'var(--color-sapphire)';
         }
 
         // Populate calculator dropdowns

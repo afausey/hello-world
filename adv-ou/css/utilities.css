@@ -117,6 +117,9 @@
 .text-electric { color: var(--color-electric); }
 .text-ruby { color: var(--color-ruby); }
 
+/* Flex utilities */
+.flex-1 { flex: 1; }
+
 /* =========================
    Cursor
    ========================= */
