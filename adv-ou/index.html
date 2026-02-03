@@ -92,11 +92,50 @@
             background: var(--color-emerald);
             color: white;
         }
+
+        /* Navigation history buttons */
+        .nav-history-buttons {
+            display: flex;
+            gap: 4px;
+            margin-right: var(--space-4);
+            padding-right: var(--space-4);
+            border-right: 1px solid var(--color-border);
+        }
+
+        .nav-history-btn {
+            background: var(--color-bg-primary);
+            color: var(--color-text-primary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            width: 32px;
+            height: 32px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-history-btn:hover:not(:disabled) {
+            background: var(--color-sapphire);
+            border-color: var(--color-sapphire);
+            color: white;
+        }
+
+        .nav-history-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
     </style>
 </head>
 <body>
     <!-- Navigation -->
     <nav class="nav-tabs">
+        <div class="nav-history-buttons">
+            <button id="nav-back" class="nav-history-btn" onclick="navigateBack()" disabled title="Go Back">←</button>
+            <button id="nav-forward" class="nav-history-btn" onclick="navigateForward()" disabled title="Go Forward">→</button>
+        </div>
         <a href="#" class="nav-tab active" data-section="pokemon">Pokemon</a>
         <a href="#" class="nav-tab" data-section="metagame">Metagame</a>
         <a href="#" class="nav-tab" data-section="cores">Cores</a>
@@ -480,6 +519,7 @@
                     if (isMatch) {
                         matches.push({
                             teamName: team.name,
+                            teamId: team.name.toLowerCase().replace(/[^a-z0-9]/g, '-'),
                             archetype: archetype.archetype,
                             author: team.author
                         });
@@ -521,8 +561,32 @@
             return null;
         }
 
+        // =========================
+        // Navigation History
+        // =========================
+        const navHistory = [];
+        let navHistoryIndex = -1;
+
+        function getCurrentLocation() {
+            const activeTab = document.querySelector('.nav-tab.active');
+            return {
+                tabId: activeTab ? activeTab.dataset.section : 'pokemon',
+                scrollY: window.scrollY
+            };
+        }
+
         // Navigate to a specific tab and scroll to element
-        function navigateToSection(tabId, elementId = null) {
+        function navigateToSection(tabId, elementId = null, addToHistory = true) {
+            // Save current location to history before navigating
+            if (addToHistory) {
+                const current = getCurrentLocation();
+                // Remove any forward history when making a new navigation
+                navHistory.splice(navHistoryIndex + 1);
+                navHistory.push({ ...current });
+                navHistoryIndex = navHistory.length - 1;
+                updateNavButtons();
+            }
+
             // Switch tab
             document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
@@ -543,6 +607,33 @@
                     }
                 }, 100);
             }
+        }
+
+        function navigateBack() {
+            if (navHistoryIndex > 0) {
+                navHistoryIndex--;
+                const loc = navHistory[navHistoryIndex];
+                navigateToSection(loc.tabId, null, false);
+                setTimeout(() => window.scrollTo(0, loc.scrollY), 50);
+                updateNavButtons();
+            }
+        }
+
+        function navigateForward() {
+            if (navHistoryIndex < navHistory.length - 1) {
+                navHistoryIndex++;
+                const loc = navHistory[navHistoryIndex];
+                navigateToSection(loc.tabId, null, false);
+                setTimeout(() => window.scrollTo(0, loc.scrollY), 50);
+                updateNavButtons();
+            }
+        }
+
+        function updateNavButtons() {
+            const backBtn = document.getElementById('nav-back');
+            const fwdBtn = document.getElementById('nav-forward');
+            if (backBtn) backBtn.disabled = navHistoryIndex <= 0;
+            if (fwdBtn) fwdBtn.disabled = navHistoryIndex >= navHistory.length - 1;
         }
 
         // Handle key feature click
@@ -806,7 +897,7 @@
                         ${relatedTeams.length > 0 ? `
                             <h3 class="section-subheader">Sample Teams</h3>
                             <div class="moves-list">
-                                ${relatedTeams.slice(0, 5).map(t => `<span class="link-tag team-link" onclick="navigateToSection('teams')">${t.teamName}</span>`).join('')}
+                                ${relatedTeams.slice(0, 5).map(t => `<span class="link-tag team-link" onclick="navigateToSection('teams', 'team-${t.teamId}')">${t.teamName}</span>`).join('')}
                             </div>
                         ` : ''}
                     </div>
@@ -903,8 +994,9 @@
                 `;
 
                 filteredTeams.forEach(team => {
+                    const teamId = team.name.toLowerCase().replace(/[^a-z0-9]/g, '-');
                     html += `
-                        <div class="set-card mt-4">
+                        <div class="set-card mt-4" id="team-${teamId}">
                             <h4>${team.name}</h4>
                             <p class="text-secondary text-sm">by ${team.author} (${team.year})</p>
                             <div class="sprite-grid mt-3 mb-3">
