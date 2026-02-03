@@ -127,6 +127,12 @@
             opacity: 0.3;
             cursor: not-allowed;
         }
+
+        /* Highlighted set in Pokemon detail */
+        .set-highlighted {
+            border: 2px solid var(--color-sapphire) !important;
+            box-shadow: 0 0 12px rgba(69, 123, 157, 0.4);
+        }
     </style>
 </head>
 <body>
@@ -473,55 +479,296 @@
         }
 
         // =========================
-        // Linking Functions
+        // Modular Linking System
         // =========================
 
-        // Find archetypes that contain ALL of the given Pokemon
-        function findArchetypesForCore(corePokemon) {
+        // Normalize Pokemon name for comparison
+        function normalizeName(name) {
+            return name.toLowerCase().replace(/[^a-z0-9]/g, '');
+        }
+
+        // Check if a Pokemon list contains a specific Pokemon
+        function listContainsPokemon(list, pokemon) {
+            const normalizedPokemon = normalizeName(pokemon);
+            return list.some(p => normalizeName(p) === normalizedPokemon);
+        }
+
+        // Check if a Pokemon list contains ALL Pokemon from another list
+        function listContainsAllPokemon(haystack, needles) {
+            return needles.every(needle => listContainsPokemon(haystack, needle));
+        }
+
+        // Find ALL teams that contain ALL of the given Pokemon
+        function findTeamsContainingPokemon(pokemonList) {
+            const teams = sampleTeamsData.sample_teams || {};
+            const matches = [];
+
+            Object.entries(teams).forEach(([archKey, archetype]) => {
+                archetype.teams.forEach(team => {
+                    if (listContainsAllPokemon(team.team, pokemonList)) {
+                        matches.push({
+                            teamName: team.name,
+                            teamId: team.name.toLowerCase().replace(/[^a-z0-9]/g, '-'),
+                            archetype: archetype.archetype,
+                            author: team.author,
+                            pokemon: team.team
+                        });
+                    }
+                });
+            });
+
+            return matches;
+        }
+
+        // Find ALL archetypes that have ALL of the given Pokemon in their key_pokemon
+        function findArchetypesContainingPokemon(pokemonList) {
             const archetypes = metagameData.archetypes || {};
             const matches = [];
 
             Object.entries(archetypes).forEach(([key, arch]) => {
-                const archPokemon = arch.key_pokemon || [];
-                // Check if all core Pokemon are in this archetype
-                const allFound = corePokemon.every(cp =>
-                    archPokemon.some(ap => ap.toLowerCase() === cp.toLowerCase())
-                );
-                if (allFound) {
-                    matches.push({ key, name: arch.name });
+                if (listContainsAllPokemon(arch.key_pokemon || [], pokemonList)) {
+                    matches.push({ key, name: arch.name, keyPokemon: arch.key_pokemon });
                 }
             });
 
             return matches;
         }
 
-        // Find teams that match an archetype based on key features or archetype name
+        // Find ALL cores where ALL Pokemon are in the given list
+        function findCoresInPokemonList(pokemonList) {
+            const cores = metagameData.key_cores || {};
+            const matches = [];
+
+            Object.entries(cores).forEach(([key, core]) => {
+                if (listContainsAllPokemon(pokemonList, core.pokemon)) {
+                    matches.push({ key, pokemon: core.pokemon, type: core.type });
+                }
+            });
+
+            return matches;
+        }
+
+        // Parse a key feature to extract Pokemon and set hint
+        // Handles: "HP Fire Magneton" -> link to Magneton's HP Fire set
+        // Handles: "Crocune" -> link to Suicune's Calm Mind set
+        // Handles: "SkarmBliss" -> link to Skarmory + Blissey core
+        function parseFeature(feature) {
+            const featureLower = feature.toLowerCase();
+
+            // Known Pokemon names to look for
+            const pokemonNames = Object.keys(pokemonData.pokemon || {});
+
+            // Famous set nicknames (direct Pokemon + set mapping)
+            const famousSetNames = {
+                'crocune': { pokemon: 'suicune', setHint: 'calm_mind' },
+                'manacune': { pokemon: 'suicune', setHint: 'calm' },
+                'mixmence': { pokemon: 'salamence', setHint: 'mixed' },
+                'mixed salamence': { pokemon: 'salamence', setHint: 'mixed' },
+                'mixtar': { pokemon: 'tyranitar', setHint: 'mixed' },
+                'ddtar': { pokemon: 'tyranitar', setHint: 'dragon_dance' },
+                'dd tyranitar': { pokemon: 'tyranitar', setHint: 'dragon_dance' },
+                'bkctar': { pokemon: 'tyranitar', setHint: 'physical' },
+                'houdini': { pokemon: 'metagross', setHint: 'choice_band' },
+                'houdini metagross': { pokemon: 'metagross', setHint: 'choice_band' }
+            };
+
+            // Check for famous set names first
+            for (const [pattern, info] of Object.entries(famousSetNames)) {
+                if (featureLower.includes(pattern)) {
+                    const pokemonKey = Object.keys(pokemonData.pokemon || {}).find(k =>
+                        pokemonData.pokemon[k].name.toLowerCase() === info.pokemon
+                    );
+                    if (pokemonKey) {
+                        const mon = pokemonData.pokemon[pokemonKey];
+                        // Find matching set
+                        if (mon.sets) {
+                            const matchedSet = Object.keys(mon.sets).find(sk =>
+                                sk.toLowerCase().includes(info.setHint) || info.setHint.includes(sk.toLowerCase())
+                            );
+                            if (matchedSet) {
+                                return { type: 'pokemonSet', pokemonKey, setKey: matchedSet };
+                            }
+                        }
+                        return { type: 'pokemon', pokemonKey };
+                    }
+                }
+            }
+
+            // Core patterns (compound names and full names)
+            const corePatterns = {
+                'skarmbliss': ['Skarmory', 'Blissey'],
+                'skarm bliss': ['Skarmory', 'Blissey'],
+                'skarmdug': ['Skarmory', 'Dugtrio'],
+                'skarm dug': ['Skarmory', 'Dugtrio'],
+                'skarmmag': ['Skarmory', 'Magneton'],
+                'skarm mag': ['Skarmory', 'Magneton'],
+                'dragmag': ['Salamence', 'Magneton'],
+                'drag mag': ['Salamence', 'Magneton'],
+                'magnecune': ['Magneton', 'Suicune'],
+                'magcune': ['Magneton', 'Suicune'],
+                'mag cune': ['Magneton', 'Suicune'],
+                'magneton suicune': ['Magneton', 'Suicune'],
+                'zapdug': ['Zapdos', 'Dugtrio'],
+                'zap dug': ['Zapdos', 'Dugtrio'],
+                'zapdos dugtrio': ['Zapdos', 'Dugtrio'],
+                'milodol': ['Milotic', 'Claydol'],
+                'milo dol': ['Milotic', 'Claydol'],
+                'cunedol': ['Suicune', 'Claydol'],
+                'cune dol': ['Suicune', 'Claydol'],
+                'magdol': ['Magneton', 'Claydol'],
+                'mag dol': ['Magneton', 'Claydol'],
+                'forredol': ['Forretress', 'Claydol'],
+                'forre dol': ['Forretress', 'Claydol'],
+                'aerobi': ['Aerodactyl', 'Tyranitar'],
+                'aero bi': ['Aerodactyl', 'Tyranitar']
+            };
+
+            // Check for core pattern
+            for (const [pattern, corePokemon] of Object.entries(corePatterns)) {
+                if (featureLower.includes(pattern)) {
+                    return { type: 'core', pokemon: corePokemon };
+                }
+            }
+
+            // Set hint patterns (look for these in features containing Pokemon names)
+            const setHintPatterns = {
+                'hp fire': 'hp_fire',
+                'hp ice': 'hp_ice',
+                'hp grass': 'hp_grass',
+                'hp ground': 'hp_ground',
+                'hp bug': 'hp_bug',
+                'choice band': 'choice_band',
+                'banded': 'choice_band',
+                'cb ': 'choice_band',
+                'dragon dance': 'dragon_dance',
+                'dd ': 'dragon_dance',
+                'calm mind': 'calm_mind',
+                'cm ': 'calm_mind',
+                'swords dance': 'swords_dance',
+                'sd ': 'swords_dance',
+                'agility': 'agility',
+                'substitute': 'substitute',
+                'sub ': 'substitute',
+                'rest': 'rest',
+                'offensive': 'offensive',
+                'defensive': 'defensive',
+                'physical': 'physical',
+                'special': 'special',
+                'mixed': 'mixed',
+                'lead': 'lead',
+                'liechi': 'liechi',
+                'salac': 'salac',
+                'curse': 'curse',
+                'wish': 'wish',
+                'endeavor': 'endeavor',
+                'baton pass': 'baton_pass'
+            };
+
+            // Try to find a Pokemon name in the feature
+            for (const pokemonKey of pokemonNames) {
+                const mon = pokemonData.pokemon[pokemonKey];
+                if (!mon) continue;
+
+                const monNameLower = mon.name.toLowerCase();
+                if (featureLower.includes(monNameLower)) {
+                    // Found a Pokemon, now look for a set hint
+                    let setHint = null;
+
+                    // Check for set hint patterns
+                    for (const [pattern, hint] of Object.entries(setHintPatterns)) {
+                        if (featureLower.includes(pattern)) {
+                            setHint = hint;
+                            break;
+                        }
+                    }
+
+                    // Try to match set key in the Pokemon's sets
+                    if (setHint && mon.sets) {
+                        const matchedSet = Object.keys(mon.sets).find(sk => {
+                            const setNameLower = mon.sets[sk].name.toLowerCase();
+                            return sk.toLowerCase().includes(setHint) ||
+                                   setHint.includes(sk.toLowerCase()) ||
+                                   setNameLower.includes(setHint.replace('_', ' '));
+                        });
+                        if (matchedSet) {
+                            return { type: 'pokemonSet', pokemonKey, setKey: matchedSet };
+                        }
+                    }
+
+                    return { type: 'pokemon', pokemonKey };
+                }
+            }
+
+            // Check for archetype keywords
+            const archetypeKeywords = {
+                'spikes offense': 'spikes_offense',
+                'spikes stall': 'stall',
+                'special offense': 'special_offense_dugtrio',
+                'hyper offense': 'hyper_offense',
+                'tss': 'tss_balance',
+                'balance': 'tss_balance',
+                'stall': 'stall',
+                'rain': 'rain_dance',
+                'superman': 'superman',
+                'breloom charizard': 'breloom_charizard_offense'
+            };
+
+            for (const [keyword, archKey] of Object.entries(archetypeKeywords)) {
+                if (featureLower.includes(keyword)) {
+                    const archetypes = metagameData.archetypes || {};
+                    if (archetypes[archKey]) {
+                        return { type: 'archetype', key: archKey, name: archetypes[archKey].name };
+                    }
+                }
+            }
+
+            // Try to match archetype names directly
+            const archetypes = metagameData.archetypes || {};
+            for (const [key, arch] of Object.entries(archetypes)) {
+                const archNameLower = arch.name.toLowerCase();
+                if (featureLower.includes(archNameLower) ||
+                    archNameLower.includes(featureLower) ||
+                    featureLower.split(' ')[0] === archNameLower.split(' ')[0]) {
+                    return { type: 'archetype', key, name: arch.name };
+                }
+            }
+
+            return null;
+        }
+
+        // Show Pokemon detail with a specific set highlighted
+        function showPokemonDetailWithSet(pokemonKey, setKey = null) {
+            showPokemonDetail(pokemonKey, setKey);
+        }
+
+        // Legacy compatibility - find archetypes for core
+        function findArchetypesForCore(corePokemon) {
+            return findArchetypesContainingPokemon(corePokemon);
+        }
+
+        // Legacy compatibility - find teams for archetype (now uses Pokemon matching)
         function findTeamsForArchetype(archetypeKey, archetypeName) {
+            const archetypes = metagameData.archetypes || {};
+            const arch = archetypes[archetypeKey];
+            if (!arch) return [];
+
+            // Find teams that contain at least 2 of the archetype's key Pokemon
             const teams = sampleTeamsData.sample_teams || {};
             const matches = [];
 
             Object.entries(teams).forEach(([archKey, archetype]) => {
-                // Check if archetype name matches
-                const archLower = archetypeName.toLowerCase();
-                const teamArchLower = archetype.archetype.toLowerCase();
-
                 archetype.teams.forEach(team => {
-                    const keyFeatures = (team.key_features || []).map(f => f.toLowerCase());
-                    const teamName = team.name.toLowerCase();
-
-                    // Match by archetype name similarity or key features
-                    const isMatch =
-                        teamArchLower.includes(archLower.split(' ')[0]) ||
-                        archLower.includes(teamArchLower.split(' ')[0]) ||
-                        keyFeatures.some(f => f.includes(archLower.split(' ')[0])) ||
-                        teamName.includes(archLower.split(' ')[0]);
-
-                    if (isMatch) {
+                    const overlap = (arch.key_pokemon || []).filter(kp =>
+                        listContainsPokemon(team.team, kp)
+                    );
+                    // Match if team has at least 2 key Pokemon from the archetype
+                    if (overlap.length >= 2) {
                         matches.push({
                             teamName: team.name,
                             teamId: team.name.toLowerCase().replace(/[^a-z0-9]/g, '-'),
                             archetype: archetype.archetype,
-                            author: team.author
+                            author: team.author,
+                            matchedPokemon: overlap
                         });
                     }
                 });
@@ -532,20 +779,20 @@
 
         // Find cores that match a key feature
         function findCoreByFeature(feature) {
-            const cores = metagameData.key_cores || {};
-            const featureLower = feature.toLowerCase();
-
-            for (const [key, core] of Object.entries(cores)) {
-                const coreName = core.pokemon.join('').toLowerCase().replace(/\s/g, '');
-                const featureClean = featureLower.replace(/\s/g, '');
-
-                if (coreName.includes(featureClean) || featureClean.includes(coreName) ||
-                    key.toLowerCase().includes(featureClean)) {
-                    return { key, core };
+            const parsed = parseFeature(feature);
+            if (parsed && parsed.type === 'core') {
+                // Find the core that matches these Pokemon
+                const cores = metagameData.key_cores || {};
+                for (const [key, core] of Object.entries(cores)) {
+                    if (listContainsAllPokemon(core.pokemon, parsed.pokemon) &&
+                        listContainsAllPokemon(parsed.pokemon, core.pokemon)) {
+                        return { key, core };
+                    }
                 }
             }
             return null;
         }
+
 
         // Find archetype that matches a key feature
         function findArchetypeByFeature(feature) {
@@ -636,20 +883,38 @@
             if (fwdBtn) fwdBtn.disabled = navHistoryIndex >= navHistory.length - 1;
         }
 
-        // Handle key feature click
+        // Handle key feature click - uses modular parseFeature system
         function handleFeatureClick(feature) {
-            // Try to find a matching core
-            const coreMatch = findCoreByFeature(feature);
-            if (coreMatch) {
-                navigateToSection('cores', `core-${coreMatch.key}`);
-                return;
-            }
+            const parsed = parseFeature(feature);
 
-            // Try to find a matching archetype
-            const archMatch = findArchetypeByFeature(feature);
-            if (archMatch) {
-                navigateToSection('archetypes', `archetype-${archMatch.key}`);
-                return;
+            if (!parsed) return;
+
+            switch (parsed.type) {
+                case 'pokemonSet':
+                    // Link to specific Pokemon set
+                    showPokemonDetail(parsed.pokemonKey, parsed.setKey);
+                    break;
+
+                case 'pokemon':
+                    // Link to Pokemon (no specific set)
+                    showPokemonDetail(parsed.pokemonKey);
+                    break;
+
+                case 'core':
+                    // Find the core that matches these Pokemon
+                    const cores = metagameData.key_cores || {};
+                    for (const [key, core] of Object.entries(cores)) {
+                        if (listContainsAllPokemon(core.pokemon, parsed.pokemon) &&
+                            listContainsAllPokemon(parsed.pokemon, core.pokemon)) {
+                            navigateToSection('cores', `core-${key}`);
+                            return;
+                        }
+                    }
+                    break;
+
+                case 'archetype':
+                    navigateToSection('archetypes', `archetype-${parsed.key}`);
+                    break;
             }
         }
 
@@ -722,8 +987,8 @@
             container.innerHTML = html || '<div class="card"><p>No Pokemon found.</p></div>';
         }
 
-        // Show Pokemon detail modal
-        function showPokemonDetail(key) {
+        // Show Pokemon detail modal, optionally highlighting a specific set
+        function showPokemonDetail(key, highlightSetKey = null) {
             const mon = pokemonData.pokemon[key];
             if (!mon) return;
 
@@ -760,8 +1025,9 @@
 
             if (mon.sets) {
                 Object.entries(mon.sets).forEach(([setKey, set]) => {
+                    const isHighlighted = highlightSetKey && setKey === highlightSetKey;
                     html += `
-                        <div class="set-card mb-4">
+                        <div class="set-card mb-4 ${isHighlighted ? 'set-highlighted' : ''}" id="set-${key}-${setKey}">
                             <div class="flex justify-between items-start">
                                 <h4>${set.name}</h4>
                                 <button class="btn btn-secondary text-xs" data-copy="${key}-${setKey}" onclick="copyPokepaste('${key}', '${setKey}')">Copy Set</button>
@@ -880,7 +1146,9 @@
             let html = '<div class="info-grid">';
 
             Object.entries(archetypes).forEach(([key, arch]) => {
-                // Find teams that use this archetype
+                // Find cores where ALL core Pokemon are in this archetype's key_pokemon
+                const relatedCores = findCoresInPokemonList(arch.key_pokemon || []);
+                // Find teams that have at least 2 key Pokemon from this archetype
                 const relatedTeams = findTeamsForArchetype(key, arch.name);
 
                 html += `
@@ -891,13 +1159,19 @@
                         <div class="moves-list">
                             ${arch.key_pokemon.map(p => createPokemonBadge(p)).join('')}
                         </div>
+                        ${relatedCores.length > 0 ? `
+                            <h3 class="section-subheader">Related Cores</h3>
+                            <div class="moves-list">
+                                ${relatedCores.map(c => `<span class="link-tag" onclick="navigateToSection('cores', 'core-${c.key}')">${c.pokemon.join(' + ')}</span>`).join('')}
+                            </div>
+                        ` : ''}
                         <h3 class="section-subheader">Gameplan</h3>
                         <p class="card-body">${arch.gameplan}</p>
                         ${arch.notes ? `<p class="text-secondary mt-3" style="font-style: italic;">${arch.notes}</p>` : ''}
                         ${relatedTeams.length > 0 ? `
                             <h3 class="section-subheader">Sample Teams</h3>
                             <div class="moves-list">
-                                ${relatedTeams.slice(0, 5).map(t => `<span class="link-tag team-link" onclick="navigateToSection('teams', 'team-${t.teamId}')">${t.teamName}</span>`).join('')}
+                                ${relatedTeams.slice(0, 8).map(t => `<span class="link-tag team-link" onclick="navigateToSection('teams', 'team-${t.teamId}')">${t.teamName}</span>`).join('')}
                             </div>
                         ` : ''}
                     </div>
@@ -916,8 +1190,10 @@
             let html = '<div class="info-grid">';
 
             Object.entries(cores).forEach(([key, core]) => {
-                // Find archetypes that use this core
-                const relatedArchetypes = findArchetypesForCore(core.pokemon);
+                // Find archetypes that contain ALL core Pokemon
+                const relatedArchetypes = findArchetypesContainingPokemon(core.pokemon);
+                // Find teams that contain ALL core Pokemon
+                const relatedTeams = findTeamsContainingPokemon(core.pokemon);
 
                 html += `
                     <div class="card" id="core-${key}">
@@ -946,6 +1222,12 @@
                             <h3 class="section-subheader">Used In Archetypes</h3>
                             <div class="moves-list">
                                 ${relatedArchetypes.map(a => `<span class="link-tag" onclick="navigateToSection('archetypes', 'archetype-${a.key}')">${a.name}</span>`).join('')}
+                            </div>
+                        ` : ''}
+                        ${relatedTeams.length > 0 ? `
+                            <h3 class="section-subheader">Sample Teams Using This Core</h3>
+                            <div class="moves-list">
+                                ${relatedTeams.slice(0, 8).map(t => `<span class="link-tag team-link" onclick="navigateToSection('teams', 'team-${t.teamId}')">${t.teamName}</span>`).join('')}
                             </div>
                         ` : ''}
                     </div>
@@ -995,6 +1277,9 @@
 
                 filteredTeams.forEach(team => {
                     const teamId = team.name.toLowerCase().replace(/[^a-z0-9]/g, '-');
+                    // Find cores present in this team using the modular system
+                    const teamCores = findCoresInPokemonList(team.team);
+
                     html += `
                         <div class="set-card mt-4" id="team-${teamId}">
                             <h4>${team.name}</h4>
@@ -1003,6 +1288,12 @@
                                 ${team.team.map(p => createSpriteOnly(p, 56)).join('')}
                             </div>
                             <p>${team.description}</p>
+                            ${teamCores.length > 0 ? `
+                                <p class="mt-3 font-semibold">Cores:</p>
+                                <div class="moves-list">
+                                    ${teamCores.map(c => `<span class="link-tag" onclick="navigateToSection('cores', 'core-${c.key}')">${c.pokemon.join(' + ')}</span>`).join('')}
+                                </div>
+                            ` : ''}
                             ${team.key_features ? `
                                 <p class="mt-3 font-semibold">Key Features:</p>
                                 <div class="moves-list">
