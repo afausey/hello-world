@@ -1398,6 +1398,175 @@
         "soft_checks": ["Swampert", "Dugtrio"],
         "notes": "130 base Speed outspeeds everything except Aerodactyl and Electrode"
       }
+    },
+    "marowak": {
+      "name": "Marowak",
+      "types": ["Ground"],
+      "ability": "Rock Head",
+      "base_stats": {
+        "hp": 60,
+        "atk": 80,
+        "def": 110,
+        "spa": 50,
+        "spd": 80,
+        "spe": 45
+      },
+      "viability": "C",
+      "role": "Thick Club wallbreaker with massive Attack; Rock Head Double-Edge user",
+      "sets": {
+        "swords_dance": {
+          "name": "Swords Dance",
+          "item": "Thick Club",
+          "nature": "Adamant",
+          "evs": "252 HP / 252 Atk / 4 SpD",
+          "moves": ["Swords Dance", "Earthquake", "Rock Slide", "Double-Edge"],
+          "description": "Thick Club doubles Attack to monstrous levels. After Swords Dance, OHKOs almost everything. Rock Head negates Double-Edge recoil.",
+          "usage_tips": "Needs Spikes support and Speed control. Very slow but hits incredibly hard. Bring in on predicted switches or after a KO."
+        },
+        "bonemerang": {
+          "name": "Bonemerang Attacker",
+          "item": "Thick Club",
+          "nature": "Adamant",
+          "evs": "252 HP / 252 Atk / 4 SpD",
+          "moves": ["Bonemerang", "Rock Slide", "Double-Edge", "Focus Punch"],
+          "description": "Bonemerang hits twice, breaking Substitutes. Focus Punch destroys Skarmory on predicted switches.",
+          "usage_tips": "Bonemerang can break through Substitute users. Prediction-heavy playstyle required due to low Speed."
+        }
+      },
+      "checks_and_counters": {
+        "hard_counters": ["Skarmory", "Flygon", "Claydol"],
+        "soft_checks": ["Swampert", "Milotic", "Suicune"],
+        "notes": "Extremely slow at base 45 Speed. Needs significant team support to function. Thick Club is essential - without it, Marowak is unusable."
+      }
+    },
+    "kabutops": {
+      "name": "Kabutops",
+      "types": ["Rock", "Water"],
+      "ability": "Swift Swim",
+      "base_stats": {
+        "hp": 60,
+        "atk": 115,
+        "def": 105,
+        "spa": 65,
+        "spd": 70,
+        "spe": 80
+      },
+      "viability": "C",
+      "role": "Swift Swim physical sweeper for Rain Dance teams; Swords Dance cleaner",
+      "sets": {
+        "swift_swim_sweeper": {
+          "name": "Swift Swim Sweeper",
+          "item": "Lum Berry",
+          "nature": "Adamant",
+          "evs": "4 HP / 252 Atk / 252 Spe",
+          "moves": ["Swords Dance", "Rock Slide", "Surf", "Hidden Power Ground"],
+          "description": "Primary physical sweeper on Rain Dance teams. Swift Swim doubles Speed in rain, reaching 480. Swords Dance + STAB Rock Slide demolishes teams.",
+          "usage_tips": "Set up Rain Dance with a teammate before bringing in Kabutops. HP Ground hits Metagross and opposing Rock-types. Lum Berry blocks status."
+        },
+        "choice_band": {
+          "name": "Choice Band",
+          "item": "Choice Band",
+          "nature": "Adamant",
+          "evs": "4 HP / 252 Atk / 252 Spe",
+          "moves": ["Rock Slide", "Double-Edge", "Brick Break", "Hidden Power Ground"],
+          "description": "Immediate power without setup. Works outside of rain as a standalone wallbreaker.",
+          "usage_tips": "Can function on non-rain teams. 115 base Attack with Choice Band hits hard even without rain."
+        }
+      },
+      "checks_and_counters": {
+        "hard_counters": ["Swampert", "Suicune", "Milotic"],
+        "soft_checks": ["Skarmory", "Flygon", "Celebi"],
+        "notes": "Requires Rain Dance support to truly sweep. Outside of rain, base 80 Speed is mediocre. Rock/Water typing gives it many resistances but also weaknesses to Grass, Ground, and Fighting."
+      }
+    },
+    "omastar": {
+      "name": "Omastar",
+      "types": ["Rock", "Water"],
+      "ability": "Swift Swim",
+      "base_stats": {
+        "hp": 70,
+        "atk": 60,
+        "def": 125,
+        "spa": 115,
+        "spd": 70,
+        "spe": 55
+      },
+      "viability": "C",
+      "role": "Swift Swim special sweeper; Spikes setter with offensive presence",
+      "sets": {
+        "swift_swim_sweeper": {
+          "name": "Rain Dance Sweeper",
+          "item": "Lum Berry",
+          "nature": "Modest",
+          "evs": "4 HP / 252 SpA / 252 Spe",
+          "moves": ["Rain Dance", "Surf", "Ice Beam", "Hidden Power Grass"],
+          "description": "Special attacking counterpart to Kabutops on rain teams. Can set its own Rain Dance. HP Grass hits Swampert and opposing Water-types.",
+          "usage_tips": "115 base SpA with rain-boosted Surf hits extremely hard. Ice Beam coverage handles Grass-types and Dragons. More self-sufficient than Kabutops."
+        },
+        "spikes_support": {
+          "name": "Spikes Support",
+          "item": "Leftovers",
+          "nature": "Bold",
+          "evs": "252 HP / 252 Def / 4 SpA",
+          "moves": ["Spikes", "Surf", "Ice Beam", "Toxic"],
+          "description": "Defensive Spikes setter with good physical bulk. Alternative to Skarmory that handles Fire-types better.",
+          "usage_tips": "125 base Defense lets it take physical hits well. Spikes + Toxic wears down switch-ins. Loses to Blissey but beats most physical attackers."
+        }
+      },
+      "checks_and_counters": {
+        "hard_counters": ["Blissey", "Celebi", "Snorlax"],
+        "soft_checks": ["Starmie", "Suicune", "Swampert (for non-HP Grass)"],
+        "notes": "Base 55 Speed is very low - absolutely needs rain to sweep. Excellent physical Defense but poor Special Defense makes it vulnerable to special attackers."
+      }
+    },
+    "sceptile": {
+      "name": "Sceptile",
+      "types": ["Grass"],
+      "ability": "Overgrow",
+      "base_stats": {
+        "hp": 70,
+        "atk": 85,
+        "def": 65,
+        "spa": 105,
+        "spd": 85,
+        "spe": 120
+      },
+      "viability": "C",
+      "role": "Fast Grass-type special attacker; SubSeed user; Swords Dance sweeper",
+      "sets": {
+        "subseed": {
+          "name": "SubSeed",
+          "item": "Leftovers",
+          "nature": "Timid",
+          "evs": "4 HP / 252 SpA / 252 Spe",
+          "moves": ["Substitute", "Leech Seed", "Leaf Blade", "Hidden Power Ice"],
+          "description": "Classic SubSeed strategy. Base 120 Speed outspeeds most of the tier. Stalls out opponents with Leech Seed while behind Substitute.",
+          "usage_tips": "HP Ice hits Salamence and Flygon. Leaf Blade is STAB and has high crit rate."
+        },
+        "swords_dance": {
+          "name": "Swords Dance",
+          "item": "Leftovers",
+          "nature": "Jolly",
+          "evs": "4 HP / 252 Atk / 252 Spe",
+          "moves": ["Swords Dance", "Leaf Blade", "Earthquake", "Rock Slide"],
+          "description": "Physical sweeper with +2 Leaf Blade. Outspeeds most threats. Earthquake handles Poison and Fire-types.",
+          "usage_tips": "Set up on Water-types and Swampert. Jolly outspeeds Jolteon. Leaf Blade crit chance helps vs bulky targets."
+        },
+        "special_attacker": {
+          "name": "Special Attacker",
+          "item": "Leftovers",
+          "nature": "Timid",
+          "evs": "4 HP / 252 SpA / 252 Spe",
+          "moves": ["Leaf Blade", "Hidden Power Ice", "Dragon Claw", "Leech Seed"],
+          "description": "Fast special attacker that threatens Water and Ground types. Dragon Claw provides neutral coverage.",
+          "usage_tips": "Best Grass-type option against Salamence and Flygon thanks to Speed and HP Ice. Competes with Celebi for team slots."
+        }
+      },
+      "checks_and_counters": {
+        "hard_counters": ["Blissey", "Skarmory", "Regice"],
+        "soft_checks": ["Salamence", "Zapdos", "Celebi"],
+        "notes": "Fastest Grass-type in ADV OU. Pure Grass typing leaves it walled by many common Pokemon. Base 105 SpA is good but not overwhelming. Works best on offensive teams that can pressure its checks."
+      }
     }
   }
 }
