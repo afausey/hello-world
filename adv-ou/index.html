@@ -216,6 +216,56 @@
             ><span class="sprite-fallback" style="display: none; width: ${size}px; height: ${size}px; font-size: ${Math.floor(size/2)}px;">${fallbackInitial}</span>`;
         }
 
+        // =========================
+        // Pokepaste Export
+        // =========================
+
+        // Generate Pokepaste format for a set
+        function generatePokepaste(pokemonName, ability, set) {
+            const lines = [];
+            // Pokemon @ Item
+            lines.push(`${pokemonName} @ ${set.item}`);
+            // Ability
+            lines.push(`Ability: ${ability}`);
+            // EVs
+            lines.push(`EVs: ${set.evs}`);
+            // Nature
+            const nature = set.nature.split(' / ')[0]; // Take first if multiple options
+            lines.push(`${nature} Nature`);
+            // Moves
+            set.moves.forEach(move => {
+                // Clean up move names (handle "Move1 / Move2" options)
+                const cleanMove = move.split(' / ')[0];
+                lines.push(`- ${cleanMove}`);
+            });
+            return lines.join('\n');
+        }
+
+        // Copy to clipboard function
+        function copyPokepaste(pokemonKey, setKey) {
+            const mon = pokemonData.pokemon[pokemonKey];
+            if (!mon || !mon.sets || !mon.sets[setKey]) return;
+
+            const paste = generatePokepaste(mon.name, mon.ability, mon.sets[setKey]);
+
+            navigator.clipboard.writeText(paste).then(() => {
+                // Show feedback
+                const btn = document.querySelector(`[data-copy="${pokemonKey}-${setKey}"]`);
+                if (btn) {
+                    const originalText = btn.textContent;
+                    btn.textContent = 'Copied!';
+                    btn.classList.add('btn-success');
+                    setTimeout(() => {
+                        btn.textContent = originalText;
+                        btn.classList.remove('btn-success');
+                    }, 1500);
+                }
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                alert('Failed to copy to clipboard');
+            });
+        }
+
         // Move type database (common ADV OU moves)
         const moveTypes = {
             // Normal
@@ -452,7 +502,10 @@
                 Object.entries(mon.sets).forEach(([setKey, set]) => {
                     html += `
                         <div class="set-card mb-4">
-                            <h4>${set.name}</h4>
+                            <div class="flex justify-between items-start">
+                                <h4>${set.name}</h4>
+                                <button class="btn btn-secondary text-xs" data-copy="${key}-${setKey}" onclick="copyPokepaste('${key}', '${setKey}')">Copy Set</button>
+                            </div>
                             <p class="text-sm mt-2"><strong>Item:</strong> <span class="item-name">${set.item}</span> | <strong>Nature:</strong> ${set.nature}</p>
                             <p class="text-sm ev-spread"><strong>EVs:</strong> ${set.evs}</p>
                             <div class="moves-list mt-3 mb-3">
@@ -1047,6 +1100,9 @@ Or use CLI:
 
                 this.classList.add('active');
                 document.getElementById(this.dataset.section).classList.add('active');
+
+                // Reset scroll position to top when switching tabs
+                window.scrollTo(0, 0);
             });
         });
 
