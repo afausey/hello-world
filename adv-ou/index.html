@@ -104,27 +104,27 @@
         <!-- Calculator Section -->
         <section id="calculator" class="section">
             <div class="calc-section">
-                <h2>Damage Calculator</h2>
-                <p style="color: var(--text-secondary); margin-bottom: 1rem;">Select attacker, defender, and move to calculate damage.</p>
+                <h2 class="card-title mb-4">Damage Calculator</h2>
+                <p class="text-secondary mb-4">Select attacker, defender, and move to calculate damage.</p>
 
-                <label>Attacker:</label>
+                <label class="font-medium text-sm mb-1 block">Attacker:</label>
                 <select class="calc-select" id="calc-attacker"></select>
 
-                <label>Attacker Set:</label>
+                <label class="font-medium text-sm mb-1 block mt-3">Attacker Set:</label>
                 <select class="calc-select" id="calc-attacker-set"></select>
 
-                <label>Move:</label>
+                <label class="font-medium text-sm mb-1 block mt-3">Move:</label>
                 <select class="calc-select" id="calc-move"></select>
 
-                <label>Defender:</label>
+                <label class="font-medium text-sm mb-1 block mt-3">Defender:</label>
                 <select class="calc-select" id="calc-defender"></select>
 
-                <label>Defender Set:</label>
+                <label class="font-medium text-sm mb-1 block mt-3">Defender Set:</label>
                 <select class="calc-select" id="calc-defender-set"></select>
 
                 <button class="calc-btn" id="calc-btn">Calculate Damage</button>
 
-                <div class="calc-result" id="calc-result" style="display: none;"></div>
+                <div class="calc-result hidden" id="calc-result"></div>
             </div>
         </section>
         </div><!-- /.container -->
@@ -344,18 +344,18 @@
             const stats = mon.base_stats;
 
             let html = `
-                <button class="close-btn" onclick="closeDetail()">Close</button>
+                <button class="close-btn" onclick="closeDetail()">← Back</button>
                 <div class="pokemon-header">
-                    <h2>${mon.name}</h2>
+                    <h2 class="pokemon-name">${mon.name}</h2>
                     <span class="viability-badge">${mon.viability} Tier</span>
                 </div>
-                <div>
-                    ${mon.types.map(t => `<span class="type-badge" style="background: ${typeColors[t]}">${t}</span>`).join(' ')}
+                <div class="mb-3">
+                    ${mon.types.map(t => `<span class="type-badge type-${t.toLowerCase()}">${t}</span>`).join(' ')}
                 </div>
-                <p style="margin: 0.5rem 0; color: var(--text-secondary);">${mon.role}</p>
+                <p class="text-secondary mb-4">${mon.role}</p>
 
-                <h3>Base Stats</h3>
-                <div class="stats-grid">
+                <h3 class="mb-3">Base Stats</h3>
+                <div class="stats-grid mb-6">
                     <div><div class="stat-label">HP</div><div class="stat-value">${stats.hp}</div></div>
                     <div><div class="stat-label">Atk</div><div class="stat-value">${stats.atk}</div></div>
                     <div><div class="stat-label">Def</div><div class="stat-value">${stats.def}</div></div>
@@ -364,21 +364,21 @@
                     <div><div class="stat-label">Spe</div><div class="stat-value">${stats.spe}</div></div>
                 </div>
 
-                <h3>Sets</h3>
+                <h3 class="mb-3">Sets</h3>
             `;
 
             if (mon.sets) {
                 Object.entries(mon.sets).forEach(([setKey, set]) => {
                     html += `
-                        <div class="set-card">
+                        <div class="set-card mb-4">
                             <h4>${set.name}</h4>
-                            <p><strong>Item:</strong> ${set.item} | <strong>Nature:</strong> ${set.nature}</p>
-                            <p><strong>EVs:</strong> ${set.evs}</p>
-                            <div class="moves-list">
+                            <p class="text-sm mt-2"><strong>Item:</strong> <span class="item-name">${set.item}</span> | <strong>Nature:</strong> ${set.nature}</p>
+                            <p class="text-sm ev-spread"><strong>EVs:</strong> ${set.evs}</p>
+                            <div class="moves-list mt-3 mb-3">
                                 ${set.moves.map(m => createMoveBadge(m)).join('')}
                             </div>
-                            <p>${set.description}</p>
-                            ${set.usage_tips ? `<p><strong>Tips:</strong> ${set.usage_tips}</p>` : ''}
+                            <p class="text-secondary">${set.description}</p>
+                            ${set.usage_tips ? `<p class="mt-2 text-emerald"><strong>Tips:</strong> ${set.usage_tips}</p>` : ''}
                         </div>
                     `;
                 });
@@ -386,11 +386,11 @@
 
             if (mon.checks_and_counters) {
                 html += `
-                    <h3>Checks & Counters</h3>
+                    <h3 class="mt-6 mb-3">Checks & Counters</h3>
                     <div class="set-card">
-                        <p><strong>Hard Counters:</strong> ${mon.checks_and_counters.hard_counters?.join(', ') || 'None'}</p>
-                        <p><strong>Soft Checks:</strong> ${mon.checks_and_counters.soft_checks?.join(', ') || 'None'}</p>
-                        ${mon.checks_and_counters.notes ? `<p><em>${mon.checks_and_counters.notes}</em></p>` : ''}
+                        <p class="mb-2"><strong class="text-ruby">Hard Counters:</strong> ${mon.checks_and_counters.hard_counters?.join(', ') || 'None'}</p>
+                        <p class="mb-2"><strong class="text-electric">Soft Checks:</strong> ${mon.checks_and_counters.soft_checks?.join(', ') || 'None'}</p>
+                        ${mon.checks_and_counters.notes ? `<p class="text-secondary mt-3" style="font-style: italic;">${mon.checks_and_counters.notes}</p>` : ''}
                     </div>
                 `;
             }
@@ -411,59 +411,66 @@
             let html = `
                 <div class="card">
                     <h2>Metagame Characteristics</h2>
-                    <ul>
-                        <li><strong>Pace:</strong> ${meta.metagame_characteristics?.pace}</li>
-                        <li><strong>Dominant Style:</strong> ${meta.metagame_characteristics?.dominant_playstyle}</li>
-                        <li><strong>Key Mechanic:</strong> ${meta.metagame_characteristics?.key_mechanic}</li>
-                        <li><strong>Weather:</strong> ${meta.metagame_characteristics?.weather}</li>
-                        <li><strong>Trapping:</strong> ${meta.metagame_characteristics?.trapping}</li>
+                    <ul class="mt-3">
+                        <li class="mb-2"><strong class="text-sapphire">Pace:</strong> ${meta.metagame_characteristics?.pace}</li>
+                        <li class="mb-2"><strong class="text-sapphire">Dominant Style:</strong> ${meta.metagame_characteristics?.dominant_playstyle}</li>
+                        <li class="mb-2"><strong class="text-sapphire">Key Mechanic:</strong> ${meta.metagame_characteristics?.key_mechanic}</li>
+                        <li class="mb-2"><strong class="text-sapphire">Weather:</strong> ${meta.metagame_characteristics?.weather}</li>
+                        <li class="mb-2"><strong class="text-sapphire">Trapping:</strong> ${meta.metagame_characteristics?.trapping}</li>
                     </ul>
                 </div>
 
                 <div class="card">
                     <h2>Clauses</h2>
-                    <ul>
+                    <ul class="mt-3">
                         ${Object.entries(meta.clauses || {}).map(([k, v]) =>
-                            `<li><strong>${k.replace(/_/g, ' ')}:</strong> ${v}</li>`
+                            `<li class="mb-2"><strong>${k.replace(/_/g, ' ')}:</strong> <span class="text-secondary">${v}</span></li>`
                         ).join('')}
                     </ul>
                 </div>
 
                 <div class="card">
                     <h2>Unique Gen 3 Mechanics</h2>
-                    <ul>
-                        <li><strong>Explosion/Self-Destruct:</strong> ${meta.unique_gen3_mechanics?.explosion_self_destruct}</li>
-                        <li><strong>Critical Hits:</strong> ${meta.unique_gen3_mechanics?.critical_hits}</li>
-                        <li><strong>Sleep Duration:</strong> ${meta.unique_gen3_mechanics?.sleep_duration}</li>
-                        <li><strong>Sandstorm:</strong> ${meta.unique_gen3_mechanics?.sandstorm_effect}</li>
-                        <li><strong>Spikes Damage:</strong> 1 layer = 12.5%, 2 layers = 16.67%, 3 layers = 25%</li>
-                        <li><strong>Taunt Duration:</strong> ${meta.unique_gen3_mechanics?.taunt_duration}</li>
-                        <li><strong>Encore Duration:</strong> ${meta.unique_gen3_mechanics?.encore_duration}</li>
+                    <ul class="mt-3">
+                        <li class="mb-2"><strong>Explosion/Self-Destruct:</strong> <span class="text-secondary">${meta.unique_gen3_mechanics?.explosion_self_destruct}</span></li>
+                        <li class="mb-2"><strong>Critical Hits:</strong> <span class="text-secondary">${meta.unique_gen3_mechanics?.critical_hits}</span></li>
+                        <li class="mb-2"><strong>Sleep Duration:</strong> <span class="text-secondary">${meta.unique_gen3_mechanics?.sleep_duration}</span></li>
+                        <li class="mb-2"><strong>Sandstorm:</strong> <span class="text-secondary">${meta.unique_gen3_mechanics?.sandstorm_effect}</span></li>
+                        <li class="mb-2"><strong>Spikes Damage:</strong> <span class="font-mono">1 layer = 12.5%, 2 layers = 16.67%, 3 layers = 25%</span></li>
+                        <li class="mb-2"><strong>Taunt Duration:</strong> <span class="text-secondary">${meta.unique_gen3_mechanics?.taunt_duration}</span></li>
+                        <li class="mb-2"><strong>Encore Duration:</strong> <span class="text-secondary">${meta.unique_gen3_mechanics?.encore_duration}</span></li>
                     </ul>
                 </div>
 
                 <div class="card">
                     <h2>Trapping Guide</h2>
-                    <h3>Dugtrio (Arena Trap)</h3>
-                    <p><strong>Targets:</strong> ${meta.trapping_guide?.dugtrio?.common_targets?.join(', ')}</p>
-                    <p>${meta.trapping_guide?.dugtrio?.notes}</p>
-                    ${meta.trapping_guide?.dugtrio?.common_set ? `<p><strong>Common Set:</strong> ${meta.trapping_guide.dugtrio.common_set}</p>` : ''}
-                    ${meta.trapping_guide?.dugtrio?.bulky_variant ? `<p><strong>Bulky Variant:</strong> ${meta.trapping_guide.dugtrio.bulky_variant}</p>` : ''}
 
-                    <h3>Magneton (Magnet Pull)</h3>
-                    <p><strong>Targets:</strong> ${meta.trapping_guide?.magneton?.common_targets?.join(', ')}</p>
-                    <p>${meta.trapping_guide?.magneton?.notes}</p>
-                    ${meta.trapping_guide?.magneton?.common_sets ? `
-                        <p><strong>HP Fire Set:</strong> ${meta.trapping_guide.magneton.common_sets.hp_fire || ''}</p>
-                        <p><strong>Magnet Item:</strong> ${meta.trapping_guide.magneton.common_sets.magnet_item || ''}</p>
-                        <p><strong>Endure Salac:</strong> ${meta.trapping_guide.magneton.common_sets.endure_salac || ''}</p>
-                    ` : ''}
+                    <div class="set-card mt-4">
+                        <h4>Dugtrio (Arena Trap)</h4>
+                        <p class="mt-2"><strong class="text-ruby">Targets:</strong> ${meta.trapping_guide?.dugtrio?.common_targets?.join(', ')}</p>
+                        <p class="text-secondary mt-2">${meta.trapping_guide?.dugtrio?.notes}</p>
+                        ${meta.trapping_guide?.dugtrio?.common_set ? `<p class="mt-2"><strong>Common Set:</strong> <span class="font-mono text-sm">${meta.trapping_guide.dugtrio.common_set}</span></p>` : ''}
+                        ${meta.trapping_guide?.dugtrio?.bulky_variant ? `<p class="mt-2"><strong>Bulky Variant:</strong> <span class="font-mono text-sm">${meta.trapping_guide.dugtrio.bulky_variant}</span></p>` : ''}
+                    </div>
+
+                    <div class="set-card mt-4">
+                        <h4>Magneton (Magnet Pull)</h4>
+                        <p class="mt-2"><strong class="text-ruby">Targets:</strong> ${meta.trapping_guide?.magneton?.common_targets?.join(', ')}</p>
+                        <p class="text-secondary mt-2">${meta.trapping_guide?.magneton?.notes}</p>
+                        ${meta.trapping_guide?.magneton?.common_sets ? `
+                            <p class="mt-2"><strong>HP Fire Set:</strong> <span class="font-mono text-sm">${meta.trapping_guide.magneton.common_sets.hp_fire || ''}</span></p>
+                            <p class="mt-2"><strong>Magnet Item:</strong> <span class="font-mono text-sm">${meta.trapping_guide.magneton.common_sets.magnet_item || ''}</span></p>
+                            <p class="mt-2"><strong>Endure Salac:</strong> <span class="font-mono text-sm">${meta.trapping_guide.magneton.common_sets.endure_salac || ''}</span></p>
+                        ` : ''}
+                    </div>
 
                     ${meta.trapping_guide?.counter_trapping ? `
-                        <h3>Counter-Trapping</h3>
-                        <p>${meta.trapping_guide.counter_trapping.description}</p>
-                        <p><strong>Importance:</strong> ${meta.trapping_guide.counter_trapping.importance}</p>
-                        ${meta.trapping_guide.counter_trapping.yolo_skarm ? `<p><strong>Yolo Skarm:</strong> ${meta.trapping_guide.counter_trapping.yolo_skarm}</p>` : ''}
+                        <div class="set-card mt-4">
+                            <h4>Counter-Trapping</h4>
+                            <p class="text-secondary mt-2">${meta.trapping_guide.counter_trapping.description}</p>
+                            <p class="mt-2"><strong class="text-emerald">Importance:</strong> ${meta.trapping_guide.counter_trapping.importance}</p>
+                            ${meta.trapping_guide.counter_trapping.yolo_skarm ? `<p class="mt-2"><strong>Yolo Skarm:</strong> <span class="text-secondary">${meta.trapping_guide.counter_trapping.yolo_skarm}</span></p>` : ''}
+                        </div>
                     ` : ''}
                 </div>
             `;
@@ -476,24 +483,25 @@
             const container = document.getElementById('archetypes-content');
             const archetypes = metagameData.archetypes || {};
 
-            let html = '';
+            let html = '<div class="info-grid">';
 
             Object.entries(archetypes).forEach(([key, arch]) => {
                 html += `
                     <div class="card">
-                        <h2>${arch.name}</h2>
-                        <p>${arch.description}</p>
-                        <h3>Key Pokemon</h3>
+                        <h2 class="card-title">${arch.name}</h2>
+                        <p class="text-secondary mb-4">${arch.description}</p>
+                        <h3 class="section-subheader mt-4">Key Pokemon</h3>
                         <div class="moves-list">
                             ${arch.key_pokemon.map(p => createPokemonBadge(p)).join('')}
                         </div>
-                        <h3>Gameplan</h3>
-                        <p>${arch.gameplan}</p>
-                        ${arch.notes ? `<p><em>${arch.notes}</em></p>` : ''}
+                        <h3 class="section-subheader">Gameplan</h3>
+                        <p class="card-body">${arch.gameplan}</p>
+                        ${arch.notes ? `<p class="text-secondary mt-3" style="font-style: italic;">${arch.notes}</p>` : ''}
                     </div>
                 `;
             });
 
+            html += '</div>';
             container.innerHTML = html;
         }
 
@@ -506,14 +514,18 @@
 
             Object.entries(cores).forEach(([key, core]) => {
                 html += `
-                    <div class="card">
-                        <h2 style="margin-bottom: 0.5rem;">${core.pokemon.map(p => createPokemonBadge(p)).join(' <span style="color: var(--text-secondary);">+</span> ')}</h2>
-                        <span class="type-badge" style="background: var(--accent)">${core.type}</span>
-                        <p style="margin-top: 0.5rem;">${core.description}</p>
-                        ${core.synergy ? `<p><strong>Synergy:</strong> ${core.synergy}</p>` : ''}
-                        ${core.strategy ? `<p><strong>Strategy:</strong> ${core.strategy}</p>` : ''}
-                        ${core.notes ? `<p><strong>Notes:</strong> ${core.notes}</p>` : ''}
-                        ${core.weaknesses ? `<p><strong>Weaknesses:</strong> ${core.weaknesses.join(', ')}</p>` : ''}
+                    <div class="core-card">
+                        <div class="core-header">
+                            <div class="core-pokemon-pair">
+                                ${core.pokemon.map(p => createPokemonBadge(p)).join('<span class="core-plus">+</span>')}
+                            </div>
+                            <span class="archetype-badge ${core.type === 'Offensive' ? 'offensive' : core.type === 'Defensive' ? 'defensive' : 'balanced'}">${core.type}</span>
+                        </div>
+                        <p class="core-description">${core.description}</p>
+                        ${core.synergy ? `<p class="text-sm"><span class="font-semibold text-emerald">Synergy:</span> ${core.synergy}</p>` : ''}
+                        ${core.strategy ? `<p class="text-sm mt-2"><span class="font-semibold text-sapphire">Strategy:</span> ${core.strategy}</p>` : ''}
+                        ${core.notes ? `<p class="text-sm text-secondary mt-2"><span class="font-medium">Notes:</span> ${core.notes}</p>` : ''}
+                        ${core.weaknesses ? `<p class="core-weaknesses mt-3"><strong>Weaknesses:</strong> ${core.weaknesses.join(', ')}</p>` : ''}
                     </div>
                 `;
             });
@@ -881,7 +893,7 @@
             }
 
             const result = document.getElementById('calc-result');
-            result.style.display = 'block';
+            result.classList.remove('hidden');
             result.textContent = 'Calculating...';
 
             // Try to call the API
