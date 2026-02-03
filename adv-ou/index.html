@@ -152,6 +152,70 @@
             'Dark': '#705848', 'Steel': '#B8B8D0'
         };
 
+        // =========================
+        // Sprite System
+        // =========================
+
+        // Normalize Pokemon name for sprite URL (handles special cases)
+        function normalizePokemonName(name) {
+            if (!name) return '';
+            return name
+                .toLowerCase()
+                .replace(/['']/g, '')      // Remove apostrophes (Mr. Mime -> mr-mime)
+                .replace(/[.]/g, '')       // Remove periods (Mr. -> Mr)
+                .replace(/♀/g, '-f')       // Female symbol
+                .replace(/♂/g, '-m')       // Male symbol
+                .replace(/\s+/g, '')       // Remove spaces
+                .replace(/:/g, '')         // Remove colons
+                .replace(/-o$/g, '-o')     // Keep -o suffix (Porygon2 special case)
+                .replace(/é/g, 'e');       // Accent characters
+        }
+
+        // Special name mappings for Pokemon Showdown sprites
+        const spriteNameMap = {
+            'nidoran-f': 'nidoranf',
+            'nidoran-m': 'nidoranm',
+            'mr.mime': 'mrmime',
+            'mr. mime': 'mrmime',
+            'ho-oh': 'hooh',
+            'porygon2': 'porygon2',
+            'porygon-z': 'porygonz'
+        };
+
+        // Get sprite URL for a Pokemon (uses Pokemon Showdown Gen 3 sprites)
+        function getSpriteUrl(name) {
+            let normalized = normalizePokemonName(name);
+            // Check for special mappings
+            if (spriteNameMap[normalized]) {
+                normalized = spriteNameMap[normalized];
+            }
+            // Pokemon Showdown Gen 3 sprites (front)
+            return `https://play.pokemonshowdown.com/sprites/gen3/${normalized}.png`;
+        }
+
+        // Get animated sprite URL (for detail views)
+        function getAnimatedSpriteUrl(name) {
+            let normalized = normalizePokemonName(name);
+            if (spriteNameMap[normalized]) {
+                normalized = spriteNameMap[normalized];
+            }
+            // Pokemon Showdown animated sprites
+            return `https://play.pokemonshowdown.com/sprites/ani/${normalized}.gif`;
+        }
+
+        // Create sprite element with fallback
+        function createSprite(name, size = 40, animated = false) {
+            const url = animated ? getAnimatedSpriteUrl(name) : getSpriteUrl(name);
+            const fallbackInitial = name ? name.charAt(0).toUpperCase() : '?';
+            return `<img
+                src="${url}"
+                alt="${name}"
+                class="pokemon-sprite"
+                style="width: ${size}px; height: ${size}px; image-rendering: pixelated;"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-flex';"
+            ><span class="sprite-fallback" style="display: none; width: ${size}px; height: ${size}px; font-size: ${Math.floor(size/2)}px;">${fallbackInitial}</span>`;
+        }
+
         // Move type database (common ADV OU moves)
         const moveTypes = {
             // Normal
@@ -260,12 +324,23 @@
             };
         }
 
-        // Helper: Create clickable Pokemon badge with type colors
-        function createPokemonBadge(name) {
+        // Helper: Create clickable Pokemon badge with sprite and type colors
+        function createPokemonBadge(name, showSprite = true) {
             const key = getPokemonKeyByName(name);
             const style = getTypeStyle(name);
             const onclick = key ? `onclick="showPokemonDetail('${key}')"` : '';
-            return `<span class="move-badge pokemon-link" ${onclick} style="background: ${style.gradient}; color: ${style.textColor}; border: none; cursor: ${key ? 'pointer' : 'default'}; text-shadow: ${style.textColor === '#000000' ? 'none' : '1px 1px 2px rgba(0,0,0,0.5)'};">${name}</span>`;
+            const spriteHtml = showSprite ? createSprite(name, 24) : '';
+            return `<span class="pokemon-badge" ${onclick} style="background: ${style.gradient}; color: ${style.textColor}; cursor: ${key ? 'pointer' : 'default'}; text-shadow: ${style.textColor === '#000000' ? 'none' : '1px 1px 2px rgba(0,0,0,0.5)'};">${spriteHtml}<span class="pokemon-badge-name">${name}</span></span>`;
+        }
+
+        // Helper: Create sprite-only display (for team grids)
+        function createSpriteOnly(name, size = 48) {
+            const key = getPokemonKeyByName(name);
+            const onclick = key ? `onclick="showPokemonDetail('${key}')"` : '';
+            return `<div class="sprite-container" ${onclick} title="${name}" style="cursor: ${key ? 'pointer' : 'default'};">
+                ${createSprite(name, size)}
+                <span class="sprite-label">${name}</span>
+            </div>`;
         }
 
         // Load JSON data
@@ -322,9 +397,10 @@
                         <div class="pokemon-grid">
                             ${tiers[tier].map(mon => `
                                 <div class="pokemon-mini" onclick="showPokemonDetail('${mon.key}')">
-                                    <strong>${mon.name}</strong>
-                                    <div>
-                                        ${mon.types.map(t => `<span class="type-badge" style="background: ${typeColors[t]}">${t}</span>`).join(' ')}
+                                    <div class="pokemon-mini-sprite">${createSprite(mon.name, 48)}</div>
+                                    <strong class="pokemon-mini-name">${mon.name}</strong>
+                                    <div class="pokemon-mini-types">
+                                        ${mon.types.map(t => `<span class="type-badge type-${t.toLowerCase()}">${t}</span>`).join(' ')}
                                     </div>
                                 </div>
                             `).join('')}
@@ -345,14 +421,19 @@
 
             let html = `
                 <button class="close-btn" onclick="closeDetail()">← Back</button>
-                <div class="pokemon-header">
-                    <h2 class="pokemon-name">${mon.name}</h2>
-                    <span class="viability-badge">${mon.viability} Tier</span>
+                <div class="pokemon-detail-header">
+                    <div class="pokemon-detail-sprite">
+                        ${createSprite(mon.name, 96, true)}
+                    </div>
+                    <div class="pokemon-detail-info">
+                        <h2 class="pokemon-name">${mon.name}</h2>
+                        <span class="viability-badge mb-2">${mon.viability} Tier</span>
+                        <div class="mb-2">
+                            ${mon.types.map(t => `<span class="type-badge type-${t.toLowerCase()}">${t}</span>`).join(' ')}
+                        </div>
+                        <p class="text-secondary">${mon.role}</p>
+                    </div>
                 </div>
-                <div class="mb-3">
-                    ${mon.types.map(t => `<span class="type-badge type-${t.toLowerCase()}">${t}</span>`).join(' ')}
-                </div>
-                <p class="text-secondary mb-4">${mon.role}</p>
 
                 <h3 class="mb-3">Base Stats</h3>
                 <div class="stats-grid mb-6">
@@ -576,8 +657,8 @@
                         <div class="set-card mt-4">
                             <h4>${team.name}</h4>
                             <p class="text-secondary text-sm">by ${team.author} (${team.year})</p>
-                            <div class="moves-list mt-3 mb-3">
-                                ${team.team.map(p => createPokemonBadge(p)).join('')}
+                            <div class="sprite-grid mt-3 mb-3">
+                                ${team.team.map(p => createSpriteOnly(p, 40)).join('')}
                             </div>
                             <p>${team.description}</p>
                             ${team.key_features ? `

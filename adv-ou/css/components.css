@@ -492,3 +492,86 @@
   font-weight: var(--font-weight-semibold);
   font-size: var(--text-sm);
 }
+
+/* =========================
+   Pokemon Badges with Sprites
+   ========================= */
+.pokemon-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  padding: var(--space-1) var(--space-2);
+  padding-left: var(--space-1);
+  border-radius: var(--radius-sm);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  vertical-align: middle;
+}
+
+.pokemon-badge:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.pokemon-badge-name {
+  white-space: nowrap;
+}
+
+.pokemon-sprite {
+  display: inline-block;
+  vertical-align: middle;
+  object-fit: contain;
+}
+
+/* =========================
+   Sprite Containers
+   ========================= */
+.sprite-container {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-2);
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-normal);
+  text-align: center;
+}
+
+.sprite-container:hover {
+  border-color: var(--color-sapphire);
+  background: var(--color-bg-surface-hover);
+  transform: translateY(-2px);
+}
+
+.sprite-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+  max-width: 60px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Sprite Grid for Team Cards */
+.sprite-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2);
+  margin: var(--space-3) 0;
+}
+
+.sprite-grid .sprite-container {
+  padding: var(--space-2);
+}
+
+/* Large sprite for detail views */
+.sprite-large {
+  width: 96px;
+  height: 96px;
+  image-rendering: auto;
+}

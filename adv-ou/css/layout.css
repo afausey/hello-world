@@ -123,11 +123,47 @@
   cursor: pointer;
   text-align: center;
   transition: all var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
 }
 
 .pokemon-mini:hover {
   border-color: var(--color-sapphire);
   background: var(--color-bg-surface-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(69, 123, 157, 0.2);
+}
+
+.pokemon-mini-sprite {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+}
+
+.pokemon-mini-sprite img {
+  image-rendering: pixelated;
+}
+
+.pokemon-mini-name {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+}
+
+.pokemon-mini-types {
+  display: flex;
+  gap: var(--space-1);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pokemon-mini-types .type-badge {
+  font-size: 10px;
+  padding: 2px 6px;
 }
 
 /* =========================
@@ -218,6 +254,56 @@
   font-size: var(--text-base);
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-primary);
+}
+
+/* =========================
+   Pokemon Detail Header
+   ========================= */
+.pokemon-detail-header {
+  display: flex;
+  gap: var(--space-6);
+  align-items: flex-start;
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-6);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.pokemon-detail-sprite {
+  flex-shrink: 0;
+  background: var(--color-bg-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pokemon-detail-sprite img {
+  image-rendering: auto;
+}
+
+.pokemon-detail-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.pokemon-detail-info .pokemon-name {
+  font-size: var(--text-h2);
+  margin-bottom: var(--space-1);
+}
+
+@media (max-width: 480px) {
+  .pokemon-detail-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .pokemon-detail-info {
+    align-items: center;
+  }
 }
 
 /* =========================
