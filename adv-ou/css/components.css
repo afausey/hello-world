@@ -1,0 +1,494 @@
+/* Component Styles */
+
+/* =========================
+   Cards
+   ========================= */
+.card {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--padding-card);
+  transition: border-color var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.card:hover {
+  border-color: var(--color-border-hover);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card-title {
+  font-family: var(--font-mono);
+  font-size: var(--text-h4);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-4);
+}
+
+.card-body {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-body);
+}
+
+/* Team Card */
+.team-card {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  position: relative;
+}
+
+.team-card:hover {
+  border-color: var(--color-sapphire);
+  box-shadow: 0 6px 16px rgba(69, 123, 157, 0.2);
+  transform: translateY(-2px);
+}
+
+.team-card-header {
+  margin-bottom: var(--space-4);
+}
+
+.team-card-title {
+  font-family: var(--font-mono);
+  font-size: var(--text-h4);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.team-card-meta {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.team-card-sprites {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-3);
+  margin: var(--space-4) 0;
+}
+
+.team-card-sprite {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-primary);
+  border-radius: var(--radius-sm);
+}
+
+.team-card-sprite img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.team-card-description {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-body);
+}
+
+/* =========================
+   Buttons
+   ========================= */
+.btn {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-medium);
+  padding: var(--padding-button);
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.btn-primary {
+  background: var(--color-sapphire);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #5a8fb0;
+  box-shadow: 0 4px 8px rgba(69, 123, 157, 0.3);
+}
+
+.btn-secondary {
+  background: var(--color-bg-surface);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+}
+
+.btn-secondary:hover {
+  border-color: var(--color-sapphire);
+  color: var(--color-sapphire);
+}
+
+.btn-success {
+  background: var(--color-emerald);
+  color: white;
+}
+
+.btn-success:hover {
+  background: #35b09f;
+}
+
+.btn-warning {
+  background: var(--color-electric);
+  color: var(--color-bg-primary);
+}
+
+.btn-warning:hover {
+  background: #ffc933;
+}
+
+/* =========================
+   Type Badges
+   ========================= */
+.type-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  padding: var(--space-1) var(--space-2);
+  border-radius: 3px;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.type-normal { background: var(--type-normal); }
+.type-fire { background: var(--type-fire); }
+.type-water { background: var(--type-water); }
+.type-electric { background: var(--type-electric); color: #000; }
+.type-grass { background: var(--type-grass); }
+.type-ice { background: var(--type-ice); color: #000; }
+.type-fighting { background: var(--type-fighting); }
+.type-poison { background: var(--type-poison); }
+.type-ground { background: var(--type-ground); color: #000; }
+.type-flying { background: var(--type-flying); }
+.type-psychic { background: var(--type-psychic); }
+.type-bug { background: var(--type-bug); }
+.type-rock { background: var(--type-rock); }
+.type-ghost { background: var(--type-ghost); }
+.type-dragon { background: var(--type-dragon); }
+.type-dark { background: var(--type-dark); }
+.type-steel { background: var(--type-steel); color: #000; }
+
+/* =========================
+   Archetype Badges
+   ========================= */
+.archetype-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-primary);
+}
+
+.archetype-badge.defensive {
+  color: var(--color-sapphire);
+  border: 1px solid var(--color-sapphire);
+}
+
+.archetype-badge.offensive {
+  color: var(--color-electric);
+  border: 1px solid var(--color-electric);
+}
+
+.archetype-badge.balanced {
+  color: var(--color-emerald);
+  border: 1px solid var(--color-emerald);
+}
+
+.archetype-badge.beginner {
+  color: var(--color-emerald);
+  border: 1px solid var(--color-emerald);
+}
+
+.archetype-badge.intermediate {
+  color: var(--color-electric);
+  border: 1px solid var(--color-electric);
+}
+
+.archetype-badge.advanced {
+  color: var(--color-sapphire);
+  border: 1px solid var(--color-sapphire);
+}
+
+/* =========================
+   Pokemon List Items
+   ========================= */
+.pokemon-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-list);
+}
+
+.pokemon-list-item {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-inline);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition-normal);
+  cursor: pointer;
+}
+
+.pokemon-list-item:hover {
+  border-color: var(--color-sapphire);
+}
+
+.pokemon-sprite-inline {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.pokemon-info {
+  flex: 1;
+}
+
+.pokemon-name {
+  font-family: var(--font-mono);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-1);
+}
+
+.pokemon-types {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.pokemon-stat {
+  font-family: var(--font-mono);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  margin-left: auto;
+}
+
+/* =========================
+   Speed Tier Items
+   ========================= */
+.speed-tier-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.speed-tier-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-bg-surface);
+  border-left: 3px solid var(--color-electric);
+}
+
+.speed-tier-sprite {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.speed-tier-pokemon {
+  font-family: var(--font-mono);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  min-width: 120px;
+}
+
+.speed-tier-details {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  flex: 1;
+}
+
+.speed-tier-number {
+  font-family: var(--font-mono);
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-electric);
+  margin-left: auto;
+}
+
+/* =========================
+   Core Display
+   ========================= */
+.core-card {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  margin-bottom: var(--space-4);
+}
+
+.core-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.core-pokemon-pair {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.core-sprite {
+  width: 48px;
+  height: 48px;
+}
+
+.core-plus {
+  font-family: var(--font-mono);
+  font-size: var(--text-h3);
+  color: var(--color-text-secondary);
+  font-weight: 300;
+}
+
+.core-description {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-body);
+  margin-bottom: var(--space-4);
+}
+
+.core-weaknesses {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.core-weaknesses strong {
+  color: var(--color-ruby);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* =========================
+   Tooltip
+   ========================= */
+.tooltip {
+  position: absolute;
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-sapphire);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+  max-width: 300px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-fast);
+}
+
+.tooltip.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.tooltip-title {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.tooltip-link {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  color: var(--color-link);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.tooltip-link:hover {
+  color: var(--color-link-hover);
+  text-decoration: underline;
+}
+
+/* =========================
+   Sprite Fallback
+   ========================= */
+.sprite-fallback {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
+}
+
+/* =========================
+   Search Box
+   ========================= */
+.search-box {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-surface);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  transition: border-color var(--transition-normal);
+}
+
+.search-box::placeholder {
+  color: var(--color-text-tertiary);
+}
+
+.search-box:focus {
+  outline: none;
+  border-color: var(--color-sapphire);
+}
+
+/* =========================
+   Viability Badge
+   ========================= */
+.viability-badge {
+  display: inline-block;
+  background: var(--color-sapphire);
+  color: white;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--text-sm);
+}

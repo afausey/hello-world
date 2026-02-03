@@ -1,0 +1,98 @@
+:root {
+  /* Colors - Base */
+  --color-bg-primary: #0a1929;
+  --color-bg-surface: #1e2936;
+  --color-bg-surface-hover: #253645;
+  --color-border: #2d3748;
+  --color-border-hover: #3d4f5f;
+
+  /* Colors - Brand */
+  --color-sapphire: #457b9d;
+  --color-emerald: #2a9d8f;
+  --color-electric: #ffb703;
+  --color-ruby: #e63946;
+
+  /* Colors - Text */
+  --color-text-primary: #e2e8f0;
+  --color-text-secondary: #94a3b8;
+  --color-text-tertiary: #64748b;
+  --color-link: #60a5fa;
+  --color-link-hover: #93c5fd;
+
+  /* Colors - Pokemon Types */
+  --type-normal: #a8a878;
+  --type-fire: #f08030;
+  --type-water: #6890f0;
+  --type-electric: #f8d030;
+  --type-grass: #78c850;
+  --type-ice: #98d8d8;
+  --type-fighting: #c03028;
+  --type-poison: #a040a0;
+  --type-ground: #e0c068;
+  --type-flying: #a890f0;
+  --type-psychic: #f85888;
+  --type-bug: #a8b820;
+  --type-rock: #b8a038;
+  --type-ghost: #705898;
+  --type-dragon: #7038f8;
+  --type-dark: #705848;
+  --type-steel: #b8b8d0;
+
+  /* Typography */
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --text-h1: 2.5rem;
+  --text-h2: 2rem;
+  --text-h3: 1.5rem;
+  --text-h4: 1.25rem;
+  --text-h5: 1.125rem;
+  --text-base: 1rem;
+  --text-sm: 0.875rem;
+  --text-xs: 0.75rem;
+  --text-lg: 1.125rem;
+
+  --line-height-heading: 1.2;
+  --line-height-body: 1.6;
+  --line-height-tight: 1.4;
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Spacing */
+  --space-unit: 0.25rem;
+  --space-1: calc(var(--space-unit) * 1);
+  --space-2: calc(var(--space-unit) * 2);
+  --space-3: calc(var(--space-unit) * 3);
+  --space-4: calc(var(--space-unit) * 4);
+  --space-5: calc(var(--space-unit) * 5);
+  --space-6: calc(var(--space-unit) * 6);
+  --space-8: calc(var(--space-unit) * 8);
+  --space-10: calc(var(--space-unit) * 10);
+  --space-12: calc(var(--space-unit) * 12);
+  --space-16: calc(var(--space-unit) * 16);
+  --space-20: calc(var(--space-unit) * 20);
+
+  /* Common Patterns */
+  --padding-card: var(--space-6);
+  --padding-button: var(--space-3) var(--space-5);
+  --padding-section: var(--space-8);
+
+  --gap-list: var(--space-3);
+  --gap-grid: var(--space-4);
+  --gap-inline: var(--space-2);
+
+  --margin-heading: var(--space-6);
+  --margin-section: var(--space-10);
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-normal: 200ms ease;
+}
