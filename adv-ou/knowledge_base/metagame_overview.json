@@ -164,6 +164,42 @@
       "type": "wincon",
       "description": "Magneton traps and eliminates Skarmory, which is the main Pokemon that can Roar out Suicune. Once Skarmory is gone, Crocune (Rest/Sleep Talk Suicune) becomes nearly unstoppable as the last Pokemon.",
       "strategy": "Use Magneton early/mid-game to trap Skarmory. Save Suicune for last - nothing can phaze it if it's your last mon."
+    },
+    "skarmory_magneton": {
+      "pokemon": ["Skarmory", "Magneton"],
+      "type": "offensive",
+      "description": "SkarmMag combines Spikes from Skarmory with Magneton trapping opposing Steel-types. This opens holes for physical attackers once opposing Skarmory is removed.",
+      "synergy": "Skarmory sets Spikes, Magneton removes opposing Skarmory that would wall your team. Often paired with Aerodactyl or other physical cleaners."
+    },
+    "milotic_claydol": {
+      "pokemon": ["Milotic", "Claydol"],
+      "type": "defensive",
+      "description": "MiloDol provides dual recovery walls with Rapid Spin support. Milotic handles physical attackers while Claydol removes opposing Spikes.",
+      "synergy": "Milotic's recovery and physical bulk pairs with Claydol's Spikes removal and utility."
+    },
+    "suicune_claydol": {
+      "pokemon": ["Suicune", "Claydol"],
+      "type": "defensive",
+      "description": "CuneDol combines Suicune's excellent defensive profile with Claydol's Rapid Spin. Suicune serves as both wall and win condition.",
+      "synergy": "Claydol keeps Spikes off so Suicune can switch freely. Suicune can set up Calm Mind late-game once threats are weakened."
+    },
+    "forretress_claydol": {
+      "pokemon": ["Forretress", "Claydol"],
+      "type": "utility",
+      "description": "ForreDol doubles up on hazard control - Forretress sets Spikes while Claydol spins away opposing hazards.",
+      "synergy": "Forretress focuses on Spiking and Exploding, Claydol handles Rapid Spin and provides Ground immunity."
+    },
+    "aerodactyl_tyranitar": {
+      "pokemon": ["Aerodactyl", "Tyranitar"],
+      "type": "offensive",
+      "description": "AeroBi (Aerodactyl + Tyranitar) overwhelms defenses with similar offensive profiles. Both threaten similar checks, making it hard to switch safely.",
+      "synergy": "Tyranitar's Sand Stream powers both Rock Slides. Dragon Dance Tyranitar lures physical walls, opening holes for Aerodactyl to clean."
+    },
+    "milotic_blissey": {
+      "pokemon": ["Milotic", "Blissey"],
+      "type": "defensive",
+      "description": "Milotic and Blissey form an extremely difficult-to-break defensive core, but are passive. Relies on Spikes and sand chip to make progress.",
+      "synergy": "Blissey handles special attackers, Milotic handles physical. Both have reliable recovery."
     }
   },
   "trapping_guide": {
