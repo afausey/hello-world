@@ -1,0 +1,225 @@
+{
+  "overview": {
+    "description": "Critical speed benchmarks in ADV OU. These are the 'magic numbers' that define competitive viability.",
+    "formulas": {
+      "dragon_dance_salac": "Speed * 1.5 (round down) for +1 boost",
+      "agility_swift_swim": "Speed * 2 for +2 boost or Swift Swim in rain",
+      "outspeed_after_dd": "To outspeed target at +1: target_speed * (2/3), round up"
+    }
+  },
+
+  "practical_tiers": {
+    "tier_0_extreme": {
+      "name": "Extreme (400+)",
+      "range": "400+",
+      "description": "Boosted sweepers only - nothing naturally reaches this speed",
+      "pokemon": [
+        {"name": "Zapdos", "speed": 488, "condition": "+2 Agility (32 EVs)", "set": "Agility Pass"},
+        {"name": "Medicham", "speed": 426, "condition": "+1 Salac, Jolly max", "set": "Salac Sweeper"},
+        {"name": "Salamence", "speed": 406, "condition": "+1 Dragon Dance, Adamant 140 EVs", "set": "Dragon Dance"},
+        {"name": "Ludicolo", "speed": 404, "condition": "Swift Swim in rain, Modest 104 EVs", "set": "Rain Sweeper"},
+        {"name": "Heracross", "speed": 403, "condition": "+1 Salac Berry, Adamant max", "set": "Sub-Salac"},
+        {"name": "Metagross", "speed": 400, "condition": "+2 Agility (96 EVs)", "set": "Agility"}
+      ]
+    },
+    "tier_1_blazing": {
+      "name": "Blazing (350-399)",
+      "range": "350-399",
+      "description": "Fastest unboosted Pokemon in the tier",
+      "pokemon": [
+        {"name": "Aerodactyl", "speed": 394, "condition": "Jolly max", "set": "Lead / Revenge Killer"},
+        {"name": "Jolteon", "speed": 394, "condition": "Timid max", "set": "Offensive Pivot"},
+        {"name": "Dugtrio", "speed": 372, "condition": "Jolly max", "set": "Trapper - MUST max speed"},
+        {"name": "Sceptile", "speed": 372, "condition": "Timid max", "set": "Offensive Lead"},
+        {"name": "Raikou", "speed": 361, "condition": "Timid max", "set": "Calm Mind Sweeper"},
+        {"name": "Starmie", "speed": 361, "condition": "Timid max", "set": "Spinner / Revenge Killer"},
+        {"name": "Gengar", "speed": 350, "condition": "Timid max", "set": "Offensive Spinblocker"}
+      ]
+    },
+    "tier_2_fast": {
+      "name": "Fast (300-349)",
+      "range": "300-349",
+      "description": "Fast offensive Pokemon and speed creep variants",
+      "pokemon": [
+        {"name": "Gengar", "speed": 332, "condition": "Timid 184 EVs", "set": "Outspeeds +1 DD Tyranitar"},
+        {"name": "Salamence", "speed": 328, "condition": "Jolly/Timid max", "set": "Pre-DD speed"},
+        {"name": "Zapdos", "speed": 328, "condition": "Timid max", "set": "Offensive variants"},
+        {"name": "Flygon", "speed": 328, "condition": "Jolly max", "set": "Choice Band"},
+        {"name": "Jirachi", "speed": 328, "condition": "Jolly max", "set": "Offensive Calm Mind"},
+        {"name": "Gengar", "speed": 319, "condition": "Modest max (HP sets)", "set": "HP lowers Speed IV"},
+        {"name": "Celebi", "speed": 308, "condition": "Timid 176 EVs", "set": "Common spread"},
+        {"name": "Zapdos", "speed": 300, "condition": "Timid 148 EVs", "set": "Beats neutral 100s"},
+        {"name": "Flygon", "speed": 300, "condition": "Jolly 148 EVs", "set": "Speed creep variant"}
+      ]
+    },
+    "tier_3_moderate": {
+      "name": "Moderate (250-299)",
+      "range": "250-299",
+      "description": "Mid-speed attackers and defensive pivots",
+      "pokemon": [
+        {"name": "Heracross", "speed": 295, "condition": "Jolly max", "set": "Speed variant (rare)"},
+        {"name": "Jirachi", "speed": 274, "condition": "Careful 152 EVs", "set": "Defensive variant"},
+        {"name": "Heracross", "speed": 269, "condition": "Adamant max", "set": "Standard power set"},
+        {"name": "Celebi", "speed": 264, "condition": "Modest 80 EVs", "set": "Bulky CM"}
+      ]
+    },
+    "tier_4_bulky": {
+      "name": "Bulky (200-249)",
+      "range": "200-249",
+      "description": "Bulky attackers and defensive Pokemon",
+      "pokemon": [
+        {"name": "Tyranitar", "speed": 243, "condition": "Jolly max", "set": "Mirror matches (rare)"},
+        {"name": "Tyranitar", "speed": 221, "condition": "Adamant max", "set": "Standard offensive"},
+        {"name": "Suicune", "speed": 208, "condition": "Bold 8 EVs", "set": "Calm Mind"},
+        {"name": "Milotic", "speed": 202, "condition": "Bold 16 EVs", "set": "Bulky Water"},
+        {"name": "Ludicolo", "speed": 202, "condition": "Modest 104 EVs", "set": "202 * 2 = 404 in rain"},
+        {"name": "Tyranitar", "speed": 200, "condition": "Adamant 168 EVs", "set": "Choice Band"},
+        {"name": "Metagross", "speed": 200, "condition": "Adamant 96 EVs", "set": "Bulky Attacker"},
+        {"name": "Skarmory", "speed": 200, "condition": "Impish 96 EVs", "set": "Fast Skarm variant"}
+      ]
+    },
+    "tier_5_slow": {
+      "name": "Slow (100-199)",
+      "range": "100-199",
+      "description": "Defensive walls and slow attackers",
+      "pokemon": [
+        {"name": "Milotic", "speed": 198, "condition": "Bold 0 EVs", "set": "Max bulk"},
+        {"name": "Skarmory", "speed": 179, "condition": "Impish 12 EVs", "set": "Outspeeds min Tar"},
+        {"name": "Claydol", "speed": 168, "condition": "Careful 0 EVs", "set": "Spinner"},
+        {"name": "Umbreon", "speed": 166, "condition": "Careful 0 EVs", "set": "Mean Look trapper"},
+        {"name": "Vaporeon", "speed": 166, "condition": "Bold 0 EVs", "set": "Wish passer"},
+        {"name": "Tyranitar", "speed": 157, "condition": "Sassy 68 EVs", "set": "Defensive variants"},
+        {"name": "Blissey", "speed": 146, "condition": "Calm 0 EVs", "set": "Special wall"},
+        {"name": "Swampert", "speed": 140, "condition": "Relaxed 0 EVs", "set": "Physical wall"},
+        {"name": "Snorlax", "speed": 96, "condition": "Careful 0 EVs", "set": "CurseLax"}
+      ]
+    }
+  },
+
+  "key_benchmarks": {
+    "394": {
+      "description": "Max speed Aerodactyl/Jolteon",
+      "pokemon": ["Aerodactyl", "Jolteon"],
+      "significance": "Fastest unboosted Pokemon in OU"
+    },
+    "372": {
+      "description": "Max speed Dugtrio/Sceptile",
+      "pokemon": ["Dugtrio", "Sceptile"],
+      "significance": "Dugtrio needs max speed to trap effectively"
+    },
+    "361": {
+      "description": "Max speed Raikou/Starmie",
+      "pokemon": ["Raikou", "Starmie"],
+      "significance": "Fastest common special attackers"
+    },
+    "350": {
+      "description": "Max speed Gengar",
+      "pokemon": ["Gengar"],
+      "significance": "Fast offensive ghost"
+    },
+    "332": {
+      "description": "Outspeed +1 Tyranitar",
+      "pokemon": ["Gengar"],
+      "significance": "Critical benchmark - beats +1 DD Tyranitar (331 speed)"
+    },
+    "328": {
+      "description": "Max speed base 100s",
+      "pokemon": ["Salamence", "Zapdos", "Flygon", "Jirachi"],
+      "significance": "Extremely common speed tier - many offensive threats"
+    },
+    "300": {
+      "description": "Speed creep base 100s",
+      "pokemon": ["Zapdos", "Flygon"],
+      "significance": "Outspeeds neutral base 100s while investing less"
+    },
+    "221": {
+      "description": "Max speed Adamant Tyranitar",
+      "pokemon": ["Tyranitar"],
+      "significance": "Standard offensive Tyranitar speed"
+    },
+    "200": {
+      "description": "Bulky attacker benchmark",
+      "pokemon": ["Tyranitar", "Metagross", "Skarmory"],
+      "significance": "Common defensive benchmark - outspeeds min Tyranitar"
+    },
+    "179": {
+      "description": "Min Skarmory",
+      "pokemon": ["Skarmory"],
+      "significance": "Outspeeds min speed Tyranitar to Whirlwind before setup"
+    }
+  },
+
+  "boosted_threats": {
+    "dragon_dance": {
+      "name": "Dragon Dance (+1)",
+      "formula": "Speed * 1.5",
+      "threats": [
+        {"pokemon": "Salamence", "unboosted": 271, "boosted": 406, "evs": "Adamant 140 EVs", "significance": "THE benchmark to beat"},
+        {"pokemon": "Tyranitar", "unboosted": 221, "boosted": 331, "evs": "Adamant max", "significance": "Need 332 to outspeed"},
+        {"pokemon": "Tyranitar", "unboosted": 243, "boosted": 364, "evs": "Jolly max", "significance": "Rare but deadly"},
+        {"pokemon": "Gyarados", "unboosted": 245, "boosted": 367, "evs": "Adamant 188 EVs", "significance": "DD Gyarados variant"}
+      ]
+    },
+    "salac_berry": {
+      "name": "Salac Berry (+1)",
+      "formula": "Speed * 1.5",
+      "threats": [
+        {"pokemon": "Heracross", "unboosted": 269, "boosted": 403, "evs": "Adamant max", "significance": "Sub-Salac sweeper"},
+        {"pokemon": "Aerodactyl", "unboosted": 394, "boosted": 591, "evs": "Jolly max", "significance": "Liechi Aero endgame"}
+      ]
+    },
+    "agility": {
+      "name": "Agility (+2)",
+      "formula": "Speed * 2",
+      "threats": [
+        {"pokemon": "Metagross", "unboosted": 200, "boosted": 400, "evs": "Adamant 96 EVs", "significance": "Agility sweeper"},
+        {"pokemon": "Zapdos", "unboosted": 244, "boosted": 488, "evs": "32 EVs", "significance": "AgiliPass"}
+      ]
+    },
+    "swift_swim": {
+      "name": "Swift Swim (Rain)",
+      "formula": "Speed * 2",
+      "threats": [
+        {"pokemon": "Ludicolo", "unboosted": 202, "boosted": 404, "evs": "Modest 104 EVs", "significance": "Outspeeds +1 Salac Heracross"},
+        {"pokemon": "Kabutops", "unboosted": 306, "boosted": 612, "evs": "Jolly max", "significance": "Physical rain sweeper"},
+        {"pokemon": "Kingdra", "unboosted": 295, "boosted": 590, "evs": "Timid max", "significance": "Special rain sweeper"}
+      ]
+    }
+  },
+
+  "speed_creep_guide": {
+    "outspeed_plus1_tyranitar": {
+      "target": 332,
+      "reasoning": "+1 Adamant Tyranitar hits 331 speed. You need 332 minimum.",
+      "common_users": ["Gengar with 184 Spe EVs"],
+      "importance": "Critical - DD Tyranitar is everywhere"
+    },
+    "outspeed_neutral_base_100": {
+      "target": 300,
+      "reasoning": "Neutral nature base 100s hit 298-299. 300 guarantees outspeed.",
+      "common_users": ["Zapdos with 148 Spe", "Flygon with 148 Spe"],
+      "importance": "Efficient - save EVs while beating common threats"
+    },
+    "outspeed_adamant_tyranitar": {
+      "target": 222,
+      "reasoning": "Max Adamant Tyranitar hits 221. 222+ guarantees outspeed.",
+      "importance": "Common - many Pokemon aim for this"
+    },
+    "outspeed_min_tyranitar": {
+      "target": 158,
+      "reasoning": "Minimum speed Tyranitar (Sassy 0 EVs) hits 157.",
+      "common_users": ["Defensive Skarmory with 12 Spe"],
+      "importance": "Allows Skarmory to Whirlwind before Tyranitar uses Pursuit"
+    }
+  },
+
+  "meta_notes": [
+    "Dugtrio MUST run max speed (372) to trap effectively",
+    "Hidden Power sets often use 30 Speed IV, losing 1-2 speed points",
+    "Jolly vs Adamant: Usually Adamant preferred for power",
+    "Timid vs Modest: Timid preferred for speed tier competition",
+    "Speed ties common at 328 (base 100s) and 221 (Adamant Tar)",
+    "Swift Swim doubles speed in rain - calculate unboosted first",
+    "Dragon Dance is +1 (1.5x), Agility is +2 (2x) - don't confuse them"
+  ]
+}
