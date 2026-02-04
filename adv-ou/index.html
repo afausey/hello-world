@@ -93,13 +93,15 @@
             color: white;
         }
 
-        /* Navigation history buttons */
+        /* Navigation history buttons - must be above modal */
         .nav-history-buttons {
             display: flex;
             gap: 4px;
             margin-right: var(--space-4);
             padding-right: var(--space-4);
             border-right: 1px solid var(--color-border);
+            position: relative;
+            z-index: 10000;
         }
 
         .nav-history-btn {
@@ -116,6 +118,8 @@
             align-items: center;
             justify-content: center;
             font-family: var(--font-mono);
+            position: relative;
+            z-index: 10000;
         }
 
         /* Active/enabled state */
@@ -1098,8 +1102,12 @@
 
             // Store keys in detail-content for state restoration
             const detailContent = document.getElementById('detail-content');
+            const detailView = document.getElementById('detail-view');
             detailContent.dataset.pokemonKey = key;
             detailContent.dataset.highlightSet = highlightSetKey || '';
+
+            // Reset modal scroll to top (fixes scroll persisting between modals)
+            detailView.scrollTop = 0;
 
             // Lock body scroll
             lockBodyScroll();
