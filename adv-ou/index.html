@@ -103,7 +103,7 @@
         }
 
         .nav-history-btn {
-            background: var(--color-bg-primary);
+            background: var(--color-bg-surface);
             color: var(--color-text-primary);
             border: 1px solid var(--color-border);
             border-radius: var(--radius-sm);
@@ -115,23 +115,44 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            font-family: var(--font-mono);
         }
 
-        .nav-history-btn:hover:not(:disabled) {
+        /* Active/enabled state */
+        .nav-history-btn:not(:disabled):hover {
             background: var(--color-sapphire);
             border-color: var(--color-sapphire);
             color: white;
+            transform: translateY(-1px);
         }
 
+        .nav-history-btn:not(:disabled):active {
+            transform: translateY(0);
+        }
+
+        /* Disabled state - looks unavailable, not error */
         .nav-history-btn:disabled {
             opacity: 0.3;
             cursor: not-allowed;
+            background: var(--color-bg-surface);
+            border-color: var(--color-border);
+            color: var(--color-text-secondary);
+        }
+
+        /* Remove any red/error styling */
+        .nav-history-btn:disabled::before {
+            content: none;
         }
 
         /* Highlighted set in Pokemon detail */
         .set-highlighted {
             border: 2px solid var(--color-sapphire) !important;
             box-shadow: 0 0 12px rgba(69, 123, 157, 0.4);
+        }
+
+        /* Modal scroll lock - when body is locked */
+        body.modal-open {
+            overflow: hidden !important;
         }
     </style>
 </head>
@@ -809,29 +830,88 @@
         }
 
         // =========================
-        // Navigation History
+        // Navigation History (Enhanced)
         // =========================
         const navHistory = [];
         let navHistoryIndex = -1;
 
-        function getCurrentLocation() {
+        // Helper: Get current tab ID
+        function getCurrentTabId() {
             const activeTab = document.querySelector('.nav-tab.active');
+            return activeTab ? activeTab.dataset.section : 'pokemon';
+        }
+
+        // Helper: Get current app state (includes modal state)
+        function getCurrentState() {
+            const detailView = document.getElementById('detail-view');
+            const detailOpen = detailView && detailView.classList.contains('active');
+            const detailContent = document.getElementById('detail-content');
+
             return {
-                tabId: activeTab ? activeTab.dataset.section : 'pokemon',
-                scrollY: window.scrollY
+                tabId: getCurrentTabId(),
+                scrollY: detailOpen ? parseInt(document.body.dataset.scrollY || 0) : window.scrollY,
+                modalType: detailOpen ? 'pokemon' : null,
+                modalKey: detailOpen && detailContent ? detailContent.dataset.pokemonKey : null,
+                highlightSet: detailOpen && detailContent ? detailContent.dataset.highlightSet : null,
+                timestamp: Date.now()
             };
         }
 
+        // Helper: Add state to history
+        function addToHistory(state) {
+            // Remove any forward history when making new navigation
+            navHistory.splice(navHistoryIndex + 1);
+
+            // Add new state
+            navHistory.push(state);
+            navHistoryIndex = navHistory.length - 1;
+
+            // Update button states
+            updateNavButtons();
+        }
+
+        // Helper: Restore a history state
+        function restoreState(state) {
+            // Close any open modals first (without adding to history)
+            const detailView = document.getElementById('detail-view');
+            if (detailView && detailView.classList.contains('active')) {
+                detailView.classList.remove('active');
+                unlockBodyScroll();
+            }
+
+            // Switch to correct tab
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+
+            const tab = document.querySelector(`[data-section="${state.tabId}"]`);
+            const section = document.getElementById(state.tabId);
+
+            if (tab) tab.classList.add('active');
+            if (section) section.classList.add('active');
+
+            // Restore scroll position
+            window.scrollTo(0, state.scrollY || 0);
+
+            // Re-open modal if it was open
+            if (state.modalType === 'pokemon' && state.modalKey) {
+                setTimeout(() => {
+                    showPokemonDetailInternal(state.modalKey, state.highlightSet);
+                }, 50);
+            }
+        }
+
         // Navigate to a specific tab and scroll to element
-        function navigateToSection(tabId, elementId = null, addToHistory = true) {
-            // Save current location to history before navigating
-            if (addToHistory) {
-                const current = getCurrentLocation();
-                // Remove any forward history when making a new navigation
-                navHistory.splice(navHistoryIndex + 1);
-                navHistory.push({ ...current });
-                navHistoryIndex = navHistory.length - 1;
-                updateNavButtons();
+        function navigateToSection(tabId, elementId = null, addToHistoryFlag = true) {
+            // Save current state to history before navigating
+            if (addToHistoryFlag) {
+                addToHistory(getCurrentState());
+            }
+
+            // Close any open modal first
+            const detailView = document.getElementById('detail-view');
+            if (detailView && detailView.classList.contains('active')) {
+                detailView.classList.remove('active');
+                unlockBodyScroll();
             }
 
             // Switch tab
@@ -859,9 +939,8 @@
         function navigateBack() {
             if (navHistoryIndex > 0) {
                 navHistoryIndex--;
-                const loc = navHistory[navHistoryIndex];
-                navigateToSection(loc.tabId, null, false);
-                setTimeout(() => window.scrollTo(0, loc.scrollY), 50);
+                const state = navHistory[navHistoryIndex];
+                restoreState(state);
                 updateNavButtons();
             }
         }
@@ -869,9 +948,8 @@
         function navigateForward() {
             if (navHistoryIndex < navHistory.length - 1) {
                 navHistoryIndex++;
-                const loc = navHistory[navHistoryIndex];
-                navigateToSection(loc.tabId, null, false);
-                setTimeout(() => window.scrollTo(0, loc.scrollY), 50);
+                const state = navHistory[navHistoryIndex];
+                restoreState(state);
                 updateNavButtons();
             }
         }
@@ -881,6 +959,32 @@
             const fwdBtn = document.getElementById('nav-forward');
             if (backBtn) backBtn.disabled = navHistoryIndex <= 0;
             if (fwdBtn) fwdBtn.disabled = navHistoryIndex >= navHistory.length - 1;
+        }
+
+        // =========================
+        // Body Scroll Lock (for modals)
+        // =========================
+        function lockBodyScroll() {
+            const scrollY = window.scrollY;
+            document.body.dataset.scrollY = scrollY;
+            document.body.style.overflow = 'hidden';
+            document.body.style.position = 'fixed';
+            document.body.style.top = `-${scrollY}px`;
+            document.body.style.width = '100%';
+            document.body.classList.add('modal-open');
+        }
+
+        function unlockBodyScroll() {
+            const scrollY = document.body.dataset.scrollY;
+            document.body.style.overflow = '';
+            document.body.style.position = '';
+            document.body.style.top = '';
+            document.body.style.width = '';
+            document.body.classList.remove('modal-open');
+
+            if (scrollY) {
+                window.scrollTo(0, parseInt(scrollY));
+            }
         }
 
         // Handle key feature click - uses modular parseFeature system
@@ -987,10 +1091,18 @@
             container.innerHTML = html || '<div class="card"><p>No Pokemon found.</p></div>';
         }
 
-        // Show Pokemon detail modal, optionally highlighting a specific set
-        function showPokemonDetail(key, highlightSetKey = null) {
+        // Internal modal open (doesn't add to history) - used by restoreState
+        function showPokemonDetailInternal(key, highlightSetKey = null) {
             const mon = pokemonData.pokemon[key];
             if (!mon) return;
+
+            // Store keys in detail-content for state restoration
+            const detailContent = document.getElementById('detail-content');
+            detailContent.dataset.pokemonKey = key;
+            detailContent.dataset.highlightSet = highlightSetKey || '';
+
+            // Lock body scroll
+            lockBodyScroll();
 
             const stats = mon.base_stats;
 
@@ -1055,12 +1167,48 @@
                 `;
             }
 
-            document.getElementById('detail-content').innerHTML = html;
+            detailContent.innerHTML = html;
             document.getElementById('detail-view').classList.add('active');
+
+            // Scroll to highlighted set if specified
+            if (highlightSetKey) {
+                setTimeout(() => {
+                    const highlightedSet = document.getElementById(`set-${key}-${highlightSetKey}`);
+                    if (highlightedSet) {
+                        highlightedSet.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                }, 100);
+            }
+        }
+
+        // Public modal open (adds to history)
+        function showPokemonDetail(key, highlightSetKey = null) {
+            // Add current state to history BEFORE opening modal
+            addToHistory(getCurrentState());
+
+            // Open modal internally
+            showPokemonDetailInternal(key, highlightSetKey);
+
+            // Add modal state to history
+            addToHistory({
+                tabId: getCurrentTabId(),
+                scrollY: parseInt(document.body.dataset.scrollY || 0),
+                modalType: 'pokemon',
+                modalKey: key,
+                highlightSet: highlightSetKey,
+                timestamp: Date.now()
+            });
         }
 
         function closeDetail() {
-            document.getElementById('detail-view').classList.remove('active');
+            const detailView = document.getElementById('detail-view');
+            detailView.classList.remove('active');
+
+            // Restore body scroll
+            unlockBodyScroll();
+
+            // Add closed state to history
+            addToHistory(getCurrentState());
         }
 
         // Render metagame overview
@@ -1671,18 +1819,16 @@ Or use CLI:
             }
         });
 
-        // Navigation
+        // Navigation - use navigateToSection for history tracking
         document.querySelectorAll('.nav-tab').forEach(tab => {
             tab.addEventListener('click', function(e) {
                 e.preventDefault();
-                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-                document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+                const targetSection = this.dataset.section;
 
-                this.classList.add('active');
-                document.getElementById(this.dataset.section).classList.add('active');
-
-                // Reset scroll position to top when switching tabs
-                window.scrollTo(0, 0);
+                // Only navigate if switching to a different tab
+                if (targetSection !== getCurrentTabId()) {
+                    navigateToSection(targetSection, null, true);
+                }
             });
         });
 
@@ -1698,6 +1844,11 @@ Or use CLI:
         // Close modal on escape
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') closeDetail();
+        });
+
+        // Initialize history on page load
+        window.addEventListener('load', () => {
+            addToHistory(getCurrentState());
         });
 
         // Load data on page load
