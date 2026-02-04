@@ -93,40 +93,36 @@
             color: white;
         }
 
-        /* Navigation history buttons - must be above modal */
+        /* Navigation history buttons - prominent styling like back button */
         .nav-history-buttons {
             display: flex;
-            gap: 4px;
+            gap: 8px;
             margin-right: var(--space-4);
             padding-right: var(--space-4);
             border-right: 1px solid var(--color-border);
-            position: relative;
-            z-index: 10000;
         }
 
         .nav-history-btn {
-            background: var(--color-bg-surface);
-            color: var(--color-text-primary);
-            border: 1px solid var(--color-border);
-            border-radius: var(--radius-sm);
-            width: 32px;
-            height: 32px;
-            font-size: 16px;
+            background: var(--color-sapphire);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            padding: var(--space-2) var(--space-4);
+            font-size: var(--text-base);
+            font-weight: var(--font-weight-medium);
             cursor: pointer;
             transition: all var(--transition-fast);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: var(--font-mono);
-            position: relative;
-            z-index: 10000;
+            font-family: var(--font-sans);
+            min-width: 44px;
+            height: 36px;
         }
 
         /* Active/enabled state */
         .nav-history-btn:not(:disabled):hover {
-            background: var(--color-sapphire);
-            border-color: var(--color-sapphire);
-            color: white;
+            background: #5a8fb0;
             transform: translateY(-1px);
         }
 
@@ -134,29 +130,17 @@
             transform: translateY(0);
         }
 
-        /* Disabled state - looks unavailable, not error */
+        /* Disabled state - faded but same style */
         .nav-history-btn:disabled {
-            opacity: 0.3;
+            opacity: 0.35;
             cursor: not-allowed;
-            background: var(--color-bg-surface);
-            border-color: var(--color-border);
-            color: var(--color-text-secondary);
-        }
-
-        /* Remove any red/error styling */
-        .nav-history-btn:disabled::before {
-            content: none;
+            background: var(--color-sapphire);
         }
 
         /* Highlighted set in Pokemon detail */
         .set-highlighted {
             border: 2px solid var(--color-sapphire) !important;
             box-shadow: 0 0 12px rgba(69, 123, 157, 0.4);
-        }
-
-        /* Modal scroll lock - when body is locked */
-        body.modal-open {
-            overflow: hidden !important;
         }
     </style>
 </head>
@@ -237,13 +221,13 @@
                 <div class="calc-result hidden" id="calc-result"></div>
             </div>
         </section>
+
+        <!-- Pokemon Detail Section (replaces modal) -->
+        <section id="pokemon-detail" class="section">
+            <div id="pokemon-detail-content"></div>
+        </section>
         </div><!-- /.container -->
     </main>
-
-    <!-- Detail View Modal -->
-    <div class="detail-view" id="detail-view">
-        <div class="detail-content" id="detail-content"></div>
-    </div>
 
     <script>
         // Global data storage
@@ -834,35 +818,37 @@
         }
 
         // =========================
-        // Navigation History (Enhanced)
+        // Navigation History (Simplified - no modals)
         // =========================
         const navHistory = [];
         let navHistoryIndex = -1;
 
-        // Helper: Get current tab ID
-        function getCurrentTabId() {
-            const activeTab = document.querySelector('.nav-tab.active');
-            return activeTab ? activeTab.dataset.section : 'pokemon';
+        // Helper: Get current section ID
+        function getCurrentSectionId() {
+            const activeSection = document.querySelector('.section.active');
+            return activeSection ? activeSection.id : 'pokemon';
         }
 
-        // Helper: Get current app state (includes modal state)
+        // Helper: Get current app state
         function getCurrentState() {
-            const detailView = document.getElementById('detail-view');
-            const detailOpen = detailView && detailView.classList.contains('active');
-            const detailContent = document.getElementById('detail-content');
-
             return {
-                tabId: getCurrentTabId(),
-                scrollY: detailOpen ? parseInt(document.body.dataset.scrollY || 0) : window.scrollY,
-                modalType: detailOpen ? 'pokemon' : null,
-                modalKey: detailOpen && detailContent ? detailContent.dataset.pokemonKey : null,
-                highlightSet: detailOpen && detailContent ? detailContent.dataset.highlightSet : null,
+                sectionId: getCurrentSectionId(),
+                scrollY: window.scrollY,
                 timestamp: Date.now()
             };
         }
 
         // Helper: Add state to history
         function addToHistory(state) {
+            // Don't add duplicate states
+            if (navHistoryIndex >= 0) {
+                const lastState = navHistory[navHistoryIndex];
+                if (lastState.sectionId === state.sectionId &&
+                    Math.abs(lastState.scrollY - state.scrollY) < 50) {
+                    return; // Skip duplicate
+                }
+            }
+
             // Remove any forward history when making new navigation
             navHistory.splice(navHistoryIndex + 1);
 
@@ -876,54 +862,37 @@
 
         // Helper: Restore a history state
         function restoreState(state) {
-            // Close any open modals first (without adding to history)
-            const detailView = document.getElementById('detail-view');
-            if (detailView && detailView.classList.contains('active')) {
-                detailView.classList.remove('active');
-                unlockBodyScroll();
-            }
-
-            // Switch to correct tab
+            // Switch to correct section
             document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
 
-            const tab = document.querySelector(`[data-section="${state.tabId}"]`);
-            const section = document.getElementById(state.tabId);
+            // Find and activate the tab (if it exists for this section)
+            const tab = document.querySelector(`[data-section="${state.sectionId}"]`);
+            const section = document.getElementById(state.sectionId);
 
             if (tab) tab.classList.add('active');
             if (section) section.classList.add('active');
 
             // Restore scroll position
             window.scrollTo(0, state.scrollY || 0);
-
-            // Re-open modal if it was open
-            if (state.modalType === 'pokemon' && state.modalKey) {
-                setTimeout(() => {
-                    showPokemonDetailInternal(state.modalKey, state.highlightSet);
-                }, 50);
-            }
         }
 
-        // Navigate to a specific tab and scroll to element
-        function navigateToSection(tabId, elementId = null, addToHistoryFlag = true) {
+        // Navigate to a specific section and scroll to element
+        function navigateToSection(sectionId, elementId = null, addToHistoryFlag = true) {
             // Save current state to history before navigating
             if (addToHistoryFlag) {
                 addToHistory(getCurrentState());
             }
 
-            // Close any open modal first
-            const detailView = document.getElementById('detail-view');
-            if (detailView && detailView.classList.contains('active')) {
-                detailView.classList.remove('active');
-                unlockBodyScroll();
-            }
-
-            // Switch tab
+            // Switch section
             document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
 
-            document.querySelector(`[data-section="${tabId}"]`).classList.add('active');
-            document.getElementById(tabId).classList.add('active');
+            const tab = document.querySelector(`[data-section="${sectionId}"]`);
+            const section = document.getElementById(sectionId);
+
+            if (tab) tab.classList.add('active');
+            if (section) section.classList.add('active');
 
             window.scrollTo(0, 0);
 
@@ -963,32 +932,6 @@
             const fwdBtn = document.getElementById('nav-forward');
             if (backBtn) backBtn.disabled = navHistoryIndex <= 0;
             if (fwdBtn) fwdBtn.disabled = navHistoryIndex >= navHistory.length - 1;
-        }
-
-        // =========================
-        // Body Scroll Lock (for modals)
-        // =========================
-        function lockBodyScroll() {
-            const scrollY = window.scrollY;
-            document.body.dataset.scrollY = scrollY;
-            document.body.style.overflow = 'hidden';
-            document.body.style.position = 'fixed';
-            document.body.style.top = `-${scrollY}px`;
-            document.body.style.width = '100%';
-            document.body.classList.add('modal-open');
-        }
-
-        function unlockBodyScroll() {
-            const scrollY = document.body.dataset.scrollY;
-            document.body.style.overflow = '';
-            document.body.style.position = '';
-            document.body.style.top = '';
-            document.body.style.width = '';
-            document.body.classList.remove('modal-open');
-
-            if (scrollY) {
-                window.scrollTo(0, parseInt(scrollY));
-            }
         }
 
         // Handle key feature click - uses modular parseFeature system
@@ -1095,27 +1038,18 @@
             container.innerHTML = html || '<div class="card"><p>No Pokemon found.</p></div>';
         }
 
-        // Internal modal open (doesn't add to history) - used by restoreState
-        function showPokemonDetailInternal(key, highlightSetKey = null) {
+        // Show Pokemon detail as a page (not modal)
+        function showPokemonDetail(key, highlightSetKey = null) {
             const mon = pokemonData.pokemon[key];
             if (!mon) return;
 
-            // Store keys in detail-content for state restoration
-            const detailContent = document.getElementById('detail-content');
-            const detailView = document.getElementById('detail-view');
-            detailContent.dataset.pokemonKey = key;
-            detailContent.dataset.highlightSet = highlightSetKey || '';
-
-            // Reset modal scroll to top (fixes scroll persisting between modals)
-            detailView.scrollTop = 0;
-
-            // Lock body scroll
-            lockBodyScroll();
+            // Add current state to history before navigating
+            addToHistory(getCurrentState());
 
             const stats = mon.base_stats;
+            const container = document.getElementById('pokemon-detail-content');
 
             let html = `
-                <button class="close-btn" onclick="closeDetail()">← Back</button>
                 <div class="pokemon-detail-header">
                     <div class="pokemon-detail-sprite">
                         ${createSprite(mon.name, 96, true)}
@@ -1175,8 +1109,15 @@
                 `;
             }
 
-            detailContent.innerHTML = html;
-            document.getElementById('detail-view').classList.add('active');
+            container.innerHTML = html;
+
+            // Switch to pokemon-detail section
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById('pokemon-detail').classList.add('active');
+
+            // Scroll to top
+            window.scrollTo(0, 0);
 
             // Scroll to highlighted set if specified
             if (highlightSetKey) {
@@ -1187,36 +1128,6 @@
                     }
                 }, 100);
             }
-        }
-
-        // Public modal open (adds to history)
-        function showPokemonDetail(key, highlightSetKey = null) {
-            // Add current state to history BEFORE opening modal
-            addToHistory(getCurrentState());
-
-            // Open modal internally
-            showPokemonDetailInternal(key, highlightSetKey);
-
-            // Add modal state to history
-            addToHistory({
-                tabId: getCurrentTabId(),
-                scrollY: parseInt(document.body.dataset.scrollY || 0),
-                modalType: 'pokemon',
-                modalKey: key,
-                highlightSet: highlightSetKey,
-                timestamp: Date.now()
-            });
-        }
-
-        function closeDetail() {
-            const detailView = document.getElementById('detail-view');
-            detailView.classList.remove('active');
-
-            // Restore body scroll
-            unlockBodyScroll();
-
-            // Add closed state to history
-            addToHistory(getCurrentState());
         }
 
         // Render metagame overview
@@ -1833,8 +1744,8 @@ Or use CLI:
                 e.preventDefault();
                 const targetSection = this.dataset.section;
 
-                // Only navigate if switching to a different tab
-                if (targetSection !== getCurrentTabId()) {
+                // Only navigate if switching to a different section
+                if (targetSection !== getCurrentSectionId()) {
                     navigateToSection(targetSection, null, true);
                 }
             });
@@ -1847,11 +1758,6 @@ Or use CLI:
 
         document.getElementById('teams-search').addEventListener('input', function() {
             renderSampleTeams(this.value);
-        });
-
-        // Close modal on escape
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closeDetail();
         });
 
         // Initialize history on page load
