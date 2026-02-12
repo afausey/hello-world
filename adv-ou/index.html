@@ -1743,14 +1743,14 @@
             // Calculate diagram dimensions
             const minSpeed = 90;
             const maxSpeed = 420;
-            const diagramHeight = 700;
+            const diagramHeight = 900; // Taller for better vertical spacing
             const spriteSize = 40;
-            const columnWidth = 350; // Wider columns for better spacing
+            const columnWidth = 300;
 
             // Helper to calculate Y position (higher speed = higher on diagram)
             const getYPosition = (speed) => {
                 const percentage = (speed - minSpeed) / (maxSpeed - minSpeed);
-                return diagramHeight - (percentage * (diagramHeight - 80)) - 40; // Leave margin for header
+                return diagramHeight - (percentage * (diagramHeight - 80)) - 40;
             };
 
             // Generate Y-axis labels
@@ -1775,63 +1775,107 @@
                 const colorClass = `nature-${natureType}`;
                 const columnPokemon = byNature[natureType];
 
+                // For negative nature, align sprites to the right (toward center)
+                // For positive nature, align sprites to the left (toward center)
+                const alignRight = (natureType === 'negative');
+
                 html += `
                     <div class="speed-diagram-column" style="height: ${diagramHeight}px; position: relative; min-width: ${columnWidth}px;">
                         <div class="speed-diagram-column-header ${colorClass}">${label}</div>
                 `;
 
-                // Group Pokemon by exact speed value to handle overlaps
-                const bySpeed = {};
-                columnPokemon.forEach(p => {
-                    if (!bySpeed[p.speed]) bySpeed[p.speed] = [];
-                    bySpeed[p.speed].push(p);
-                });
+                // Sort by speed and collect all speeds
+                const sortedPokemon = [...columnPokemon].sort((a, b) => b.speed - a.speed);
 
-                // Track occupied positions to avoid overlaps
-                const occupiedCells = new Set();
+                // Track occupied Y positions to avoid vertical overlap
+                const occupiedYRanges = []; // Array of {yMin, yMax, xSlots: []}
 
-                // Helper to find available position
-                const findAvailablePosition = (baseY, baseX) => {
-                    // Try positions in a pattern: same row, then diagonal, then above/below
-                    const offsets = [
-                        [0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], // Same row, spread right
-                        [1, 0], [1, 1], [-1, 0], [-1, 1], // Above and below
-                        [1, 2], [-1, 2], [2, 0], [-2, 0]  // Further out
-                    ];
+                // Helper to find available position avoiding all overlaps
+                const findPosition = (speed, index) => {
+                    const baseY = getYPosition(speed);
+                    const spriteHeight = spriteSize + 4;
+                    const spriteWidth = spriteSize + 4;
 
-                    for (const [dy, dx] of offsets) {
-                        const cellKey = `${Math.round(baseY + dy * spriteSize)}_${baseX + dx * (spriteSize + 5)}`;
-                        if (!occupiedCells.has(cellKey)) {
-                            occupiedCells.add(cellKey);
-                            return {
-                                y: baseY + dy * (spriteSize * 0.3), // Slight vertical offset
-                                x: baseX + dx * (spriteSize + 5)
-                            };
+                    // Check for conflicts with existing sprites
+                    let yOffset = 0;
+                    let xSlot = 0;
+                    let foundPosition = false;
+
+                    // Try to find a non-overlapping position
+                    for (let attempt = 0; attempt < 20 && !foundPosition; attempt++) {
+                        const testY = baseY + yOffset;
+                        const testYMin = testY - spriteHeight / 2;
+                        const testYMax = testY + spriteHeight / 2;
+
+                        // Check against all occupied ranges
+                        let hasConflict = false;
+                        let conflictXSlots = [];
+
+                        for (const range of occupiedYRanges) {
+                            // Check if Y ranges overlap
+                            if (!(testYMax < range.yMin || testYMin > range.yMax)) {
+                                hasConflict = true;
+                                conflictXSlots = conflictXSlots.concat(range.xSlots);
+                            }
+                        }
+
+                        if (!hasConflict) {
+                            foundPosition = true;
+                            xSlot = 0;
+                        } else {
+                            // Find an available X slot
+                            const usedSlots = new Set(conflictXSlots);
+                            for (let s = 0; s < 6; s++) {
+                                if (!usedSlots.has(s)) {
+                                    xSlot = s;
+                                    foundPosition = true;
+                                    break;
+                                }
+                            }
+
+                            if (!foundPosition) {
+                                // Try different Y offset
+                                yOffset = (Math.floor(attempt / 2) + 1) * spriteHeight * (attempt % 2 === 0 ? 1 : -1);
+                            }
                         }
                     }
-                    // Fallback
-                    return { y: baseY, x: baseX + occupiedCells.size * (spriteSize + 5) };
+
+                    const finalY = baseY + yOffset;
+
+                    // Record this position
+                    occupiedYRanges.push({
+                        yMin: finalY - spriteHeight / 2,
+                        yMax: finalY + spriteHeight / 2,
+                        xSlots: [xSlot]
+                    });
+
+                    // Calculate X position
+                    let xPos;
+                    if (alignRight) {
+                        // Negative nature: align to right, sprites go leftward from right edge
+                        xPos = columnWidth - 60 - (xSlot * (spriteWidth + 2));
+                    } else {
+                        // Positive nature: align to left, sprites go rightward from left edge
+                        xPos = 10 + (xSlot * (spriteWidth + 2));
+                    }
+
+                    return { x: xPos, y: finalY };
                 };
 
                 // Render Pokemon sprites
-                Object.entries(bySpeed).forEach(([speed, mons]) => {
-                    const baseY = getYPosition(parseInt(speed));
+                sortedPokemon.forEach((p, idx) => {
+                    const pos = findPosition(p.speed, idx);
 
-                    mons.forEach((p, idx) => {
-                        const baseX = 10;
-                        const pos = findAvailablePosition(baseY, baseX + idx * (spriteSize + 8));
+                    const key = getPokemonKeyByName(p.name);
+                    const onclick = key ? `onclick="showPokemonDetail('${key}')"` : '';
 
-                        const key = getPokemonKeyByName(p.name);
-                        const onclick = key ? `onclick="showPokemonDetail('${key}')"` : '';
-
-                        html += `
-                            <div class="speed-diagram-sprite" ${onclick}
-                                 style="top: ${pos.y}px; left: ${pos.x}px;"
-                                 title="${p.name}: ${p.speed} Spe&#10;${p.description}">
-                                ${createSprite(p.name, spriteSize)}
-                            </div>
-                        `;
-                    });
+                    html += `
+                        <div class="speed-diagram-sprite" ${onclick}
+                             style="top: ${pos.y}px; left: ${pos.x}px;"
+                             title="${p.name}: ${p.speed} Spe&#10;${p.description}">
+                            ${createSprite(p.name, spriteSize)}
+                        </div>
+                    `;
                 });
 
                 html += `</div>`;
