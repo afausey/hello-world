@@ -850,10 +850,13 @@
         }
 
         // =========================
-        // Navigation History (Simplified - no modals)
+        // Navigation History (Browser-like model)
         // =========================
+        // History contains all visited states, index points to current state
+        // Back: go to previous state, Forward: go to next state
         const navHistory = [];
         let navHistoryIndex = -1;
+        let isNavigatingHistory = false;  // Flag to prevent adding to history during back/forward
 
         // Helper: Get current section ID
         function getCurrentSectionId() {
@@ -870,14 +873,18 @@
             };
         }
 
-        // Helper: Add state to history
+        // Helper: Add state to history (called AFTER navigating to new state)
         function addToHistory(state) {
-            // Don't add duplicate states
+            // Don't add to history when navigating via back/forward buttons
+            if (isNavigatingHistory) return;
+
+            // Don't add duplicate consecutive states
             if (navHistoryIndex >= 0) {
                 const lastState = navHistory[navHistoryIndex];
-                if (lastState.sectionId === state.sectionId &&
-                    Math.abs(lastState.scrollY - state.scrollY) < 50) {
-                    return; // Skip duplicate
+                if (lastState.sectionId === state.sectionId) {
+                    // Update scroll position of current state instead of adding duplicate
+                    lastState.scrollY = state.scrollY;
+                    return;
                 }
             }
 
@@ -911,11 +918,6 @@
 
         // Navigate to a specific section and scroll to element
         function navigateToSection(sectionId, elementId = null, addToHistoryFlag = true) {
-            // Save current state to history before navigating
-            if (addToHistoryFlag) {
-                addToHistory(getCurrentState());
-            }
-
             // Switch section
             document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
@@ -927,6 +929,11 @@
             if (section) section.classList.add('active');
 
             window.scrollTo(0, 0);
+
+            // Add DESTINATION state to history (after navigating)
+            if (addToHistoryFlag) {
+                addToHistory(getCurrentState());
+            }
 
             // Highlight element if specified
             if (elementId) {
@@ -943,19 +950,21 @@
 
         function navigateBack() {
             if (navHistoryIndex > 0) {
+                isNavigatingHistory = true;
                 navHistoryIndex--;
-                const state = navHistory[navHistoryIndex];
-                restoreState(state);
+                restoreState(navHistory[navHistoryIndex]);
                 updateNavButtons();
+                isNavigatingHistory = false;
             }
         }
 
         function navigateForward() {
             if (navHistoryIndex < navHistory.length - 1) {
+                isNavigatingHistory = true;
                 navHistoryIndex++;
-                const state = navHistory[navHistoryIndex];
-                restoreState(state);
+                restoreState(navHistory[navHistoryIndex]);
                 updateNavButtons();
+                isNavigatingHistory = false;
             }
         }
 
@@ -1081,9 +1090,6 @@
         function showPokemonDetail(key, highlightSetKey = null) {
             const mon = pokemonData.pokemon[key];
             if (!mon) return;
-
-            // Add current state to history before navigating
-            addToHistory(getCurrentState());
 
             // Check for expanded data (narrative overview)
             const expandedMon = expandedPokemonData.pokemon?.[key];
@@ -1214,6 +1220,9 @@
 
             // Scroll to top
             window.scrollTo(0, 0);
+
+            // Add DESTINATION state to history (after navigating)
+            addToHistory(getCurrentState());
 
             // Scroll to highlighted set if specified
             if (highlightSetKey) {
