@@ -142,6 +142,37 @@
             border: 2px solid var(--color-sapphire) !important;
             box-shadow: 0 0 12px rgba(69, 123, 157, 0.4);
         }
+
+        /* Overview section for narrative content */
+        .overview-section {
+            background: var(--color-bg-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+            border-left: 4px solid var(--color-sapphire);
+        }
+
+        .overview-section h3 {
+            font-family: var(--font-mono);
+            font-size: var(--text-h3);
+            color: var(--color-sapphire);
+            margin-bottom: var(--space-4);
+        }
+
+        .overview-content {
+            font-family: var(--font-sans);
+            font-size: var(--text-base);
+            line-height: 1.7;
+            color: var(--color-text-primary);
+        }
+
+        .overview-paragraph {
+            margin-bottom: var(--space-4);
+        }
+
+        .overview-paragraph:last-child {
+            margin-bottom: 0;
+        }
     </style>
 </head>
 <body>
@@ -232,6 +263,7 @@
     <script>
         // Global data storage
         let pokemonData = {};
+        let expandedPokemonData = {};  // Expanded narrative content
         let metagameData = {};
         let sampleTeamsData = {};
         let speedTiersData = {};
@@ -972,17 +1004,24 @@
         // Load JSON data
         async function loadData() {
             try {
-                const [pokemonRes, metagameRes, teamsRes, speedRes] = await Promise.all([
+                const [pokemonRes, metagameRes, teamsRes, speedRes, expandedRes] = await Promise.all([
                     fetch('knowledge_base/pokemon_sets.json'),
                     fetch('knowledge_base/metagame_overview.json'),
                     fetch('../adv-ou-sample-teams.json'),
-                    fetch('../adv-ou-speed-tiers.json')
+                    fetch('../adv-ou-speed-tiers.json'),
+                    fetch('knowledge_base/pokemon_master_expanded.json').catch(() => null)  // Optional, don't fail if missing
                 ]);
 
                 pokemonData = await pokemonRes.json();
                 metagameData = await metagameRes.json();
                 sampleTeamsData = await teamsRes.json();
                 speedTiersData = await speedRes.json();
+
+                // Load expanded data if available
+                if (expandedRes && expandedRes.ok) {
+                    expandedPokemonData = await expandedRes.json();
+                    console.log('Loaded expanded Pokemon data for:', Object.keys(expandedPokemonData.pokemon || {}).join(', '));
+                }
 
                 renderPokemonList();
                 renderMetagame();
@@ -1046,6 +1085,9 @@
             // Add current state to history before navigating
             addToHistory(getCurrentState());
 
+            // Check for expanded data (narrative overview)
+            const expandedMon = expandedPokemonData.pokemon?.[key];
+
             const stats = mon.base_stats;
             const container = document.getElementById('pokemon-detail-content');
 
@@ -1063,7 +1105,23 @@
                         <p class="text-secondary">${mon.role}</p>
                     </div>
                 </div>
+            `;
 
+            // Add narrative overview if available from expanded data
+            if (expandedMon?.overview) {
+                html += `
+                    <div class="overview-section mb-6">
+                        <h3 class="mb-3">Overview</h3>
+                        <div class="overview-content">
+                            ${expandedMon.overview.split('\n\n').map(para =>
+                                `<p class="overview-paragraph">${para.trim()}</p>`
+                            ).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            html += `
                 <h3 class="mb-3">Base Stats</h3>
                 <div class="stats-grid mb-6">
                     <div><div class="stat-label">HP</div><div class="stat-value">${stats.hp}</div></div>
@@ -1077,8 +1135,22 @@
                 <h3 class="mb-3">Sets</h3>
             `;
 
-            if (mon.sets) {
-                Object.entries(mon.sets).forEach(([setKey, set]) => {
+            // Merge sets from base and expanded data
+            const baseSets = mon.sets || {};
+            const expandedSets = expandedMon?.sets || {};
+
+            // Combine all set keys (expanded sets override base sets)
+            const allSetKeys = [...new Set([...Object.keys(baseSets), ...Object.keys(expandedSets)])];
+
+            if (allSetKeys.length > 0) {
+                allSetKeys.forEach(setKey => {
+                    // Prefer expanded set data, fall back to base set data
+                    const baseSet = baseSets[setKey] || {};
+                    const expandedSet = expandedSets[setKey] || {};
+                    const set = { ...baseSet, ...expandedSet };
+
+                    if (!set.name) return; // Skip if no valid set data
+
                     const isHighlighted = highlightSetKey && setKey === highlightSetKey;
                     html += `
                         <div class="set-card mb-4 ${isHighlighted ? 'set-highlighted' : ''}" id="set-${key}-${setKey}">
@@ -1086,27 +1158,51 @@
                                 <h4>${set.name}</h4>
                                 <button class="btn btn-secondary text-xs" data-copy="${key}-${setKey}" onclick="copyPokepaste('${key}', '${setKey}')">Copy Set</button>
                             </div>
-                            <p class="text-sm mt-2"><strong>Item:</strong> <span class="item-name">${set.item}</span> | <strong>Nature:</strong> ${set.nature}</p>
-                            <p class="text-sm ev-spread"><strong>EVs:</strong> ${set.evs}</p>
+                            <p class="text-sm mt-2"><strong>Item:</strong> <span class="item-name">${set.item || 'varies'}</span> | <strong>Nature:</strong> ${set.nature || 'varies'}</p>
+                            <p class="text-sm ev-spread"><strong>EVs:</strong> ${set.evs || 'varies'}</p>
                             <div class="moves-list mt-3 mb-3">
-                                ${set.moves.map(m => createMoveBadge(m)).join('')}
+                                ${(set.moves || []).map(m => createMoveBadge(m)).join('')}
                             </div>
-                            <p class="text-secondary">${set.description}</p>
+                            <p class="text-secondary">${set.description || ''}</p>
                             ${set.usage_tips ? `<p class="mt-2 text-emerald"><strong>Tips:</strong> ${set.usage_tips}</p>` : ''}
                         </div>
                     `;
                 });
             }
 
-            if (mon.checks_and_counters) {
+            // Use expanded checks_and_counters if available, otherwise fall back to base data
+            const checksData = expandedMon?.checks_and_counters || mon.checks_and_counters;
+            if (checksData) {
                 html += `
                     <h3 class="mt-6 mb-3">Checks & Counters</h3>
                     <div class="set-card">
-                        <p class="mb-2"><strong class="text-ruby">Hard Counters:</strong> ${mon.checks_and_counters.hard_counters?.join(', ') || 'None'}</p>
-                        <p class="mb-2"><strong class="text-electric">Soft Checks:</strong> ${mon.checks_and_counters.soft_checks?.join(', ') || 'None'}</p>
-                        ${mon.checks_and_counters.notes ? `<p class="text-secondary mt-3" style="font-style: italic;">${mon.checks_and_counters.notes}</p>` : ''}
-                    </div>
                 `;
+
+                // Handle expanded format with categories
+                if (checksData.categories) {
+                    Object.entries(checksData.categories).forEach(([category, info]) => {
+                        const categoryTitle = category.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+                        html += `
+                            <div class="checks-category mb-4">
+                                <h4 class="text-sapphire mb-2">${categoryTitle}</h4>
+                                ${info.pokemon ? `<div class="moves-list mb-2">${info.pokemon.map(p => createPokemonBadge(p)).join('')}</div>` : ''}
+                                ${info.description ? `<p class="text-secondary">${info.description}</p>` : ''}
+                            </div>
+                        `;
+                    });
+                } else {
+                    // Standard format
+                    html += `
+                        <p class="mb-2"><strong class="text-ruby">Hard Counters:</strong> ${checksData.hard_counters?.join(', ') || 'None'}</p>
+                        <p class="mb-2"><strong class="text-electric">Soft Checks:</strong> ${checksData.soft_checks?.join(', ') || 'None'}</p>
+                    `;
+                }
+
+                if (checksData.notes) {
+                    html += `<p class="text-secondary mt-3" style="font-style: italic;">${checksData.notes}</p>`;
+                }
+
+                html += `</div>`;
             }
 
             container.innerHTML = html;

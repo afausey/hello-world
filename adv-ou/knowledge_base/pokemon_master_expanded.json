@@ -1,0 +1,552 @@
+{
+  "pokemon": {
+    "tyranitar": {
+      "name": "Tyranitar",
+      "types": ["Rock", "Dark"],
+      "ability": "Sand Stream",
+      "base_stats": {
+        "hp": 100,
+        "atk": 134,
+        "def": 110,
+        "spa": 95,
+        "spd": 100,
+        "spe": 61
+      },
+      "viability": "S",
+      "role": "Mixed Attacker / Setup Sweeper / Wallbreaker",
+      
+      "overview": "In Generation III OU, Tyranitar is not just a top-tier threat — it is one of the structural forces that the entire metagame bends around. When Tyranitar appears in a battle, it does two things immediately: it establishes permanent sand and it forces the opponent to reveal how their team plans to withstand high-pressure mixed and physical offense. Sandstorm alone reshapes how games are paced. It compresses recovery margins, weakens Leftovers-dependent defensive cores, and amplifies the value of Spikes and Toxic pressure. Many of ADV's most recognizable defensive and balance structures exist partly as adaptations to Tyranitar's presence. You see this in the prevalence of bulky Waters, Claydol, Skarmory, and Celebi cores, all of which are designed with Tyranitar in mind. Even when Tyranitar is not on the field, the threat of it influences switching patterns and preservation decisions.\n\nWhat makes Tyranitar uniquely warping is that it is not locked into one identity. It can be a late-game Dragon Dance sweeper, an early-game wallbreaker, a Pursuit trapper that removes key special attackers, or a bulky disruptor that supports sand + Spikes attrition. Team preview doesn't exist in ADV, which magnifies this effect: opponents often do not know which Tyranitar variant they are facing until meaningful information has already been revealed. That uncertainty alone generates value. A player preserving their Claydol for Rapid Spin might discover too late that they are facing Dragon Dance + Hidden Power Bug. A player leaning on Gengar as a pivot may be eliminated by Pursuit. The Tyranitar user gains leverage simply by keeping sets ambiguous.\n\nDragon Dance Tyranitar is the most metagame-defining version because it converts Tyranitar from a pressure piece into a win condition. After one boost, Tyranitar's Attack reaches a level where Rock Slide plus Earthquake threatens nearly every common neutral target with a two-hit knockout or better, especially with sand and Spikes support. The Speed boost is just as important as the Attack. With maximum Speed investment and a Speed-boosting nature, a +1 Tyranitar outspeeds the large middle band of ADV OU — including offensive staples around the base 100 Speed tier such as Salamence, Jirachi, Celebi, and Zapdos. That breakpoint is intentional: those Pokémon are frequent midgame pivots, and moving before them turns many previously risky exchanges into favorable ones. Tyranitar still remains slower than the extreme fast tier — Aerodactyl, Jolteon, Dugtrio, and very fast Starmie — which is why those Pokémon retain value specifically as Tyranitar counterplay. The EV and nature choices are therefore not cosmetic; they are calibrated to flip matchups against the most common offensive speed class while accepting that the very fastest threats must be handled by teammates.\n\nCoverage choices on Dragon Dance sets are direct reflections of how the metagame answers Tyranitar. Rock Slide and Earthquake are mandatory because together they produce near-perfect neutral coverage and exploit Tyranitar's Attack stat efficiently. The last slot is where metagame targeting shows up. Hidden Power Bug is chosen to punish Celebi and Claydol, two of the most common defensive pivots into Tyranitar. At +1, Hidden Power Bug can cleanly remove or heavily cripple them, collapsing common sand balance cores. Hidden Power Grass is selected when Swampert is the bigger concern, preventing it from stonewalling the sweep. Ice Beam appears on mixed or Naive variants to punish Salamence and Flygon on the switch and to keep physical walls from pivoting freely. Lum Berry is frequently preferred over Leftovers because status is the most reliable universal stop to a Dragon Dance attempt; absorbing one Thunder Wave, Will-O-Wisp, or Toxic often determines whether Tyranitar converts a setup turn into a sweep.\n\nBulkier Dragon Dance spreads tell a different story about how Tyranitar is used. Instead of maximizing Speed, these variants invest heavily in HP and keep just enough Speed to pass key post-boost thresholds. The purpose is to survive specific counterattacks while setting up. With added bulk, Tyranitar can live attacks such as Meteor Mash from Metagross or strong neutral special hits from Zapdos and still complete a Dragon Dance. Some spreads are tuned so that Dugtrio cannot reliably revenge kill from full health after a boost, which directly targets one of the tier's most common Tyranitar removal tools. When Taunt is used in the last slot, it is there to shut down Skarmory, Suicune, and Blissey from phazing or crippling Tyranitar during its setup window. These bulky variants matter because they are better at finding setup opportunities in real games, not just in idealized damage races.\n\nNon–Dragon Dance Tyranitar sets are equally important to the ecosystem because they support different team goals. Choice Band and heavy physical attacking variants function as immediate wallbreakers that force progress early, softening physical walls so that other sweepers can close later. Mixed and Pursuit variants reshape how Ghost- and Psychic-types are played; Gengar, Starmie, and Celebi must constantly account for the risk of being trapped. Focus Punch sets exploit forced switches created by Tyranitar's threat profile and can break traditional counters expecting Rock Slide or Earthquake. These versions of Tyranitar are not trying to sweep — they are trying to destabilize defensive structure and resource counts. In a tier defined by incremental advantage through sand and Spikes, that role is often just as valuable as a cleaner.",
+      
+      "sets": {
+        "dragon_dance_max_speed": {
+          "name": "Dragon Dance (Max Speed)",
+          "description": "This max Speed Dragon Dance set exists to cross the +1 Speed line against the base 100 tier and immediately threaten offense after a single boost. Jolly rather than Adamant is chosen specifically to win those post-boost speed races; the loss in raw damage is offset by Tyranitar's already high Attack and by sand + Spikes chip. Hidden Power Bug prevents Celebi and Claydol from acting as safe defensive stops and converts them into liabilities if they switch in.",
+          "item": "Lum Berry",
+          "nature": "Jolly",
+          "evs": "4 HP / 252 Atk / 252 Spe",
+          "moves": ["Dragon Dance", "Rock Slide", "Earthquake", "Hidden Power Bug"]
+        },
+        
+        "dragon_dance_bulky": {
+          "name": "Dragon Dance (Bulky)",
+          "description": "This bulk-leaning Dragon Dance set gives up top-end Speed to gain setup reliability. The HP investment improves survival against common neutral hits and lets Tyranitar boost in front of more defensive Pokémon. The reduced Speed still clears slower walls after one boost, which is the intended target set. Taunt is the key move here — it blocks phazing and status from Skarmory, Blissey, and similar answers, turning them from counters into setup fodder. The Attack investment is calibrated so that +1 Rock Slide and Earthquake still achieve key two-hit knockouts on standard defensive spreads after sand damage.",
+          "item": "Leftovers",
+          "nature": "Adamant",
+          "evs": "252 HP / 176 Atk / 80 Spe",
+          "moves": ["Dragon Dance", "Rock Slide", "Earthquake", "Taunt"]
+        },
+        
+        "choice_band": {
+          "name": "Choice Band",
+          "description": "Choice Band Tyranitar matters because it front-loads pressure instead of staging it. The Speed investment lets it outrun slower defensive Pokémon and some mid-speed threats, while the HP remainder improves switch-in durability under sand. Focus Punch specifically targets Skarmory, Blissey, and bulky Waters on predicted switches, creating immediate structural damage. This set is used when the team wants Tyranitar to break rather than sweep, often in support of a separate cleaner.",
+          "item": "Choice Band",
+          "nature": "Adamant",
+          "evs": "80 HP / 252 Atk / 176 Spe",
+          "moves": ["Rock Slide", "Earthquake", "Hidden Power Bug", "Focus Punch"]
+        }
+      },
+      
+      "checks_and_counters": {
+        "hard_counters": ["Swampert (without Spikes)", "Claydol", "Donphan"],
+        "soft_checks": ["Metagross", "Salamence (Intimidate)", "Skarmory"],
+        "revenge_killers": ["Dugtrio (Arena Trap)", "Heracross", "Medicham"],
+        "notes": "Most counters become checks after 1 layer of Spikes. Pursuit trapping makes switching risky for Gengar/Starmie even though they resist Rock Slide."
+      }
+    },
+    
+    "zapdos": {
+      "name": "Zapdos",
+      "types": ["Electric", "Flying"],
+      "ability": "Pressure",
+      "base_stats": {
+        "hp": 90,
+        "atk": 90,
+        "def": 85,
+        "spa": 125,
+        "spd": 90,
+        "spe": 100
+      },
+      "viability": "S",
+      "role": "Pivot / Special Attacker / Phazer",
+      
+      "overview": "In Generation III OU, Zapdos holds a rare position as both a durable pivot and a persistent special attacker, combining strong defensive traits with real offensive pressure. Its Electric/Flying typing is uniquely valuable in ADV because it grants an immunity to Ground and Spikes while resisting Fighting, Bug, Steel, and Grass. In a tier heavily defined by Spikes, sand, and repeated switching, simply ignoring Spikes damage gives Zapdos structural value before it even attacks. That trait alone changes how opponents sequence their switches and preserve their Ground-types.\n\nZapdos fits naturally into the flow-based style of ADV OU. It is rarely a pure sweeper and rarely a pure wall. Instead, it exerts pressure over time. With base 125 Special Attack and base 100 Speed, it threatens immediate damage against common mid-speed Pokémon while still being bulky enough to take neutral hits and continue functioning. Teams often use Zapdos as a midgame stabilizer — something that can come in repeatedly, force out specific threats, and maintain momentum through forced switches and chip damage. Because many standard defensive Pokémon rely on Ground coverage or Spikes pressure, Zapdos frequently finds safe entry points that other attackers do not.\n\nThe metagame reflects Zapdos's presence through the importance of Electric resists and special walls. Blissey, Celebi, and specially bulky Tyranitar spreads all see increased value when Zapdos is common. Swampert in particular becomes a critical glue piece on many teams because it provides an Electric immunity while not being weak to Hidden Power Ice. In turn, Zapdos adapts with coverage and utility choices meant to punish those exact answers. This back-and-forth between Zapdos and its checks is a recurring pattern in ADV OU games.\n\nZapdos also plays an important role in phazing and control structures. Because it forces switches and threatens common Spikes setters like Skarmory with Thunderbolt, it pairs naturally with Spikes teams while also checking opposing ones. Pressure as an ability is not cosmetic in this generation — it meaningfully drains low-PP moves like Rock Slide, Ice Beam, and Rapid Spin over longer games. In drawn-out matches, this can directly change endgame math. Zapdos is therefore one of the few offensive-leaning Pokémon that also contributes to resource denial.\n\nZapdos is not without constraints. It lacks instant recovery in ADV and must rely on Rest, which introduces sleep turns and tempo risk. It also cannot freely break dedicated special walls without support, and Rock coverage from threats like Tyranitar and Aerodactyl forces careful positioning. As a result, Zapdos is strongest when used deliberately — pivoted in on immunities, used to force predictable switches, and supported with Spikes and sand so that its repeated hits accumulate into real advantage.",
+      
+      "sets": {
+        "offensive_rest": {
+          "name": "Offensive Rest",
+          "description": "This offensive Rest set is built to pressure mid-speed threats while remaining sustainable across a long game. The Speed investment outruns the base 90 tier and most neutral-nature base 100s that do not fully invest, letting Zapdos act first against many common pivots. Hidden Power Ice targets Salamence and Flygon, which would otherwise switch into Thunderbolt comfortably. Toxic punishes special walls and bulky Grounds on the switch. Rest is mandatory for longevity in ADV, and the set relies on team support to absorb sleep turns safely.",
+          "item": "Leftovers",
+          "nature": "Timid",
+          "evs": "40 HP / 252 SpA / 216 Spe",
+          "moves": ["Thunderbolt", "Hidden Power Ice", "Toxic", "Rest"]
+        },
+        
+        "defensive_roar": {
+          "name": "Defensive Roar",
+          "description": "This defensive phazing variant is tuned to switch into physical attackers more reliably while still threatening damage. The Defense investment improves matchups into threats that rely on neutral Rock or Flying coverage. Hidden Power Grass is selected specifically to hit Swampert, preventing it from walling and setting up freely. Roar pairs with Spikes support and Zapdos's forcing power to rack up entry damage and disrupt setup attempts. The small Speed allocation lets Zapdos move before slower walls and phazers, preserving control of the sequence.",
+          "item": "Leftovers",
+          "nature": "Bold",
+          "evs": "248 HP / 220 Def / 40 Spe",
+          "moves": ["Thunderbolt", "Hidden Power Grass", "Roar", "Rest"]
+        }
+      },
+      
+      "checks_and_counters": {
+        "hard_counters": ["Swampert", "Blissey", "Celebi"],
+        "soft_checks": ["Tyranitar", "Snorlax", "Raikou"],
+        "revenge_killers": ["Dugtrio (if weakened)", "Aerodactyl"],
+        "notes": "Zapdos lacks instant recovery. Wear it down over time and force Rest at inopportune moments."
+      }
+    },
+    
+    "gengar": {
+      "name": "Gengar",
+      "types": ["Ghost", "Poison"],
+      "ability": "Levitate",
+      "base_stats": {
+        "hp": 60,
+        "atk": 65,
+        "def": 60,
+        "spa": 130,
+        "spd": 75,
+        "spe": 110
+      },
+      "viability": "S",
+      "role": "Spinblocker / Offensive Pivot / Disruptor",
+      
+      "overview": "Gengar is one of the most dynamically influential Pokémon in Generation III OU because it compresses multiple high-impact roles into one teamslot. It is simultaneously an offensive threat, a spinblocker, a status spreader, a lure, and a disruption piece. Unlike purely defensive Ghosts or purely offensive sweepers, Gengar operates as a tempo manipulator. Its immunities, Speed tier, and wide movepool allow it to dictate exchanges and punish predictable play. Many hazard-based and spike-centric structures rely on Gengar not just for blocking Rapid Spin, but for actively destabilizing opposing defensive cores.\n\nIts Ghost/Poison typing combined with Levitate gives it three crucial immunities: Normal, Fighting, and Ground. Those immunities map directly onto common ADV OU attacks such as Earthquake, Rapid Spin, Explosion, Focus Punch, and Body Slam. This lets Gengar enter play on moves that would force out most other offensive Pokémon. The spinblocking function is especially important in a tier where Spikes are central to long-game advantage. Skarmory and Forretress teams frequently pair with Gengar so that every layer of Spikes becomes meaningfully permanent unless Gengar is removed.\n\nGengar's Speed places it above the crowded base 100 tier, allowing it to naturally outrun Salamence, Zapdos, Jirachi, Celebi, and offensive Tyranitar. That alone forces caution in midgame positioning. Combined with strong special coverage and Explosion, Gengar becomes extremely difficult to wall safely. Traditional special walls like Blissey can handle its standard attacks but must constantly fear Explosion. Physical switch-ins risk Will-O-Wisp or coverage moves. This layered threat profile makes Gengar one of the tier's best progress-forcing Pokémon.\n\nCoverage flexibility is a defining trait. BoltBeam variants threaten both bulky waters and flying dragons. Fire Punch pressures Steel-types such as Metagross and Forretress. Giga Drain punishes Swampert and Tyranitar attempting to pivot in. Will-O-Wisp variants cripple physical attackers and permanently alter damage math. Taunt + status variants dismantle slower defensive builds. Because Gengar's fourth moveslot is so flexible, scouting its set is mandatory before committing defensive lines.\n\nGengar is not without constraints. Its physical bulk is poor, and while it has many immunities, it cannot repeatedly take neutral hits. Sand damage and Spikes chip it quickly. Faster threats such as Aerodactyl and Jolteon can force it out. Dedicated Pursuit users, especially Tyranitar, create constant risk if Gengar is locked into unfavorable sequences. Strong Gengar play involves leveraging immunities and double switches rather than raw tanking.",
+      
+      "sets": {
+        "offensive_coverage": {
+          "name": "Offensive Coverage",
+          "description": "This is the classic offensive coverage Gengar that fits naturally on Spikes offense and balanced builds. Maximum Speed with a Timid nature ensures Gengar outruns the base 100 Speed tier and speed-ties opposing Gengar. Maximum Special Attack is required to pressure bulky waters and flying threats meaningfully. Thunderbolt plus Ice Punch forms near-perfect neutral coverage across common ADV OU targets, hitting Suicune, Milotic, Skarmory, Salamence, and Flygon for strong damage. Fire Punch is chosen specifically to pressure Steel-types that would otherwise pivot comfortably, especially Metagross and Forretress on hazard teams. Explosion is the structural keystone of the set. It allows Gengar to convert its presence into immediate removal of Blissey or a heavily chipped special wall. The threat of Explosion alone forces more conservative Blissey play, which indirectly benefits special attackers across the team.",
+          "item": "Leftovers",
+          "nature": "Timid",
+          "evs": "4 Def / 252 SpA / 252 Spe",
+          "moves": ["Thunderbolt", "Ice Punch", "Fire Punch", "Explosion"]
+        },
+        
+        "utility_disruptor": {
+          "name": "Utility Disruptor",
+          "description": "The utility disruptor variant trades Explosion for sustained disruption against defensive and physical structures. Will-O-Wisp cripples Tyranitar, Metagross, Salamence, and other physical attackers attempting to trap or pressure Gengar. Taunt shuts down recovery, phazing, and status from slower walls such as Blissey, Skarmory, and Swampert, turning Gengar into an anti-stall instrument as well as a spinblocker. The small HP investment improves switch-in survivability against weaker resisted hits and sand cycles while preserving key offensive benchmarks with Special Attack investment. Maximum Speed remains mandatory to maintain its positioning advantage over the base 100 tier. This set matters most on hazard-stacking teams that want their spinblocker to also actively break defensive counterplay rather than simply exist to block Rapid Spin.",
+          "item": "Leftovers",
+          "nature": "Timid",
+          "evs": "40 HP / 216 SpA / 252 Spe",
+          "moves": ["Will-O-Wisp", "Thunderbolt", "Ice Punch", "Taunt"]
+        }
+      },
+      
+      "checks_and_counters": {
+        "hard_counters": ["Blissey (if no Explosion)"],
+        "soft_checks": ["Tyranitar (Pursuit)", "Snorlax", "Umbreon"],
+        "revenge_killers": ["Aerodactyl", "Jolteon", "Dugtrio"],
+        "notes": "Gengar is frail. Priority and faster threats force it out. Pursuit trapping from Tyranitar is a constant threat."
+      }
+    },
+    
+    "skarmory": {
+      "name": "Skarmory",
+      "types": ["Steel", "Flying"],
+      "ability": "Keen Eye",
+      "base_stats": {
+        "hp": 65,
+        "atk": 80,
+        "def": 140,
+        "spa": 40,
+        "spd": 70,
+        "spe": 70
+      },
+      "viability": "S",
+      "role": "Physical Wall / Spikes Setter / Phazer",
+      
+      "overview": "In Generation III OU, Skarmory is one of the defining defensive anchors of the entire tier. Its value is not based on surprise or flexibility but on reliability and structural impact. Steel/Flying typing, extremely high Defense, and access to Spikes give Skarmory a central role in how ADV games are won and lost. Many team archetypes — especially sand + Spikes balance — are built with Skarmory as a foundational piece. When Skarmory is present, the game often becomes about long-term positioning, hazard layering, and controlled phazing rather than immediate knockouts.\n\nSkarmory's defensive profile lets it wall a large portion of the tier's physical attackers. It comfortably absorbs Earthquake, resists many common physical coverage moves, and shrugs off neutral hits that would overwhelm other walls. This makes it a primary answer to threats like non–Fire Blast Salamence, Metagross without Thunder Punch, and many Tyranitar variants lacking Fire Blast or strong mixed coverage. Because so many top threats are physical or mixed, Skarmory frequently serves as the first defensive pivot revealed in a match.\n\nWhat truly elevates Skarmory from wall to metagame pillar is Spikes. In ADV, Spikes are among the most powerful forms of progress available. There is only one layer type, but each layer dramatically increases the punishment for switching — and ADV is a switch-heavy metagame. Skarmory is the most consistent Spikes setter because it can repeatedly find safe entry points and force out what it walls. Once Spikes are established, Skarmory often shifts from setter to enforcer, using Whirlwind to cycle opponents through hazards and convert positional advantage into permanent damage.\n\nThe metagame adapts heavily around Skarmory. Fire coverage on mixed attackers becomes more common specifically to break it. Magneton sees usage largely because trapping and removing Skarmory can unlock entire offensive game plans. Rapid Spin support becomes more valuable because teams that fail to remove Skarmory's Spikes fall behind over time. Even moveset choices — such as Fire Blast on Tyranitar or Flamethrower on special attackers — are frequently justified primarily by the need to threaten Skarmory.\n\nSkarmory is not passive, but it is tempo-sensitive. Without proper support it can be overwhelmed by special attackers or trapped and removed. It lacks reliable instant recovery outside of Rest and must manage sleep turns carefully. When paired with cleric support or solid special walls like Blissey, however, Skarmory becomes extremely difficult to break cleanly. Its presence turns games into resource contests measured in layers, switches, and forced reveals rather than raw damage output.",
+      
+      "sets": {
+        "spikes_phaze": {
+          "name": "Spikes + Phaze",
+          "description": "This is the standard Spikes + phaze Skarmory that defines ADV hazard play. Maximum HP and heavy Defense investment let it repeatedly switch into physical attackers and lay Spikes multiple times across a match. The small Speed investment allows Skarmory to act before opposing uninvested Skarmory and some slower walls, which matters in phazing wars. Drill Peck prevents total passivity and threatens Fighting-types and certain Grass-types that try to exploit it. Rest is required for longevity and assumes team support to manage sleep turns.",
+          "item": "Leftovers",
+          "nature": "Impish",
+          "evs": "252 HP / 232 Def / 24 Spe",
+          "moves": ["Spikes", "Whirlwind", "Drill Peck", "Rest"]
+        },
+        
+        "mixed_bulk_toxic": {
+          "name": "Mixed Bulk Toxic",
+          "description": "This mixed-bulk variant sacrifices some physical margin to better tolerate special chip, particularly from neutral special hits aimed at wearing Skarmory down. Toxic turns switch-ins like bulky Waters and Zapdos into long-term liabilities, while Protect scouts Choice Band users and gains extra Leftovers turns alongside sand and poison damage. This set is used on slower, more methodical teams that want Skarmory to function as a long-horizon progress engine rather than just a physical stopgap.",
+          "item": "Leftovers",
+          "nature": "Impish",
+          "evs": "252 HP / 176 Def / 80 SpD",
+          "moves": ["Spikes", "Toxic", "Protect", "Rest"]
+        }
+      },
+      
+      "checks_and_counters": {
+        "hard_counters": ["Magneton (Magnet Pull trap)", "Mixed attackers with Fire coverage"],
+        "soft_checks": ["Zapdos", "Gengar", "Special attackers"],
+        "revenge_killers": ["N/A (Skarmory is defensive)"],
+        "notes": "Magneton is Skarmory's worst nightmare. Once trapped, Heracross and Medicham become unwallable."
+      }
+    },
+    
+    "blissey": {
+      "name": "Blissey",
+      "types": ["Normal"],
+      "ability": "Natural Cure",
+      "base_stats": {
+        "hp": 255,
+        "atk": 10,
+        "def": 10,
+        "spa": 75,
+        "spd": 135,
+        "spe": 55
+      },
+      "viability": "S",
+      "role": "Special Wall / Cleric / Status Spreader",
+      
+      "overview": "Blissey is the definitive special wall of Generation III OU and one of the primary forces that defines how special offense is constructed and deployed. Its raw special bulk is so extreme that it does not merely check most special attackers — it invalidates them unless they are specifically designed to break it. Because of this, Blissey is not just a defensive Pokémon but a metagame filter. Entire categories of special sweepers, movesets, and lure strategies exist primarily because Blissey exists.\n\nWhere Skarmory anchors the physical side of many defensive cores, Blissey anchors the special side. The classic Skarmory + Blissey pairing is not just common but structurally foundational in ADV OU, forming the backbone of many stall and balance teams. Blissey's presence forces special attackers to either carry boosting moves, mixed coverage, Explosion, or dedicated lure tech. Purely straightforward special damage is rarely sufficient. As a result, Blissey indirectly increases the value of mixed attackers such as Tyranitar, Salamence, and Metagross, all of which can pressure it from the physical side.\n\nBlissey's influence also extends into tempo and information control. Because it forces so many switches from special attackers, it generates frequent free turns. Those turns are converted into progress through status spreading, cleric support, or direct disruption. Thunder Wave, Toxic, and Sing variants each shape games differently, slowing offensive teams or putting defensive pivots on timers. Aromatherapy support, meanwhile, allows entire teams to play more aggressively with status absorption, knowing Blissey can reset the board later.\n\nDespite its passivity on paper, Blissey is not strategically passive. Its movepool gives it multiple high-impact disruptive tools. Seismic Toss provides fixed, reliable damage that ignores defensive boosts. Soft-Boiled gives immediate recovery that keeps it stable across long games. Natural Cure lets it absorb status without long-term cost, which is critical in a tier filled with Toxic and Thunder Wave. Explosion from special attackers is often the only clean way to remove it quickly, and even that trade is not always favorable depending on game state.\n\nIts weaknesses are equally defining. Blissey gives up momentum against strong physical attackers and can be exploited by Substitute users, set‑up sweepers without fear of status, and certain mixed threats. It requires careful pairing with physical walls and phazers. When mispositioned, it can become a liability rather than an anchor. High-level play with Blissey is less about switching it in — that part is trivial — and more about converting the forced switches it creates into lasting structural advantage.",
+      
+      "sets": {
+        "all_purpose": {
+          "name": "All-Purpose",
+          "description": "This is the most common all-purpose Blissey set, built to maximize reliability against the broadest range of special threats while still providing disruptive value. Maximum Defense investment with a Bold nature is mandatory because Blissey's HP is already enormous and its Defense is the only stat that can realistically be patched. This physical investment allows Blissey to survive weaker physical hits, avoid certain two-hit knockouts, and avoid being immediately forced out by every mixed attacker. Seismic Toss is chosen over special attacks as the primary damage move because fixed damage is more reliable across matchups and ignores Calm Mind boosts from threats like Suicune and Jirachi. Soft-Boiled provides immediate recovery and is non‑negotiable for longevity. Thunder Wave cripples switch-ins such as Tyranitar, Metagross, and Salamence, dramatically changing speed control across the match. Ice Beam prevents Salamence and Flygon from switching in freely and punishes Substitute users trying to exploit passivity. The Special Attack investment ensures Ice Beam always breaks key Substitute thresholds and threatens two-hit knockouts on offensive dragons after chip.",
+          "item": "Leftovers",
+          "nature": "Bold",
+          "evs": "252 Def / 252 SpA / 4 HP",
+          "moves": ["Seismic Toss", "Soft-Boiled", "Thunder Wave", "Ice Beam"]
+        },
+        
+        "cleric": {
+          "name": "Cleric",
+          "description": "The cleric variant shifts Blissey from special wall to team support engine. Aromatherapy resets status across the entire team, enabling more aggressive play from teammates that would otherwise be worn down by Toxic or paralysis. The added Special Defense investment improves consistency against boosted special attackers and repeated Calm Mind exchanges, while still maintaining enough Defense to avoid immediate collapse to mixed pressure. Toxic replaces Thunder Wave here to pressure opposing bulky waters, Calm Mind users without Rest, and defensive pivots that try to exploit Blissey as setup fodder. This version of Blissey matters most on longer-game structures where status control and durability outweigh speed control. Instead of directly crippling threats, it ensures your own defensive core cannot be slowly dismantled by status spread.",
+          "item": "Leftovers",
+          "nature": "Calm",
+          "evs": "252 Def / 80 SpA / 176 SpD",
+          "moves": ["Seismic Toss", "Soft-Boiled", "Aromatherapy", "Toxic"]
+        }
+      },
+      
+      "checks_and_counters": {
+        "hard_counters": ["Heracross", "Medicham", "Mixed Tyranitar"],
+        "soft_checks": ["Metagross", "Snorlax", "Dugtrio (trap after chip)"],
+        "revenge_killers": ["N/A (Blissey is defensive)"],
+        "notes": "Explosion from special attackers is the cleanest removal. Dugtrio can trap after Spikes chip."
+      }
+    },
+    
+    "swampert": {
+      "name": "Swampert",
+      "types": ["Water", "Ground"],
+      "ability": "Torrent",
+      "base_stats": {
+        "hp": 100,
+        "atk": 110,
+        "def": 90,
+        "spa": 85,
+        "spd": 90,
+        "spe": 60
+      },
+      "viability": "S",
+      "role": "Physical Wall / Phazer / Mixed Tank",
+      
+      "overview": "Swampert is one of the defining structural anchors of Generation III OU. Where some Pokémon shape the metagame through pressure or trapping, Swampert shapes it through stability. It is one of the most reliable defensive pivots in the tier and functions as a universal glue piece across balance, bulky offense, and even some stall variants. Its typing, bulk, and movepool let it check a wide range of top threats while simultaneously advancing hazard pressure and offensive tempo. Many ADV OU games are quietly decided by how well Swampert is preserved and positioned.\n\nWater/Ground typing is the core of its influence. An Electric immunity combined with resistance to Rock and neutrality to most common coverage makes Swampert the default answer to Zapdos, Tyranitar, Metagross, and physical offense that lacks Hidden Power Grass. Because Zapdos is one of the most centralizing forces in ADV OU, any Pokémon that can repeatedly switch into it without fear immediately becomes tier-defining. Swampert fills that role more consistently than any alternative. Its presence alone changes how Electric-types are played and forces Grass coverage onto many mixed attackers that would otherwise prefer different moves.\n\nSwampert is also one of the most dependable hazard amplifiers in ADV — meaning Spikes support plus consistent chip through forced switches. While it does not set Spikes itself, it pairs naturally with Skarmory and Forretress and is one of the best phazers in the tier. Roar variants prevent setup sweepers from exploiting passive sequences and convert defensive positioning into hazard damage. This makes Swampert both a defensive buffer and a momentum engine. Teams using Spikes frequently rely on Swampert to repeatedly cycle opposing threats and accumulate chip that later enables cleaners.\n\nUnlike purely passive walls, Swampert meaningfully threatens damage. Its base 110 Attack makes Earthquake hit hard even without heavy investment, and STAB Surf prevents physical walls from switching in freely. This mixed offensive presence stops it from being trivial to exploit. Opponents cannot simply rotate resistances without consequence. Over time, Swampert forces progress through both damage and positioning, which is why it appears on such a wide range of archetypes.\n\nIts main constraint is the Grass weakness. Hidden Power Grass from Zapdos, mixed Tyranitar, offensive Celebi, and certain lure sets exists largely because Swampert is so common. This creates a metagame feedback loop: Swampert is everywhere because it is reliable, and Grass coverage is everywhere because Swampert is everywhere. Managing that risk — scouting movesets, tracking revealed coverage, and preserving health — is central to high-level Swampert play.",
+      
+      "sets": {
+        "mixed_tank": {
+          "name": "Mixed Tank",
+          "description": "This is the classic mixed tank Swampert that defines the standard expectation in ADV OU. The HP and Defense investment allow Swampert to consistently check physical Tyranitar, Metagross, and non-boosted Salamence while maintaining enough Special Attack to threaten key targets. Surf provides reliable STAB damage against neutral switch-ins and punishes physical attackers that expect only Earthquake. Ice Beam prevents Salamence and Flygon from switching in safely and secures important two-hit knockouts after minimal chip. The Special Attack investment is tuned so Ice Beam reliably threatens offensive Salamence and Flygon and meaningfully damages Celebi on the switch. The defensive investment ensures Swampert survives repeated Rock Slides and Meteor Mashes in sand-heavy games. Roar is chosen because the set's value comes from denying setup and amplifying Spikes damage. Without Roar, Swampert becomes more exploitable by Substitute users and boosters.",
+          "item": "Leftovers",
+          "nature": "Relaxed",
+          "evs": "240 HP / 216 Def / 52 SpA",
+          "moves": ["Earthquake", "Surf", "Ice Beam", "Roar"]
+        },
+        
+        "defensive_toxic": {
+          "name": "Defensive Toxic",
+          "description": "The more defensive Toxic variant appears on heavier balance and stall structures. Here Swampert shifts from mixed tank to long-game anchor. Toxic pressures opposing bulky waters, Zapdos switch-ins without Hidden Power Grass, and other defensive pivots that expect to outlast it. Protect adds Leftovers recovery cycles and scouting value, which is especially important against mixed attackers that may carry Hidden Power Grass specifically to remove Swampert. The Special Defense investment improves consistency against repeated Zapdos attacks and mixed coverage while still maintaining enough physical bulk to check Tyranitar and Metagross. This set matters because it transforms Swampert from a check into a durability engine. Instead of trading damage, it accumulates advantage through poison, phazing, and recovery turns, making it a cornerstone of slower hazard-centric builds.",
+          "item": "Leftovers",
+          "nature": "Relaxed",
+          "evs": "252 HP / 196 Def / 60 SpD",
+          "moves": ["Earthquake", "Protect", "Toxic", "Roar"]
+        }
+      },
+      
+      "checks_and_counters": {
+        "hard_counters": ["Celebi", "Grass-types with HP Grass"],
+        "soft_checks": ["Zapdos (with HP Grass)", "Suicune", "Milotic"],
+        "revenge_killers": ["N/A (Swampert is defensive)"],
+        "notes": "Hidden Power Grass is Swampert's main weakness. Scout for it early and preserve health accordingly."
+      }
+    },
+    
+    "salamence": {
+      "name": "Salamence",
+      "types": ["Dragon", "Flying"],
+      "ability": "Intimidate",
+      "base_stats": {
+        "hp": 95,
+        "atk": 135,
+        "def": 80,
+        "spa": 110,
+        "spd": 80,
+        "spe": 100
+      },
+      "viability": "S",
+      "role": "Mixed Attacker / Setup Sweeper / Wallbreaker",
+      
+      "overview": "Salamence is one of the most flexible and structurally warping offensive presences in ADV OU. It is not just a sweeper or breaker — it is a role-compressing pressure engine that reshapes positioning every time it enters the field. Intimidate, high mixed attacking stats, strong dual STAB options, and wide coverage give Salamence the ability to function as a wallbreaker, cleaner, pivot, or lure depending on set. Many defensive cores are evaluated primarily on how reliably they handle Salamence across multiple entries.\n\nIntimidate is central to Salamence's metagame influence. In a physically slanted tier filled with Tyranitar, Metagross, Aerodactyl, and Choice Band attackers, Intimidate creates immediate tempo and damage reduction. Salamence often forces switches simply by entering play, buying free turns for setup, attacking, or double-switching. Unlike pure defensive pivots, Salamence converts those forced reactions into direct offensive progress. This interaction makes it one of the most effective momentum generators in the format.\n\nOffensively, Salamence's threat comes from uncertainty as much as raw numbers. Dragon Dance variants threaten late-game sweeps once bulky waters and Steels are worn down. Mixed attackers — commonly called MixMence — attack from both sides of the spectrum to break traditional physical walls. Fire Blast deletes Skarmory and heavily damages Metagross and Forretress. Hidden Power Grass or special coverage punishes Swampert, which is otherwise one of the tier's most common defensive anchors. Because these coverage combinations overlap imperfectly with defensive answers, scouting Salamence's set is often mandatory before committing to a line.\n\nSalamence also defines how teams use Rock coverage and Speed control. Rock Slide and Hidden Power Flying resistances are valued in part because of Salamence's presence. Faster threats and priority Explosion users are frequently preserved specifically to prevent a Salamence endgame. Its weakness to Rock Slide and vulnerability to sand plus Spikes chip mean it rarely sweeps from full-health opposition without prior groundwork, but ADV is a chip-driven metagame — and Salamence is one of the best at converting chip into wins.\n\nDefensively, Salamence is not bulky in the traditional sense, but its resistances to Fighting, Fire, Water, and Grass, combined with Ground immunity, give it meaningful pivot utility. It commonly rotates with Steel-types and bulky waters to form Intimidate-based defensive loops that reduce physical damage over time. Even when not sweeping, it often contributes repeated value through attack drops, forced switches, and coverage pressure.",
+      
+      "sets": {
+        "dragon_dance": {
+          "name": "Dragon Dance",
+          "description": "Dragon Dance Salamence is the classic physical win-condition set. Maximum Speed ensures that after one Dragon Dance boost, Salamence outspeeds the entire unboosted metagame and most boosted mid-speed threats. Maximum Attack maximizes sweep conversion once setup is achieved. A Naive nature preserves special attack for minor mixed damage and avoids lowering Speed. Hidden Power Flying is the primary STAB and hits harder than Aerial Ace while retaining strong neutral coverage. Earthquake removes Tyranitar, Metagross, and Jirachi. Rock Slide covers Zapdos, opposing Salamence, and Gyarados, preventing Flying-types from walling the set. This set matters because once Skarmory and bulky waters are sufficiently weakened or removed, very few teams can absorb boosted Flying + Ground coverage safely. The Speed benchmark after one boost is what turns midgame positioning wins into endgame sweeps.",
+          "item": "Leftovers",
+          "nature": "Naive",
+          "evs": "252 Atk / 4 SpA / 252 Spe",
+          "moves": ["Dragon Dance", "Hidden Power Flying", "Earthquake", "Rock Slide"]
+        },
+        
+        "mixed": {
+          "name": "Mixed (MixMence)",
+          "description": "Mixed Salamence is designed to break defensive cores rather than sweep outright. The Speed investment outruns neutral base 90 Pokémon and many defensive spreads, ensuring Salamence attacks first against key walls. Special Attack is maximized to guarantee heavy damage or knockouts on Skarmory and significant damage into Metagross and Forretress with Fire Blast. The Attack investment ensures Brick Break and Rock Slide still secure important two-hit knockouts after Intimidate cycling and sand chip. Hidden Power Grass specifically targets Swampert, preventing it from serving as a universal Salamence answer. Brick Break pressures Tyranitar and Blissey. Rock Slide prevents Zapdos from switching in freely. This set matters because it invalidates standard Skarmory + Swampert + Blissey defensive triangles by threatening all three slots with the correct prediction. Even when it does not sweep, it often opens decisive holes for teammates by forcing damage onto the exact Pokémon meant to anchor the opponent's structure.",
+          "item": "Leftovers",
+          "nature": "Rash",
+          "evs": "80 Atk / 252 SpA / 176 Spe",
+          "moves": ["Fire Blast", "Hidden Power Grass", "Brick Break", "Rock Slide"]
+        }
+      },
+      
+      "checks_and_counters": {
+        "hard_counters": ["Skarmory (if no Fire Blast)", "Suicune", "Milotic"],
+        "soft_checks": ["Swampert (if no HP Grass)", "Zapdos", "Blissey"],
+        "revenge_killers": ["Aerodactyl", "Ice Beam users", "Dugtrio"],
+        "notes": "Salamence relies on chip damage to sweep. Ice Beam and Rock coverage are common specifically to check it. Preserve faster threats to prevent late-game sweeps."
+      }
+    },
+    
+    "metagross": {
+      "name": "Metagross",
+      "types": ["Steel", "Psychic"],
+      "ability": "Clear Body",
+      "base_stats": {
+        "hp": 80,
+        "atk": 135,
+        "def": 130,
+        "spa": 95,
+        "spd": 90,
+        "spe": 70
+      },
+      "viability": "S",
+      "role": "Bulky Attacker / Physical Wall / Setup Sweeper",
+      
+      "overview": "Metagross is one of the most structurally important offensive and defensive hybrids in Generation III OU. It is one of the tier's primary glue threats, combining elite Attack, excellent defensive typing, and just enough bulk to repeatedly influence board position. Unlike more specialized Steels, Metagross is rarely passive. Every time it enters the field it threatens immediate, irreversible progress through high base power attacks, Explosion trades, or lure pressure. Many ADV team structures are built not just to use Metagross, but to manage opposing Metagross safely across a long game.\n\nSteel typing is uniquely valuable in ADV. Metagross resists Rock, Psychic, Flying, Normal, Ghost, and Grass, and is immune to Toxic. In a sandstorm-heavy, Spikes-centric metagame where chip damage defines outcomes, those resistances convert directly into usable switch-in opportunities. Metagross is a consistent pivot into Choice Band Rock Slide users, many Tyranitar variants, and numerous physical attackers. Unlike Skarmory or Forretress, however, it does not give momentum away when it comes in. The opponent is immediately forced into a damage-control decision.\n\nBase 135 Attack defines how Metagross shapes exchanges. Meteor Mash is one of the most dangerous neutral buttons in the tier, with both high base power and a meaningful chance to raise Attack, which can suddenly flip damage math and force sacks. Earthquake complements it by removing opposing Steels and punishing Tyranitar. Rock Slide rounds out coverage against Zapdos, Salamence, and Gyarados. Explosion is the most important structural tool — Metagross can convert its presence directly into removal of a bulky water or special wall at any time. This makes every switch into Metagross a calculated risk rather than a safe default.\n\nSet diversity increases its metagame weight. Bulky attacker sets trade repeatedly and threaten Explosion. Agility sets convert midgame chip into late-game sweeps. Choice Band variants maximize immediate punishment and force harsher defensive cycling. Mixed or Hidden Power Grass variants exist specifically to break Swampert-centered defensive cores. Because multiple branches are viable and tournament-proven, opponents cannot assume a single response pattern without scouting.\n\nMetagross is not without constraints. It lacks recovery and is vulnerable to Fire- and Ground-type coverage from mixed attackers like Salamence and Tyranitar. Magneton can trap and remove it if mispositioned. It is also susceptible to cumulative Spikes damage. Even so, its stat density and role compression mean it frequently trades up in value, and it is common for Metagross to remove something more important than itself before going down.",
+      
+      "sets": {
+        "bulky_attacker": {
+          "name": "Bulky Attacker",
+          "description": "This is the classic bulky attacker Metagross used on balance and bulky offense. Maximum HP investment allows repeated entry into resisted physical attacks and Choice Band Rock Slides while maintaining strong overall durability under sand and Spikes pressure. The Attack investment secures important two-hit knockouts on neutral targets and heavily punishes common switch-ins. Meteor Mash is the primary midground attack and progress generator. Earthquake covers opposing Metagross and Tyranitar. Rock Slide prevents Flying-types such as Salamence and Zapdos from pivoting freely. Explosion converts positional advantage into material advantage by removing a bulky water or special wall when needed. The small Speed investment is typically used to outrun uninvested base 70 Pokémon and low-Speed Metagross in mirror situations, which can decide Explosion trades.",
+          "item": "Leftovers",
+          "nature": "Adamant",
+          "evs": "252 HP / 236 Atk / 12 Def / 8 Spe",
+          "moves": ["Meteor Mash", "Earthquake", "Explosion", "Rock Slide"]
+        },
+        
+        "agility": {
+          "name": "Agility",
+          "description": "Agility Metagross shifts roles from tank to cleaner. After one Agility, this Speed investment outspeeds the entire unboosted metagame, including base 130 Speed threats. Maximum Attack ensures that boosted Meteor Mash and Earthquake convert directly into knockouts once defensive checks are weakened. The remaining HP EVs slightly improve setup odds against resisted hits after an Intimidate drop or forced switch. This set matters because it punishes teams that rely purely on Speed control rather than layered defensive answers. Once Swampert and other bulky Grounds are chipped or removed, Agility Metagross can end games quickly. Explosion remains available as a final trade button if a single hard counter remains standing.",
+          "item": "Leftovers",
+          "nature": "Adamant",
+          "evs": "60 HP / 252 Atk / 196 Spe",
+          "moves": ["Agility", "Meteor Mash", "Earthquake", "Explosion"]
+        }
+      },
+      
+      "checks_and_counters": {
+        "hard_counters": ["Swampert", "Suicune", "Skarmory"],
+        "soft_checks": ["Zapdos (if no Rock Slide)", "Salamence (Intimidate)", "Claydol"],
+        "revenge_killers": ["Magneton (Magnet Pull trap)", "Dugtrio"],
+        "notes": "Metagross lacks recovery and is worn down by Spikes + sand. Magneton trapping is a major threat. Fire and Ground coverage from mixed attackers force it out."
+      }
+    },
+    
+    "suicune": {
+      "name": "Suicune",
+      "types": ["Water"],
+      "ability": "Pressure",
+      "base_stats": {
+        "hp": 100,
+        "atk": 75,
+        "def": 115,
+        "spa": 90,
+        "spd": 115,
+        "spe": 85
+      },
+      "viability": "A",
+      "role": "Bulky Setup Sweeper / Physical Wall / Phazer",
+      
+      "overview": "Suicune is one of the defining bulky win-condition Pokémon in ADV OU and a central pillar of long-game structures. It represents the metagame's most reliable blend of defensive stability and inevitable offensive pressure. Unlike many walls that exist only to absorb hits and enable teammates, Suicune frequently *is* the plan — a Pokémon that can anchor defensive cores early and then convert into a game-ending threat once opposing answers are weakened. Teams are often evaluated by how they pressure or contain Suicune over extended sequences.\n\nPure Water typing combined with excellent natural bulk gives Suicune unusually consistent field time. It switches comfortably into many of the format's most common attackers, including non-boosted Tyranitar, Metagross lacking Explosion pressure, Salamence without dedicated Electric coverage, and numerous mixed attackers once scouted. In a sandstorm-heavy environment, Leftovers recovery plus high base defenses allow Suicune to remain functional deep into games. It is one of the most dependable absorbers of neutral damage in the tier.\n\nWhat makes Suicune metagame-shaping rather than merely sturdy is Calm Mind. Calm Mind turns Suicune from a sponge into a scaling threat that pressures both physical and special structures. After one or two boosts, common special attackers such as Zapdos, offensive Starmie, and mixed threats struggle to break it meaningfully. Because ADV lacks many high-powered super-effective special Water answers outside Electric- and Grass-type coverage, Calm Mind Suicune can create forced endgames where the opponent must rely on critical hits, Explosion, or phazing to prevent a sweep.\n\nDifferent Suicune variants produce different strategic demands. Offensive Calm Mind sets aim to win through pressure and coverage, often running Ice Beam to remove Salamence and Celebi switch-ins. RestTalk Calm Mind sets trade immediate power for long-term inevitability, using Sleep Talk to remain active while healing status and damage. Roar variants focus on hazard abuse, pairing with Spikes to repeatedly force switches and accumulate chip. Because each variant asks different answers from the opponent, early identification is important.\n\nSuicune also strongly influences team construction around Electric coverage and Explosion usage. Teams commonly carry at least one dedicated Electric attacker, strong Grass coverage user, or phazer largely because Suicune exists. Explosion from Metagross, Snorlax, or Gengar is frequently preserved specifically to remove it. Its presence increases the value of Spikes and sand chip, since even Suicune can be forced into unfavorable Rest cycles when repeatedly pressured.\n\nIts main limitations are lack of instant recovery outside Rest and vulnerability to dedicated special walls like Blissey, which can stall or status it unless Suicune is heavily boosted or carrying specific tech. It can also be forced out by phazing from Skarmory or Swampert. Still, in many games Suicune does not need to sweep to decide the outcome — it only needs to absorb, boost, and force constrained lines until the opponent runs out of safe options.",
+      
+      "sets": {
+        "calm_mind_rest": {
+          "name": "Calm Mind + Rest",
+          "description": "This is the classic Calm Mind + Rest Suicune built for durability and endgame inevitability. Maximum HP and Defense investment allow Suicune to repeatedly switch into physical attackers such as Tyranitar and Metagross and begin boosting without being forced out immediately. The Bold nature strengthens those physical matchups, which is critical because many attempts to stop Suicune involve physical Explosion or strong neutral hits. Surf is the primary STAB and scales reliably with Calm Mind boosts. Ice Beam is chosen specifically to remove Salamence and heavily pressure Celebi, two of the most common switch-ins to mono-Water attackers. Rest provides full recovery and status clearing, enabling Suicune to outlast Toxic attempts and sand chip. This set matters because after even one Calm Mind, key special attackers fail to break it efficiently, and after multiple boosts it can push through most non-phazing teams if Blissey has been weakened or removed.",
+          "item": "Leftovers",
+          "nature": "Bold",
+          "evs": "252 HP / 252 Def / 4 SpA",
+          "moves": ["Calm Mind", "Surf", "Ice Beam", "Rest"]
+        },
+        
+        "calm_mind_roar": {
+          "name": "Calm Mind + Roar",
+          "description": "Roar Calm Mind Suicune trades immediate coverage for hazard control and positional dominance. The physical bulk investment again targets repeated switch-ins on Tyranitar, Metagross, and Salamence. The Special Attack allocation ensures Surf still threatens two-hit knockouts on frailer neutral targets after boosts while not sacrificing too much durability. Roar prevents opposing setup sweepers from exploiting Suicune and synergizes strongly with Spikes support, turning each forced switch into permanent progress. This set matters most on Spikes balance and bulky offense builds where Suicune acts as both defensive anchor and hazard amplifier. Instead of sweeping directly, it wins by repeatedly boosting, forcing switches, and compounding chip until opposing counters fall into range for teammates.",
+          "item": "Leftovers",
+          "nature": "Bold",
+          "evs": "252 HP / 200 Def / 56 SpA",
+          "moves": ["Surf", "Calm Mind", "Roar", "Rest"]
+        }
+      },
+      
+      "checks_and_counters": {
+        "hard_counters": ["Blissey", "Celebi (with Leech Seed)", "Raikou"],
+        "soft_checks": ["Zapdos (before boosts)", "Starmie", "Jirachi"],
+        "revenge_killers": ["None (too bulky)", "Explosion users (Metagross, Snorlax, Gengar)"],
+        "notes": "Suicune requires Electric coverage, Grass coverage, phazing, or Explosion to handle. Preserve these tools and chip it with Spikes + sand to prevent late-game sweeps."
+      }
+    },
+    
+    "celebi": {
+      "name": "Celebi",
+      "types": ["Psychic", "Grass"],
+      "ability": "Natural Cure",
+      "base_stats": {
+        "hp": 100,
+        "atk": 100,
+        "def": 100,
+        "spa": 100,
+        "spd": 100,
+        "spe": 100
+      },
+      "viability": "A",
+      "role": "Defensive Pivot / Disruptor / Setup Sweeper",
+      
+      "overview": "Celebi is one of the most structurally important balance anchors in ADV OU, functioning as a pivot, disruptor, and progress engine all at once. It is not defined by raw power or immediate threat, but by how efficiently it compresses defensive utility and long-game pressure into a single slot. Celebi's presence stabilizes bulky offense and balance builds by checking multiple top-tier threats while simultaneously spreading status and forcing incremental advantage. Many ADV defensive frameworks are built with Celebi as the central connective piece.\n\nGrass / Psychic typing combined with strong all-around base stats gives Celebi a rare defensive profile. It checks Swampert reliably, pressures Suicune, resists Fighting-type coverage aimed at Tyranitar and Blissey, and pivots into many mixed attackers lacking super-effective coverage. Natural Cure is a major part of its metagame value. Celebi can absorb status freely, pivot out, and return later fully functional, which makes it one of the safest switch-ins to Toxic and paralysis spreaders. In a tier where status is a primary progress tool, that trait alone is format-defining.\n\nCelebi shapes the metagame through disruption. Leech Seed, Recover, and status moves allow it to create forced switches and drain-based advantage loops. Baton Pass variants maintain momentum and prevent trapping or Pursuit sequences from ending its influence. Calm Mind sets transform Celebi from passive pivot into legitimate win condition, especially against teams that rely too heavily on bulky waters and special attackers to hold ground. Because Celebi can run multiple viable branches — defensive seed support, offensive Calm Mind, or pass-based pivot — opponents must identify the set before committing to a line.\n\nIts interaction with Tyranitar is one of the central tensions of ADV OU. Tyranitar threatens Celebi with Pursuit and super-effective STAB, while Celebi checks many of the bulky waters and Grounds that Tyranitar teams rely on to maintain structure. This creates repeated pivot wars where double switches and Baton Pass usage matter. Celebi users often build with Tyranitar counterplay baked in, such as Dugtrio support, defensive Swampert, or Fighting coverage elsewhere.\n\nCelebi also meaningfully affects how teams approach Suicune and Swampert. Without Celebi, many builds struggle to maintain long-term pressure against Calm Mind waters. With Celebi, those matchups become manageable or even favorable. That dynamic alone keeps Celebi consistently relevant across tournament play.\n\nIts weaknesses are clear but manageable. A 4× Bug weakness makes it extremely vulnerable to Hidden Power Bug from Tyranitar and certain mixed attackers. Pursuit trapping is a constant risk. It also lacks immediate offensive threat without setup, which can allow aggressive doubles from experienced opponents. Even so, its role compression, status resilience, and pivot value keep it among the most influential glue Pokémon in the tier.",
+      
+      "sets": {
+        "defensive_pivot": {
+          "name": "Defensive Pivot",
+          "description": "This is the classic defensive pivot Celebi used on balance and bulky offense. Maximum HP and heavy Defense investment allow Celebi to switch repeatedly into Swampert, Suicune, and physical attackers lacking super-effective coverage. The Speed investment is typically used to outrun uninvested base 70 Pokémon and many opposing bulky pivots, enabling safer Recover or Baton Pass before taking a hit. Leech Seed generates passive recovery and forces switches, creating steady chip in Spikes and sand environments. Recover provides reliable longevity. Psychic prevents Celebi from being fully passive and pressures Fighting-types and certain mixed attackers. Baton Pass preserves momentum and prevents Pursuit users from trapping Celebi on predicted switches. This set matters because it turns Celebi into a repeatable progress node — absorbing status, forcing movement, and transferring advantage to teammates without giving up position.",
+          "item": "Leftovers",
+          "nature": "Bold",
+          "evs": "252 HP / 220 Def / 36 Spe",
+          "moves": ["Leech Seed", "Recover", "Psychic", "Baton Pass"]
+        },
+        
+        "calm_mind": {
+          "name": "Calm Mind",
+          "description": "Calm Mind Celebi converts defensive stability into win-condition potential. The physical bulk investment maintains its ability to check Swampert and pivot into neutral physical hits, while the Special Attack allocation ensures boosted Psychic and Giga Drain reach important damage thresholds after one or two Calm Minds. Psychic is the primary damage move and scales well with boosts. Giga Drain provides recovery while directly targeting bulky waters and Grounds. Recover keeps Celebi healthy through setup attempts and status exchanges. This set matters because teams that rely only on bulky waters and passive special walls to handle Celebi can be overwhelmed once boosts accumulate. It forces more proactive counterplay such as phazing, strong Bug coverage, or Explosion trades.",
+          "item": "Leftovers",
+          "nature": "Bold",
+          "evs": "252 HP / 200 Def / 56 SpA",
+          "moves": ["Calm Mind", "Psychic", "Giga Drain", "Recover"]
+        }
+      },
+      
+      "checks_and_counters": {
+        "hard_counters": ["Tyranitar (Pursuit + HP Bug)", "Blissey", "Snorlax"],
+        "soft_checks": ["Fire-types", "Flying-types", "Jirachi"],
+        "revenge_killers": ["Aerodactyl", "Dugtrio (trap)", "Bug coverage users"],
+        "notes": "4× Bug weakness is crippling. Tyranitar with Pursuit and HP Bug is Celebi's worst nightmare. Baton Pass helps avoid Pursuit traps."
+      }
+    },
+    
+    "jirachi": {
+      "name": "Jirachi",
+      "types": ["Steel", "Psychic"],
+      "ability": "Serene Grace",
+      "base_stats": {
+        "hp": 100,
+        "atk": 100,
+        "def": 100,
+        "spa": 100,
+        "spd": 100,
+        "spe": 100
+      },
+      "viability": "A",
+      "role": "Pivot / Setup Sweeper / Wish Support / Mixed Attacker",
+      
+      "overview": "Jirachi is one of the most adaptable and structurally influential Pokémon in ADV OU, functioning as a pivot, win condition, disruptor, and glue piece depending on configuration. Its defining trait is not raw stat dominance in any one category, but exceptional stat balance combined with one of the best defensive typings in the format. Steel / Psychic with numerous key resistances allows Jirachi to enter play frequently, and its movepool breadth ensures that repeated entries almost always generate pressure rather than passivity. Many ADV balance and bulky offense teams rely on Jirachi as a central stabilizer that also threatens to snowball games.\n\nDefensively, Jirachi resists Rock, Flying, Grass, Ice, Normal, Psychic, and Dragon, and is immune to Toxic. In a sandstorm-driven tier where passive damage accumulates quickly, that immunity is particularly valuable. Jirachi can repeatedly pivot into common attacks from Zapdos, Celebi, non-Earthquake Tyranitar variants, and various mixed attackers. Unlike more passive Steels, however, Jirachi rarely gives away free turns. Its offensive and disruptive options force immediate respect from the opponent.\n\nCalm Mind sets are the most metagame-defining branch. With Calm Mind and either Wish or Substitute, Jirachi becomes a scaling special tank that is difficult to break without Ground coverage, phazing, or Explosion. Its special bulk increases rapidly, and its Steel typing gives it strong defensive matchups into many special attackers even before boosting. These sets often win through inevitability rather than burst damage, using repeated boosts and recovery to push through defensive cores once specific counters are weakened.\n\nOffensive Jirachi variants reshape speed control and positioning. Mixed attacking sets with Fire Punch and Ice Punch pressure Salamence, Celebi, and Metagross simultaneously. Faster spreads allow Jirachi to outrun key base 90 and base 100 benchmarks, changing revenge-kill math. Choice Band sets, while less common, can function as surprise breakers that exploit its wide coverage and strong Attack stat. Because several branches are viable, scouting Jirachi's first revealed move is strategically important.\n\nJirachi also plays a major support role through Wish. Wish-passing variants extend the longevity of Spikes setters, Tyranitar, and bulky waters, enabling longer hazard games and more aggressive Explosion usage from teammates. In long-form ADV games, Wish support often changes which side wins the resource war. This alone gives Jirachi value even when it is not the primary win condition.\n\nIts weaknesses are mostly coverage-based. Ground-type attacks from Swampert, Flygon, and Metagross are the most consistent way to threaten it. Magneton can trap certain variants lacking appropriate coverage. Without recovery moves or Wish, it can be worn down by Spikes and sand. Even so, its flexibility and typing ensure it remains one of the most reliable role-compressing picks in the tier.",
+      
+      "sets": {
+        "calm_mind_wish": {
+          "name": "Calm Mind + Wish",
+          "description": "Calm Mind Wish Jirachi is a balance staple that combines scaling threat with team support. Maximum HP and strong Defense investment allow Jirachi to switch repeatedly into resisted physical and special hits, particularly from Zapdos, Celebi, and mixed attackers lacking Ground coverage. The Speed investment is commonly used to outrun uninvested base 90 Pokémon and slower defensive pivots, ensuring Jirachi can boost or Wish before taking a hit. Calm Mind increases both damage output and special durability, allowing Jirachi to outscale many special attackers. Psychic is the primary STAB and remains reliable after boosts. Fire Punch prevents Steel-types such as Metagross, Skarmory, and Forretress from walling the set. Wish provides both self-sustain and team healing. This set matters because it forces opponents to maintain Ground pressure or phazing access; otherwise Jirachi can both keep a team healthy and become the endgame win condition itself.",
+          "item": "Leftovers",
+          "nature": "Bold",
+          "evs": "252 HP / 160 Def / 96 Spe",
+          "moves": ["Calm Mind", "Psychic", "Fire Punch", "Wish"]
+        },
+        
+        "mixed_attacker": {
+          "name": "Mixed Attacker",
+          "description": "Mixed attacking Jirachi is designed to pressure common defensive cores immediately rather than scale. Maximum Speed allows it to outrun base 100 Pokémon and many offensive threats, shifting revenge and pivot dynamics. The split attacking investment ensures each coverage move reaches meaningful damage thresholds against its intended targets. Psychic provides consistent STAB damage. Fire Punch removes Skarmory and heavily damages Metagross and Forretress. Ice Punch pressures Salamence, Flygon, and Celebi. Hidden Power Grass targets Swampert, which otherwise walls many Jirachi variants. This set matters because it compresses multi-target lure pressure into one slot, forcing defensive teams to absorb unexpected coverage and opening holes for physical sweepers behind it.",
+          "item": "Leftovers",
+          "nature": "Hasty",
+          "evs": "80 Atk / 176 SpA / 252 Spe",
+          "moves": ["Psychic", "Fire Punch", "Ice Punch", "Hidden Power Grass"]
+        }
+      },
+      
+      "checks_and_counters": {
+        "hard_counters": ["Swampert", "Dugtrio (trap)", "Ground-types"],
+        "soft_checks": ["Blissey (unboosted)", "Magneton (trap)", "Salamence"],
+        "revenge_killers": ["Dugtrio", "Faster Ground coverage users"],
+        "notes": "Ground coverage is Jirachi's main weakness. Magneton can trap variants without HP Grass. Without recovery, it's worn down by Spikes + sand."
+      }
+    },
+    
+    "magneton": {
+      "name": "Magneton",
+      "types": ["Electric", "Steel"],
+      "ability": "Magnet Pull",
+      "base_stats": {
+        "hp": 50,
+        "atk": 60,
+        "def": 95,
+        "spa": 120,
+        "spd": 70,
+        "spe": 70
+      },
+      "viability": "B",
+      "role": "Trapper / Special Attacker / Support",
+      
+      "overview": "Magneton is one of the most strategically warping support attackers in ADV OU because it uniquely removes Steel-types from the game through Magnet Pull. This single ability reshapes how teams are built and how defensive cores function. Skarmory, Forretress, and many Metagross and Jirachi variants cannot safely exist in the same structural role when Magneton is present. As a result, Magneton is less about raw stat dominance and more about controlled elimination of specific defensive anchors that offensive teammates depend on being gone.\n\nThe ADV metagame is heavily defined by Spikes, sand, and Steel-type defensive backbones. Skarmory in particular is central to many balance and stall structures, checking physical sweepers and enabling hazard pressure. Magneton invalidates that stability by trapping and removing Skarmory outright with Electric STAB and Hidden Power Fire. Forretress is even more vulnerable, often unable to meaningfully damage Magneton before being eliminated. When those Pokémon are removed, physical attackers such as Salamence, Metagross, Tyranitar, and Heracross gain dramatically more freedom to convert pressure into knockouts.\n\nMagneton's offensive profile is straightforward but efficient. Base 120 Special Attack backed by Thunderbolt threatens heavy neutral damage even outside trapping scenarios. Its resistances — especially to Flying, Rock, and Normal — allow it to pivot into certain Choice Band attacks and Zapdos lines in emergencies. However, Magneton is not a general wall and is vulnerable to Ground- and Fire-type coverage, which limits how aggressively it can be deployed outside its trapping role.\n\nSpeed investment is a major metagame lever on Magneton sets. Faster variants are designed specifically to outspeed standard Skarmory spreads and many defensive Steel benchmarks, ensuring the trap succeeds before phazing or status can interfere. Bulkier variants trade Speed for survivability against Metagross and Jirachi coverage, enabling more flexible entry windows. Because the trap is often game-defining, these EV decisions are not cosmetic — they directly determine whether the Steel actually gets removed.\n\nMagneton also influences how Steel-types are played even when it is not revealed. Players often scout aggressively with their Steel pivots or pair them with Dugtrio counter-trapping support. Shed Shell does not exist in ADV, so once caught, the Steel is gone. That reality forces more conservative Steel positioning across the entire tier whenever Magneton is plausible from preview.\n\nIts limitations are clear. Outside of trapping, Magneton can become momentum-negative against bulky Grounds like Swampert and Flygon, and Blissey walls it comfortably. It lacks recovery and is worn down quickly by sand and Spikes. Even so, the guaranteed removal of a key Steel-type is often worth more than Magneton itself, and many offensive structures are built specifically to capitalize on that one exchange.",
+      
+      "sets": {
+        "standard_trapper": {
+          "name": "Standard Trapper",
+          "description": "This is the standard Skarmory-trapping Magneton built to guarantee removal while maintaining some midgame utility. Maximum Special Attack ensures Thunderbolt and Hidden Power Fire achieve clean knockouts on Skarmory and Forretress. The Speed investment is calibrated to outspeed common Skarmory and slower defensive Steel spreads, ensuring Magneton attacks before phazing or status moves resolve. The remaining HP EVs slightly improve switching durability against resisted hits. Thunderbolt is the primary STAB and trap-finisher. Hidden Power Fire specifically targets Steel-types that resist Electric, most importantly Skarmory, Forretress, Metagross, and Jirachi. Toxic punishes switch-ins such as Swampert and Blissey if Magneton is forced out after a trap attempt. Protect scouts Choice Band users and accumulates Leftovers plus sand turns. This set matters because it converts a predicted Steel switch into permanent removal, which often unlocks entire offensive game plans.",
+          "item": "Leftovers",
+          "nature": "Modest",
+          "evs": "40 HP / 252 SpA / 216 Spe",
+          "moves": ["Thunderbolt", "Hidden Power Fire", "Toxic", "Protect"]
+        },
+        
+        "bulky_trapper": {
+          "name": "Bulky Trapper",
+          "description": "Bulkier Magneton spreads reduce Speed to gain better survivability against Metagross and Jirachi coverage while still outrunning minimum-Speed Skarmory. The HP investment improves setup opportunities for Substitute on forced switches and resisted attacks. Maximum Special Attack is retained to preserve trapping certainty. Substitute protects Magneton from status and Explosion attempts while trapping, and it eases prediction against mixed Steel variants. Thunder Wave adds team speed control and punishes common Ground-type switch-ins on prediction. This set matters on more deliberate offensive builds where ensuring the trap succeeds safely is more important than maximizing Speed benchmarks.",
+          "item": "Leftovers",
+          "nature": "Modest",
+          "evs": "172 HP / 252 SpA / 84 Spe",
+          "moves": ["Thunderbolt", "Hidden Power Fire", "Thunder Wave", "Substitute"]
+        }
+      },
+      
+      "checks_and_counters": {
+        "hard_counters": ["Swampert", "Blissey", "Ground-types"],
+        "soft_checks": ["Zapdos", "Celebi", "Dugtrio (counter-trap)"],
+        "revenge_killers": ["Dugtrio", "Earthquake users"],
+        "notes": "Magneton's sole job is trapping and removing Steel-types. Without Steels to trap, it's very passive. Preserve Magneton for the key trap moment."
+      }
+    }
+  }
+}
