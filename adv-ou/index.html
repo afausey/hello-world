@@ -1784,94 +1784,71 @@
                         <div class="speed-diagram-column-header ${colorClass}">${label}</div>
                 `;
 
-                // Sort by speed and collect all speeds
+                // Sort by speed descending
                 const sortedPokemon = [...columnPokemon].sort((a, b) => b.speed - a.speed);
 
-                // Track occupied Y positions to avoid vertical overlap
-                const occupiedYRanges = []; // Array of {yMin, yMax, xSlots: []}
+                // Track all placed sprites with their exact positions
+                const placedSprites = []; // Array of {y, x}
+                const spriteHeight = spriteSize + 8;
+                const spriteWidth = spriteSize + 8;
 
-                // Helper to find available position avoiding all overlaps
-                const findPosition = (speed, index) => {
+                // Helper to check if a position overlaps with any existing sprite
+                const hasOverlap = (y, x) => {
+                    for (const placed of placedSprites) {
+                        const yOverlap = Math.abs(y - placed.y) < spriteHeight;
+                        const xOverlap = Math.abs(x - placed.x) < spriteWidth;
+                        if (yOverlap && xOverlap) return true;
+                    }
+                    return false;
+                };
+
+                // Helper to find available position
+                const findPosition = (speed) => {
                     const baseY = getYPosition(speed);
-                    const spriteHeight = spriteSize + 4;
-                    const spriteWidth = spriteSize + 4;
+                    const baseX = 10;
 
-                    // Check for conflicts with existing sprites
-                    let yOffset = 0;
-                    let xSlot = 0;
-                    let foundPosition = false;
+                    // Try positions: first at base, then offset horizontally, then vertically
+                    const maxHorizontalSlots = 5;
+                    const maxVerticalOffsets = 10;
 
-                    // Try to find a non-overlapping position
-                    for (let attempt = 0; attempt < 20 && !foundPosition; attempt++) {
-                        const testY = baseY + yOffset;
-                        const testYMin = testY - spriteHeight / 2;
-                        const testYMax = testY + spriteHeight / 2;
+                    for (let vOffset = 0; vOffset < maxVerticalOffsets; vOffset++) {
+                        // Alternate above and below
+                        const yShift = Math.ceil(vOffset / 2) * spriteHeight * (vOffset % 2 === 0 ? 1 : -1);
+                        const testY = baseY + (vOffset === 0 ? 0 : yShift);
 
-                        // Check against all occupied ranges
-                        let hasConflict = false;
-                        let conflictXSlots = [];
+                        for (let hSlot = 0; hSlot < maxHorizontalSlots; hSlot++) {
+                            const testX = baseX + (hSlot * spriteWidth);
 
-                        for (const range of occupiedYRanges) {
-                            // Check if Y ranges overlap
-                            if (!(testYMax < range.yMin || testYMin > range.yMax)) {
-                                hasConflict = true;
-                                conflictXSlots = conflictXSlots.concat(range.xSlots);
-                            }
-                        }
-
-                        if (!hasConflict) {
-                            foundPosition = true;
-                            xSlot = 0;
-                        } else {
-                            // Find an available X slot
-                            const usedSlots = new Set(conflictXSlots);
-                            for (let s = 0; s < 6; s++) {
-                                if (!usedSlots.has(s)) {
-                                    xSlot = s;
-                                    foundPosition = true;
-                                    break;
-                                }
-                            }
-
-                            if (!foundPosition) {
-                                // Try different Y offset
-                                yOffset = (Math.floor(attempt / 2) + 1) * spriteHeight * (attempt % 2 === 0 ? 1 : -1);
+                            if (!hasOverlap(testY, testX)) {
+                                placedSprites.push({ y: testY, x: testX });
+                                return { x: testX, y: testY };
                             }
                         }
                     }
 
-                    const finalY = baseY + yOffset;
-
-                    // Record this position
-                    occupiedYRanges.push({
-                        yMin: finalY - spriteHeight / 2,
-                        yMax: finalY + spriteHeight / 2,
-                        xSlots: [xSlot]
-                    });
-
-                    // Calculate X position
-                    let xPos;
-                    if (alignRight) {
-                        // Negative nature: align to right, sprites go leftward from right edge
-                        xPos = columnWidth - 60 - (xSlot * (spriteWidth + 2));
-                    } else {
-                        // Positive nature: align to left, sprites go rightward from left edge
-                        xPos = 10 + (xSlot * (spriteWidth + 2));
-                    }
-
-                    return { x: xPos, y: finalY };
+                    // Fallback: just place it somewhere
+                    const fallbackX = baseX + (placedSprites.length % maxHorizontalSlots) * spriteWidth;
+                    const fallbackY = baseY;
+                    placedSprites.push({ y: fallbackY, x: fallbackX });
+                    return { x: fallbackX, y: fallbackY };
                 };
 
                 // Render Pokemon sprites
-                sortedPokemon.forEach((p, idx) => {
-                    const pos = findPosition(p.speed, idx);
+                sortedPokemon.forEach((p) => {
+                    const pos = findPosition(p.speed);
 
                     const key = getPokemonKeyByName(p.name);
                     const onclick = key ? `onclick="showPokemonDetail('${key}')"` : '';
 
+                    // Use 'right' positioning for negative nature (align to center)
+                    // Use 'left' positioning for positive nature (align to center)
+                    const posStyle = alignRight
+                        ? `top: ${pos.y}px; right: ${pos.x}px;`
+                        : `top: ${pos.y}px; left: ${pos.x}px;`;
+
                     html += `
                         <div class="speed-diagram-sprite" ${onclick}
-                             style="top: ${pos.y}px; left: ${pos.x}px;"
+                             style="${posStyle}"
                              title="${p.name}: ${p.speed} Spe&#10;${p.description}">
                             ${createSprite(p.name, spriteSize)}
                         </div>
