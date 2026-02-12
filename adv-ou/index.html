@@ -1686,7 +1686,7 @@
             // From key benchmarks
             Object.entries(benchmarks).forEach(([speed, info]) => {
                 const natureStr = (info.nature || '').toLowerCase();
-                let natureType = 'neutral';
+                let natureType = 'positive'; // Default to positive
                 if (natureStr.includes('jolly') || natureStr.includes('timid')) {
                     natureType = 'positive';
                 } else if (natureStr.includes('adamant') || natureStr.includes('modest') || natureStr.includes('brave') || natureStr.includes('quiet')) {
@@ -1709,7 +1709,7 @@
             Object.values(tiers).forEach(tier => {
                 (tier.pokemon || []).forEach(p => {
                     const setStr = (p.set || p.condition || '').toLowerCase();
-                    let natureType = 'neutral';
+                    let natureType = 'positive'; // Default to positive
                     if (setStr.includes('jolly') || setStr.includes('timid')) {
                         natureType = 'positive';
                     } else if (setStr.includes('adamant') || setStr.includes('modest')) {
@@ -1734,22 +1734,23 @@
             // Sort by speed descending
             pokemonData.sort((a, b) => b.speed - a.speed);
 
-            // Group by nature
+            // Group by nature (only positive and negative)
             const byNature = {
                 negative: pokemonData.filter(p => p.nature === 'negative'),
-                neutral: pokemonData.filter(p => p.nature === 'neutral'),
                 positive: pokemonData.filter(p => p.nature === 'positive')
             };
 
             // Calculate diagram dimensions
             const minSpeed = 90;
             const maxSpeed = 420;
-            const diagramHeight = 600;
+            const diagramHeight = 700;
+            const spriteSize = 40;
+            const columnWidth = 350; // Wider columns for better spacing
 
             // Helper to calculate Y position (higher speed = higher on diagram)
             const getYPosition = (speed) => {
                 const percentage = (speed - minSpeed) / (maxSpeed - minSpeed);
-                return diagramHeight - (percentage * (diagramHeight - 60)) - 30; // Leave margin for header
+                return diagramHeight - (percentage * (diagramHeight - 80)) - 40; // Leave margin for header
             };
 
             // Generate Y-axis labels
@@ -1758,9 +1759,9 @@
             let html = `
                 <div class="card">
                     <h2>Speed by Nature Diagram</h2>
-                    <p class="text-secondary mb-4">Pokemon positioned by their Speed stat (Y-axis) and whether they use a speed-boosting, neutral, or speed-reducing nature (X-axis). Hover over sprites to see details.</p>
+                    <p class="text-secondary mb-4">Pokemon positioned by their Speed stat (Y-axis) and whether they use a speed-boosting or speed-reducing nature (X-axis). Hover over sprites to see details.</p>
                     <div class="speed-diagram-container">
-                        <div class="speed-diagram" style="height: ${diagramHeight}px;">
+                        <div class="speed-diagram" style="height: ${diagramHeight}px; grid-template-columns: 50px 1fr 1fr;">
                             <div class="speed-diagram-y-axis" style="height: ${diagramHeight}px;">
                                 ${yLabels.map(speed => `
                                     <span class="speed-diagram-y-label" style="position: absolute; top: ${getYPosition(speed) - 8}px; right: 8px;">${speed}</span>
@@ -1768,40 +1769,69 @@
                             </div>
             `;
 
-            // Render each column
-            ['negative', 'neutral', 'positive'].forEach((natureType, colIndex) => {
-                const label = natureType === 'negative' ? 'Speed- Nature' :
-                             natureType === 'neutral' ? 'Neutral Nature' : 'Speed+ Nature';
+            // Render each column (only negative and positive)
+            ['negative', 'positive'].forEach((natureType, colIndex) => {
+                const label = natureType === 'negative' ? 'Speed- Nature (Adamant, Modest, etc.)' : 'Speed+ Nature (Jolly, Timid)';
                 const colorClass = `nature-${natureType}`;
                 const columnPokemon = byNature[natureType];
 
                 html += `
-                    <div class="speed-diagram-column" style="height: ${diagramHeight}px; position: relative;">
+                    <div class="speed-diagram-column" style="height: ${diagramHeight}px; position: relative; min-width: ${columnWidth}px;">
                         <div class="speed-diagram-column-header ${colorClass}">${label}</div>
                 `;
 
-                // Track horizontal positions to avoid overlaps within same speed range
-                const occupiedPositions = {};
+                // Group Pokemon by exact speed value to handle overlaps
+                const bySpeed = {};
+                columnPokemon.forEach(p => {
+                    if (!bySpeed[p.speed]) bySpeed[p.speed] = [];
+                    bySpeed[p.speed].push(p);
+                });
 
-                columnPokemon.forEach((p, idx) => {
-                    const yPos = getYPosition(p.speed);
+                // Track occupied positions to avoid overlaps
+                const occupiedCells = new Set();
 
-                    // Find an available x position (stagger sprites at similar speeds)
-                    const speedBucket = Math.floor(p.speed / 20);
-                    if (!occupiedPositions[speedBucket]) occupiedPositions[speedBucket] = 0;
-                    const xOffset = (occupiedPositions[speedBucket] % 4) * 45 + 10;
-                    occupiedPositions[speedBucket]++;
+                // Helper to find available position
+                const findAvailablePosition = (baseY, baseX) => {
+                    // Try positions in a pattern: same row, then diagonal, then above/below
+                    const offsets = [
+                        [0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], // Same row, spread right
+                        [1, 0], [1, 1], [-1, 0], [-1, 1], // Above and below
+                        [1, 2], [-1, 2], [2, 0], [-2, 0]  // Further out
+                    ];
 
-                    const key = getPokemonKeyByName(p.name);
-                    const onclick = key ? `onclick="showPokemonDetail('${key}')"` : '';
+                    for (const [dy, dx] of offsets) {
+                        const cellKey = `${Math.round(baseY + dy * spriteSize)}_${baseX + dx * (spriteSize + 5)}`;
+                        if (!occupiedCells.has(cellKey)) {
+                            occupiedCells.add(cellKey);
+                            return {
+                                y: baseY + dy * (spriteSize * 0.3), // Slight vertical offset
+                                x: baseX + dx * (spriteSize + 5)
+                            };
+                        }
+                    }
+                    // Fallback
+                    return { y: baseY, x: baseX + occupiedCells.size * (spriteSize + 5) };
+                };
 
-                    html += `
-                        <div class="speed-diagram-sprite" ${onclick}
-                             style="top: ${yPos}px; left: ${xOffset}px;"
-                             title="${p.name}: ${p.speed} Spe\n${p.description}">
-                            ${createSprite(p.name, 40)}
-                        </div>
-                    `;
+                // Render Pokemon sprites
+                Object.entries(bySpeed).forEach(([speed, mons]) => {
+                    const baseY = getYPosition(parseInt(speed));
+
+                    mons.forEach((p, idx) => {
+                        const baseX = 10;
+                        const pos = findAvailablePosition(baseY, baseX + idx * (spriteSize + 8));
+
+                        const key = getPokemonKeyByName(p.name);
+                        const onclick = key ? `onclick="showPokemonDetail('${key}')"` : '';
+
+                        html += `
+                            <div class="speed-diagram-sprite" ${onclick}
+                                 style="top: ${pos.y}px; left: ${pos.x}px;"
+                                 title="${p.name}: ${p.speed} Spe&#10;${p.description}">
+                                ${createSprite(p.name, spriteSize)}
+                            </div>
+                        `;
+                    });
                 });
 
                 html += `</div>`;
