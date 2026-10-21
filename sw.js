@@ -1,4 +1,4 @@
-const CACHE = 'circuit-rounds-dcf153cc41';
+const CACHE = 'circuit-rounds-a9dc26b5d2';
 const FILES = ["./", "index.html", "manifest.webmanifest", "icon-180.png", "icon-192.png", "icon-512.png"];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES.map(u => new Request(u, { cache: 'reload' })))).then(() => self.skipWaiting()));
